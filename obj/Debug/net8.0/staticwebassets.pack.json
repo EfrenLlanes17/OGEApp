@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
+      "PackagePath": "staticwebassets\\OGEApp.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.OGEApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.OGEApp.props",
+      "PackagePath": "build\\OGEApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.OGEApp.props",
+      "PackagePath": "buildMultiTargeting\\OGEApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.OGEApp.props",
+      "PackagePath": "buildTransitive\\OGEApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
