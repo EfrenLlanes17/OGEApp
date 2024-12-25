@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-2\\OGEApp.csproj": {}
+    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-3\\OGEApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-2\\OGEApp.csproj": {
+    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-3\\OGEApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-2\\OGEApp.csproj",
+        "projectUniqueName": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-3\\OGEApp.csproj",
         "projectName": "OGEApp",
-        "projectPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-2\\OGEApp.csproj",
+        "projectPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-3\\OGEApp.csproj",
         "packagesPath": "C:\\Users\\efren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-2\\obj\\",
+        "outputPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\efren\\AppData\\Roaming\\NuGet\\NuGet.Config",
