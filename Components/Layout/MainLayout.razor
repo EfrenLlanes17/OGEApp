@@ -1,14 +1,20 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
+ <div class="page">
+   @* <div class="sidebar">
         <NavMenu />
-    </div>
+    </div> *@
 
     <main>
         <div class="top-row px-4">
             
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <select name="locations" id="locations">
+            <option value="Mustang PP">Mustang PP</option>
+            <option value="Peidmont PP">Peidmont PP</option>
+            </select>
+            <NavLink href="activity">Activity</NavLink>
+           <NavLink href="statistics">Statistics</NavLink>
+            <NavLink href="map">Map</NavLink>
         </div>
 
         <article class="content px-4">
