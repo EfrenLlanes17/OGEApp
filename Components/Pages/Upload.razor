@@ -18,11 +18,31 @@
 
 <img src="https://www.marketbeat.com/logos/oge-energy-corp-logo.jpg" alt="Inflow Logo" width="75" height="25" style="align-content: center;">
 
-<label for="fileUpload" class="btn btn-primary rounded-pill" 
-       style="background-color: black; color: white; font-weight: bold; font-size: 20px; width: 15%; border-width: 1mm; border-color: white;">
+
+<label for="fileUpload" class="btn btn-primary rounded-pill"
+       style="background-color: black; color: white; font-weight: bold; font-size: 20px; width: 15%; border-width: 1mm; border-color: white; cursor: pointer; text-align: center;">
     Upload File
+    <InputFile id="fileUpload" OnChange="HandleFileSelected" accept=".csv" style="display: none;" />
 </label>
-<input type="file" id="fileUpload" accept=".csv" style="display: none;  align-content: center;">
+
+<pre>@csvContent</pre>
+
+@code {
+    private string csvContent;
+
+    private async Task HandleFileSelected(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file != null)
+        {
+            using (var stream = file.OpenReadStream())
+            using (var reader = new StreamReader(stream))
+            {
+                csvContent = await reader.ReadToEndAsync();
+            }
+        }
+    }
+}
 
 
 
