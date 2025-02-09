@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-6\\OGEApp.csproj",
+      "projectUniqueName": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-7\\OGEApp.csproj",
       "projectName": "OGEApp",
-      "projectPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-6\\OGEApp.csproj",
+      "projectPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-7\\OGEApp.csproj",
       "packagesPath": "C:\\Users\\efren\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-6\\obj\\",
+      "outputPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-7\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\efren\\AppData\\Roaming\\NuGet\\NuGet.Config",

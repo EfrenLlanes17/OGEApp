@@ -25,7 +25,15 @@
     <InputFile id="fileUpload" OnChange="HandleFileSelected" accept=".csv" style="display: none;" />
 </label>
 
-<pre>@fileCSVHandler.fileContents</pre>
+
+<button @onclick="fileCSVHandler.clearFileContentsVar">Clear fileContents Var</button>
+
+@* <pre>@fileCSVHandler.fileContents</pre> *@
+<pre>@fileCSVHandler.ConvertCsvTo2DArray(fileCSVHandler.fileContents)[0,0]</pre>
+
+@* [0,0] is top left corner
+[1,0] is one down from top left corner 
+set up as [y,x] i know its goofy sorry*@
 
 @code {
 
@@ -34,15 +42,48 @@
 
         public static string fileContents { get; set; } = "Default Value";
 
+        public static string fileContentsArray { get; set; } = "Default Value";
+
         public event Action OnChange;
 
-         public void SetFileValue(string value)
-    {
+         public void SetFileValue(string value) {
         fileContents = value;
         NotifyStateChanged();
+        }
+
+        public static void clearFileContentsVar() {
+            fileContents = "Default Value";
+        }
+
+
+         public static string[,] ConvertCsvTo2DArray(string csv){
+            if(csv != "Default Value"){
+        var lines = csv.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        var rows = lines.Length;
+        var cols = lines[0].Split(',').Length;
+
+        string[,] table = new string[rows, cols];
+
+        for (int i = 0; i < rows; i++)
+        {
+            var values = lines[i].Split(',');
+            for (int j = 0; j < cols; j++)
+            {
+                table[i, j] = values[j];
+            }
+        }
+
+        return table;
+        }
+        else{
+            string[,] table = new string[1, 1];
+            table[0,0] = "Hello";
+            return table;
+        }
     }
 
-    private void NotifyStateChanged() => OnChange?.Invoke();
+
+        private void NotifyStateChanged() => OnChange?.Invoke();
 
 
 
@@ -65,6 +106,9 @@
             }
         }
     }
+
+
+    
 }
 
 
