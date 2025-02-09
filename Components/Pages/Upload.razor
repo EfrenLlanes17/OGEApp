@@ -25,9 +25,32 @@
     <InputFile id="fileUpload" OnChange="HandleFileSelected" accept=".csv" style="display: none;" />
 </label>
 
-<pre>@csvContent</pre>
+<pre>@fileCSVHandler.fileContents</pre>
 
 @code {
+
+
+    public class fileCSVHandler{
+
+        public static string fileContents { get; set; } = "Default Value";
+
+        public event Action OnChange;
+
+         public void SetFileValue(string value)
+    {
+        fileContents = value;
+        NotifyStateChanged();
+    }
+
+    private void NotifyStateChanged() => OnChange?.Invoke();
+
+
+
+    }
+
+
+
+
     private string csvContent;
 
     private async Task HandleFileSelected(InputFileChangeEventArgs e)
@@ -38,7 +61,7 @@
             using (var stream = file.OpenReadStream())
             using (var reader = new StreamReader(stream))
             {
-                csvContent = await reader.ReadToEndAsync();
+                fileCSVHandler.fileContents = await reader.ReadToEndAsync();
             }
         }
     }
