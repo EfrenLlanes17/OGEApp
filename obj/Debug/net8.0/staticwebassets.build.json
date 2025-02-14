@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mWuoQ8nEvYZduwFPZDPaa1ekyO4iIU1B7kHZUVKh6Aw=",
+  "Hash": "75AYtyAQIReXLCy5VhKoG6O7AH6eVI0EVIgL+KDArBs=",
   "Source": "OGEApp",
   "BasePath": "_content/OGEApp",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\images\\whiteInflowLogo.png",
+      "SourceId": "OGEApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\",
+      "BasePath": "_content/OGEApp",
+      "RelativePath": "images/whiteInflowLogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\whiteInflowLogo.png"
     },
     {
       "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\images\\whiteOGELogo.png",

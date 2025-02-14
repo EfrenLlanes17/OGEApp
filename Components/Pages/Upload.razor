@@ -2,6 +2,8 @@
 
 @rendermode InteractiveServer
 
+@inject NavigationManager Navigation
+
 <PageTitle>Upload</PageTitle>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
@@ -37,31 +39,7 @@
 </div>
 
 
-@* <pre>@fileCSVHandler.fileContents</pre> *@
-@* <pre>@fileCSVHandler.ConvertCsvTo2DArray(fileCSVHandler.fileContents)[0,0]</pre> *@
 
-@* [0,0] is top left corner
-[1,0] is one down from top left corner 
-set up as [y,x] i know its goofy sorry*@
-
-@if (strings.Count > 0)
-{
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th>Event Title</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var entry in strings)
-            {
-                <tr>
-                    <td>@entry</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
 
 @code {
 
@@ -89,10 +67,10 @@ set up as [y,x] i know its goofy sorry*@
     public List<Entry> Entries = new();
 
 
-    List<string> strings = new List<string>();
  
    private async Task HandleFileUpload(InputFileChangeEventArgs e)
     {
+        OGEApp.Components.Layout.MainLayout.locations.Add("Help"); // this is how you add
         var file = e.File;
         if (file == null) return;
 
@@ -118,9 +96,13 @@ set up as [y,x] i know its goofy sorry*@
                 firstLine = false;
              }
         }
-         Console.WriteLine(Entries[0].DevID); 
+         @* Console.WriteLine(Entries[0].DevID);  *@
+         Navigation.NavigateTo("/Activity"); // check if sucsessful
     }
     
+
+
+
 }
 
 

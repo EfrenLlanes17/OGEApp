@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\images\\whiteInflowLogo.png",
+      "PackagePath": "staticwebassets\\images\\whiteInflowLogo.png"
+    },
+    {
       "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\images\\whiteOGELogo.png",
       "PackagePath": "staticwebassets\\images\\whiteOGELogo.png"
     },
