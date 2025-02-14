@@ -55,6 +55,29 @@ set up as [y,x] i know its goofy sorry*@
 
 @code {
 
+    public class Entry
+    {
+        public string time { get; } = "";
+        public string Location { get; } = "";
+        public string ReaderDesc { get; } = "";
+        public string IDHash { get;} = "";
+        public int DevID { get; } 
+        public int Machine { get;}
+
+        public Entry(string time, string Location ,string ReaderDesc , string IDHash, int DevID, int Machine){
+
+            this.time = time;
+            this.Location = Location;
+            this.ReaderDesc = ReaderDesc;
+            this.IDHash = IDHash;
+            this.DevID = DevID;
+            this.Machine = Machine;
+
+        }
+    }
+
+    public List<Entry> Entries = new();
+
 
     List<string> strings = new List<string>();
  
@@ -63,16 +86,29 @@ set up as [y,x] i know its goofy sorry*@
         var file = e.File;
         if (file == null) return;
 
-        using var stream = file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100); // 100 MB limit
+        using var stream = file.OpenReadStream(); 
         using var reader = new StreamReader(stream);
 
         string line;
+        bool firstLine = true;
         while ((line = await reader.ReadLineAsync()) != null)
         {
-            // Process each line (e.g., parse CSV)
+            
+            //columns[0] Time
+            //columns[1] pp location
+            //columns[2] room location
+            //columns[3] Hash
+            //columns[4] DevID
+            //columns[5] Matchine
+            if(!firstLine){
             var columns = line.Split(',');
-            Console.WriteLine(line);
+             Entries.Add(new Entry(columns[0],columns[1],columns[2],columns[3],int.Parse(columns[4]),int.Parse(columns[5]))); 
+             }
+             else{
+                firstLine = false;
+             }
         }
+         Console.WriteLine(Entries[0].DevID); 
     }
     
 }
