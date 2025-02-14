@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "w1FX+iceCnnn2okFJuJ2pSujXb1HV3eqQZeWQgxxJIs=",
+  "Hash": "mWuoQ8nEvYZduwFPZDPaa1ekyO4iIU1B7kHZUVKh6Aw=",
   "Source": "OGEApp",
   "BasePath": "_content/OGEApp",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "OGEApp\\wwwroot",
       "Source": "OGEApp",
-      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OGEApp.styles.css",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OGEApp.styles.css",
       "SourceId": "OGEApp",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "OGEApp.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OGEApp.styles.css"
+      "OriginalItemSpec": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OGEApp.styles.css"
     },
     {
-      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
       "SourceId": "OGEApp",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "OGEApp.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\app.css",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\favicon.png",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-8\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\images\\whiteOGELogo.png",
+      "SourceId": "OGEApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\wwwroot\\",
+      "BasePath": "_content/OGEApp",
+      "RelativePath": "images/whiteOGELogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\whiteOGELogo.png"
     }
   ]
 }

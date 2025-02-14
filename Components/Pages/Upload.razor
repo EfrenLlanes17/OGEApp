@@ -22,92 +22,58 @@
 <label for="fileUpload" class="btn btn-primary rounded-pill"
        style="background-color: black; color: white; font-weight: bold; font-size: 20px; width: 15%; border-width: 1mm; border-color: white; cursor: pointer; text-align: center;">
     Upload File
-    <InputFile id="fileUpload" OnChange="HandleFileSelected" accept=".csv" style="display: none;" />
+    <InputFile id="fileUpload" OnChange="HandleFileUpload" accept=".csv" style="display: none;" />
 </label>
 
 
-<button @onclick="fileCSVHandler.clearFileContentsVar">Clear fileContents Var</button>
 
 @* <pre>@fileCSVHandler.fileContents</pre> *@
-<pre>@fileCSVHandler.ConvertCsvTo2DArray(fileCSVHandler.fileContents)[0,0]</pre>
+@* <pre>@fileCSVHandler.ConvertCsvTo2DArray(fileCSVHandler.fileContents)[0,0]</pre> *@
 
 @* [0,0] is top left corner
 [1,0] is one down from top left corner 
 set up as [y,x] i know its goofy sorry*@
 
+@if (strings.Count > 0)
+{
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th>Event Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in strings)
+            {
+                <tr>
+                    <td>@entry</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
 @code {
 
 
-    public class fileCSVHandler{
-
-        public static string fileContents { get; set; } = "Default Value";
-
-        public static string fileContentsArray { get; set; } = "Default Value";
-
-        public event Action OnChange;
-
-         public void SetFileValue(string value) {
-        fileContents = value;
-        NotifyStateChanged();
-        }
-
-        public static void clearFileContentsVar() {
-            fileContents = "Default Value";
-        }
-
-
-         public static string[,] ConvertCsvTo2DArray(string csv){
-            if(csv != "Default Value"){
-        var lines = csv.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
-        var rows = lines.Length;
-        var cols = lines[0].Split(',').Length;
-
-        string[,] table = new string[rows, cols];
-
-        for (int i = 0; i < rows; i++)
-        {
-            var values = lines[i].Split(',');
-            for (int j = 0; j < cols; j++)
-            {
-                table[i, j] = values[j];
-            }
-        }
-
-        return table;
-        }
-        else{
-            string[,] table = new string[1, 1];
-            table[0,0] = "Hello";
-            return table;
-        }
-    }
-
-
-        private void NotifyStateChanged() => OnChange?.Invoke();
-
-
-
-    }
-
-
-
-
-    private string csvContent;
-
-    private async Task HandleFileSelected(InputFileChangeEventArgs e)
+    List<string> strings = new List<string>();
+ 
+   private async Task HandleFileUpload(InputFileChangeEventArgs e)
     {
         var file = e.File;
-        if (file != null)
+        if (file == null) return;
+
+        using var stream = file.OpenReadStream(maxAllowedSize: 1024 * 1024 * 100); // 100 MB limit
+        using var reader = new StreamReader(stream);
+
+        string line;
+        while ((line = await reader.ReadLineAsync()) != null)
         {
-            using (var stream = file.OpenReadStream())
-            using (var reader = new StreamReader(stream))
-            {
-                fileCSVHandler.fileContents = await reader.ReadToEndAsync();
-            }
+            // Process each line (e.g., parse CSV)
+            var columns = line.Split(',');
+            Console.WriteLine(line);
         }
     }
-
-
     
 }
 
