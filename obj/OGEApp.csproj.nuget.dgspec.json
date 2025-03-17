@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\OGEApp.csproj": {}
+    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-11\\OGEApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\OGEApp.csproj": {
+    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-11\\OGEApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\OGEApp.csproj",
+        "projectUniqueName": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-11\\OGEApp.csproj",
         "projectName": "OGEApp",
-        "projectPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\OGEApp.csproj",
+        "projectPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-11\\OGEApp.csproj",
         "packagesPath": "C:\\Users\\efren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-10\\obj\\",
+        "outputPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-11\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\efren\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +44,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "MudBlazor": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "MudBlazor.ThemeManager": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

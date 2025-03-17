@@ -2,6 +2,10 @@
 
 @rendermode InteractiveServer
 
+@using MudBlazor
+@using MudBlazor.Services;
+
+
 @inject NavigationManager Navigation
 
 <PageTitle>Upload</PageTitle>
@@ -25,83 +29,228 @@
         }
 </style>
 
+
+
+
 <div class="container">
 <h1 style="font-weight: bold; font-size: 35px; text-align: center; margin-top: 10%;">Welcome To</h1>
 
 <img src="images/whiteInflowLogo.png" alt="Inflow Logo" width="325" height="75" style="align-content: center; margin-top: 1%;">
 
 
-<label for="fileUpload" class="btn btn-primary rounded-pill"
+<MudFileUpload T="IBrowserFile" FilesChanged="FileUploaded">
+    <ActivatorContent>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.CloudUpload">
+            Upload File
+        </MudButton>
+    </ActivatorContent>
+</MudFileUpload>
+
+
+@* <label for="fileUpload" class="btn btn-primary rounded-pill"
        style="background-color: black; color: white; font-weight: bold; font-size: 20px; width: 20%; border-width: 1mm; border-color: white; cursor: pointer; text-align: center; margin-top: 10%">
     Upload File
     <InputFile id="fileUpload" OnChange="HandleFileUpload" accept=".csv" style="display: none;" />
-</label>
+</label>*@
+</div> 
+
+@if(file != null || Series.Count != 0){
+<MudSimpleTable Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>File Size(bytes)</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                    <td>@file.Name</td>
+                    <td>@file.Size</td>
+              </tr>  
+    </tbody>
+    </MudSimpleTable> 
+
+
+
+    <MudSimpleTable Style="overflow-x: auto; background-color: rgb(75, 72, 72);">
+    <thead>
+        <tr>
+            <th>Day of the Week</th>
+            <th>Event Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in eventsByDayOfWeek)
+        {
+            <tr>
+                <td>@entry.Key</td>
+                <td>@entry.Value.Count</td>
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
+
+
+
+    <div>
+    <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options"/>
+    <MudGrid>
+        @* <MudItem xs="6">
+            <MudText Typo="Typo.body1" Class="py-3">Selected: @(Index < 0 ? "None" : Series[Index].Name)</MudText>
+        </MudItem>
+        <MudItem xs="6">
+            <MudSlider @bind-Value="Options.LineStrokeWidth" Min="1" Max="10" Color="Color.Info">Line Width: @Options.LineStrokeWidth.ToString()</MudSlider>
+        </MudItem> *@
+    </MudGrid>
 </div>
+}
 
 
 
 
 @code {
 
-    public class Entry
-    {
-        public string time { get; } = "";
-        public string Location { get; } = "";
-        public string ReaderDesc { get; } = "";
-        public string IDHash { get;} = "";
-        public int DevID { get; } 
-        public int Machine { get;}
+ public static IBrowserFile file { get; set; }
+    public string FileName { get; set; } = "";
+    public long FileSize { get; set; }
+    public string FileType { get; set; } = "";
+    public string ListSize { get; set; } = "";
+    public DateTimeOffset LastModified { get; set; }
+    public string ErrorMessage { get; set; } = "";
 
-        public Entry(string time, string Location ,string ReaderDesc , string IDHash, int DevID, int Machine){
+    const int MAX_FILESIZE = 5000 * 1024; // 5 MB
 
-            this.time = time;
-            this.Location = Location;
-            this.ReaderDesc = ReaderDesc;
-            this.IDHash = IDHash;
-            this.DevID = DevID;
-            this.Machine = Machine;
-
-        }
-    }
-
-    public List<Entry> Entries = new();
+    private Dictionary<string, List<ReaderEvent>> readerEvents = new();
+    private static Dictionary<string, List<ReaderEvent>> eventsByDayOfWeek = new();
+    private List<ReaderEvent> Entries = new();
 
 
- 
-   private async Task HandleFileUpload(InputFileChangeEventArgs e)
-    {
-        OGEApp.Components.Layout.MainLayout.locations.Add("Help"); // this is how you add
-        var file = e.File;
-        if (file == null) return;
 
-        using var stream = file.OpenReadStream(); 
-        using var reader = new StreamReader(stream);
-
-        string line;
-        bool firstLine = true;
-        while ((line = await reader.ReadLineAsync()) != null)
-        {
-            
-            //columns[0] Time
-            //columns[1] pp location
-            //columns[2] room location
-            //columns[3] Hash
-            //columns[4] DevID
-            //columns[5] Matchine
-            if(!firstLine){
-            var columns = line.Split(',');
-             Entries.Add(new Entry(columns[0],columns[1],columns[2],columns[3],int.Parse(columns[4]),int.Parse(columns[5]))); 
-             }
-             else{
-                firstLine = false;
-             }
-        }
-         @* Console.WriteLine(Entries[0].DevID);  *@
-         Navigation.NavigateTo("/Activity"); // check if sucsessful
-    }
+private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
+    public ChartOptions Options = new ChartOptions();
     
+    public static List<ChartSeries> Series = new List<ChartSeries>()
+    {
+    };
+    public string[] XAxisLabels = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
 
+    public async Task FileUploaded(IBrowserFile e)
+    {
+        Console.WriteLine("Hello");
+        var browserFile = e;
+        file = browserFile;
+
+        if (browserFile != null)
+        {
+            FileSize = browserFile.Size;
+            FileType = browserFile.ContentType;
+            FileName = browserFile.Name;
+            LastModified = browserFile.LastModified;
+
+            try
+            {
+                using var memoryStream = new MemoryStream();
+                await browserFile.OpenReadStream(MAX_FILESIZE).CopyToAsync(memoryStream);
+
+                memoryStream.Position = 0;
+                using var reader = new StreamReader(memoryStream);
+
+                string line;
+                bool firstLine = true;
+                Entries.Clear();
+
+                while ((line = await reader.ReadLineAsync()) != null)
+                {
+                    if (!firstLine)
+                    {
+                        var columns = line.Split(',');
+                        Entries.Add(new ReaderEvent(columns[0], columns[1], columns[2], columns[3], int.Parse(columns[4]), int.Parse(columns[5])));
+                    }
+                    else
+                    {
+                        firstLine = false;
+                    }
+                }
+
+                ListSize = Entries.Count.ToString();
+                readerEvents = OrganizeEventsByReader(Entries);
+                eventsByDayOfWeek = OrganizeEventsByDayOfWeek(Entries);
+            }
+            catch (Exception exception)
+            {
+                ErrorMessage = exception.Message;
+            }
+        }
+    }
+
+    private Dictionary<string, List<ReaderEvent>> OrganizeEventsByReader(List<ReaderEvent> events)
+    {
+        var dictionary = new Dictionary<string, List<ReaderEvent>>();
+        foreach (var evt in events)
+        {
+            string readerId = $"{evt.DevID}-{evt.Machine}";
+            if (!dictionary.ContainsKey(readerId))
+            {
+                dictionary[readerId] = new List<ReaderEvent> { evt };
+            }
+            else
+            {
+                dictionary[readerId].Add(evt);
+            }
+        }
+        return dictionary;
+    }
+
+    private Dictionary<string, List<ReaderEvent>> OrganizeEventsByDayOfWeek(List<ReaderEvent> events)
+    {
+        var dictionary = new Dictionary<string, List<ReaderEvent>>
+        {
+            {"Sunday", new List<ReaderEvent>()},
+            {"Monday", new List<ReaderEvent>()},
+            {"Tuesday", new List<ReaderEvent>()},
+            {"Wednesday", new List<ReaderEvent>()},
+            {"Thursday", new List<ReaderEvent>()},
+            {"Friday", new List<ReaderEvent>()},
+            {"Saturday", new List<ReaderEvent>()}
+        };
+
+        
+
+        foreach (var evt in events)
+        {
+            if (DateTime.TryParse(evt.Time, out DateTime eventDate))
+            {
+                string dayOfWeek = eventDate.ToString("dddd");
+                dictionary[dayOfWeek].Add(evt);
+                
+            }
+        }
+        Series.Add(new ChartSeries() { Name = "# of Entries", Data = new double[] { dictionary["Sunday"].Count, dictionary["Monday"].Count, dictionary["Tuesday"].Count, dictionary["Wednesday"].Count, dictionary["Thursday"].Count, dictionary["Friday"].Count, dictionary["Saturday"].Count} });
+        return dictionary;
+    }
+
+    public class ReaderEvent
+    {
+        public string Time { get; }
+        public string Location { get; }
+        public string ReaderDesc { get; }
+        public string IDHash { get; }
+        public int DevID { get; }
+        public int Machine { get; }
+
+        public ReaderEvent(string time, string location, string readerDesc, string idHash, int devID, int machine)
+        {
+            Time = time;
+            Location = location;
+            ReaderDesc = readerDesc;
+            IDHash = idHash;
+            DevID = devID;
+            Machine = machine;
+        }
+    }
 
 }
 
@@ -109,6 +258,5 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 

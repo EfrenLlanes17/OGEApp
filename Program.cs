@@ -1,3 +1,4 @@
+using MudBlazor.Services;
 using OGEApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 //dotnet run
 
 // Add services to the container.
+
+builder.Services.AddMudServices();
+builder.Services.AddMudBlazorDialog();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
