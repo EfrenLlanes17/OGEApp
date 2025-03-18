@@ -28,9 +28,15 @@
 <h3 style="font-weight: bold; margin-top: 7mm;">Entries/Exits: @entriesAndExit</h3>
 <h3 style="font-weight: bold; margin-top: 7mm;">People: @amountPeople</h3>
 
+<div>
+    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+    <MudGrid>
+         
+    </MudGrid>
+</div>
 
 <div>
-    <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options"/>
+    <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;"  ChartOptions="@Options"/>
     <MudGrid>
          
     </MudGrid>
@@ -66,6 +72,14 @@
     input {
   color-scheme: dark;
 }
+.mud-chart text {
+    fill: white !important;
+}
+
+.mud-chart-bar {
+        stroke-width: 40px;
+    }
+
 
 
 </style>
