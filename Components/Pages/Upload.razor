@@ -38,25 +38,27 @@
 <img src="images/whiteInflowLogo.png" alt="Inflow Logo" width="325" height="75" style="align-content: center; margin-top: 1%;">
 
 
-<MudFileUpload T="IBrowserFile" FilesChanged="FileUploaded">
+@* <MudFileUpload T="IBrowserFile" FilesChanged="FileUploaded">
     <ActivatorContent>
         <MudButton Variant="Variant.Filled"
-                   Color="Color.Primary"
+                   Class="custom-upload-button"
+                   Style="background-color: black; color: white; font-weight: bold; font-size: 20px; width: 100%; border-width: 1mm; border-color: white; cursor: pointer; text-align: center; margin-top: 10%;"
                    StartIcon="@Icons.Material.Filled.CloudUpload">
             Upload File
         </MudButton>
     </ActivatorContent>
-</MudFileUpload>
+</MudFileUpload> *@
 
 
-@* <label for="fileUpload" class="btn btn-primary rounded-pill"
+
+ <label for="fileUpload" class="btn btn-primary rounded-pill"
        style="background-color: black; color: white; font-weight: bold; font-size: 20px; width: 20%; border-width: 1mm; border-color: white; cursor: pointer; text-align: center; margin-top: 10%">
     Upload File
-    <InputFile id="fileUpload" OnChange="HandleFileUpload" accept=".csv" style="display: none;" />
-</label>*@
+    <InputFile id="fileUpload" OnChange="FileUploaded" accept=".csv" style="display: none;" />
+</label>
 </div> 
 
-@if(file != null || Series.Count != 0){
+@* @if(file != null || Series.Count != 0){
 <MudSimpleTable Style="overflow-x: auto;">
             <thead>
                 <tr>
@@ -97,15 +99,15 @@
     <div>
     <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options"/>
     <MudGrid>
-        @* <MudItem xs="6">
+         <MudItem xs="6">
             <MudText Typo="Typo.body1" Class="py-3">Selected: @(Index < 0 ? "None" : Series[Index].Name)</MudText>
         </MudItem>
         <MudItem xs="6">
             <MudSlider @bind-Value="Options.LineStrokeWidth" Min="1" Max="10" Color="Color.Info">Line Width: @Options.LineStrokeWidth.ToString()</MudSlider>
-        </MudItem> *@
+        </MudItem> 
     </MudGrid>
 </div>
-}
+} *@
 
 
 
@@ -123,7 +125,7 @@
     const int MAX_FILESIZE = 5000 * 1024; // 5 MB
 
     private Dictionary<string, List<ReaderEvent>> readerEvents = new();
-    private static Dictionary<string, List<ReaderEvent>> eventsByDayOfWeek = new();
+    public static Dictionary<string, List<ReaderEvent>> eventsByDayOfWeek = new();
     private List<ReaderEvent> Entries = new();
 
 
@@ -137,10 +139,10 @@ private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
     public string[] XAxisLabels = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
 
-    public async Task FileUploaded(IBrowserFile e)
+    public async Task FileUploaded(InputFileChangeEventArgs e)
     {
         Console.WriteLine("Hello");
-        var browserFile = e;
+        var browserFile = e.File;
         file = browserFile;
 
         if (browserFile != null)
@@ -178,6 +180,7 @@ private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
                 ListSize = Entries.Count.ToString();
                 readerEvents = OrganizeEventsByReader(Entries);
                 eventsByDayOfWeek = OrganizeEventsByDayOfWeek(Entries);
+                Navigation.NavigateTo("/Activity");
             }
             catch (Exception exception)
             {

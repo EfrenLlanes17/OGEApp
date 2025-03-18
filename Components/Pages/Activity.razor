@@ -5,6 +5,23 @@
 
 <h1>Activity</h1>
 
+<MudSimpleTable Style="overflow-x: auto; background-color: rgb(75, 72, 72);">
+    <thead>
+        <tr>
+            <th>Day of the Week</th>
+            <th>Event Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Upload.eventsByDayOfWeek)
+        {
+            <tr>
+                <td>@entry.Key</td>
+                <td>@entry.Value.Count</td>
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>
 
 <style>
     body {
