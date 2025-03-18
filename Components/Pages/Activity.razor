@@ -1,11 +1,31 @@
 @page "/activity"
 @rendermode InteractiveServer
 
+@inject NavigationManager Navigation
+
 <PageTitle>activity</PageTitle>
 
-<h1>Activity</h1>
+<MudButton Variant="Variant.Filled"
+           Color="Color.Primary"
+           StartIcon="@Icons.Material.Filled.ArrowBack"
+           OnClick="backToUpload">
+    <b>Upload</b>
+</MudButton>
 
-<MudSimpleTable Style="overflow-x: auto; background-color: rgb(75, 72, 72);">
+<h1 style="font-weight: bold; margin-top: 7mm;">Activity</h1>
+
+
+<h1 style="font-weight: bold; margin-top: 7mm;">Timeframe</h1>
+
+
+<input type="date" @bind="selectedDateMin" style="width: 20%; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF;">
+
+<input type="date" @bind="selectedDateMax" style="width: 20%; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF;">
+
+
+
+
+@* <MudSimpleTable Style="overflow-x: auto; background-color: rgb(75, 72, 72);">
     <thead>
         <tr>
             <th>Day of the Week</th>
@@ -21,7 +41,7 @@
             </tr>
         }
     </tbody>
-</MudSimpleTable>
+</MudSimpleTable> *@
 
 <style>
     body {
@@ -30,5 +50,26 @@
         font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
     }
 
+    input {
+  color-scheme: dark;
+}
+
 
 </style>
+
+@code {
+
+      public DateTime selectedDateMin { get; set; } = DateTime.Today;
+      public DateTime selectedDateMax { get; set; } = DateTime.Today;
+
+
+    private void backToUpload()
+    {
+        Navigation.NavigateTo("/");
+    }
+
+   
+
+   
+
+}
