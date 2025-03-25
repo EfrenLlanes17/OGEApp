@@ -179,12 +179,17 @@ private int Index = -1;
                         firstLine = false;
                     }
                 }
+                
 
-                Layout.MainLayout.locations.Add("hello");
+                
             
                 ListSize = Entries.Count.ToString();
                 readerEvents = OrganizeEventsByReader(Entries);
                 eventsByDayOfWeek = OrganizeEventsByDayOfWeek(Entries);
+                foreach(string s in GetLocations()){
+                    Layout.MainLayout.locations.Add(s);
+                }
+
                 Navigation.NavigateTo("/Activity");
             }
             catch (Exception exception)
@@ -211,6 +216,12 @@ private int Index = -1;
         }
         return dictionary;
     }
+
+    public List<string> GetLocations()
+{
+    return Entries.Select(e => e.Location).Distinct().ToList();
+}
+
 
     private Dictionary<string, List<ReaderEvent>> OrganizeEventsByDayOfWeek(List<ReaderEvent> events)
     {
