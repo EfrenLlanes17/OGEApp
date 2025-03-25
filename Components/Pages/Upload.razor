@@ -66,6 +66,8 @@
                     <th>File Size(bytes)</th>
                 </tr>
             </thead>
+    using OGEApp.Components.Layout;
+    using OGEApp.Components.Layout;
             <tbody>
             <tr>
                     <td>@file.Name</td>
@@ -132,6 +134,7 @@
 
 private int Index = -1; 
     public ChartOptions Options = new ChartOptions();
+
     
     public static List<ChartSeries> Series = new List<ChartSeries>()
     {
@@ -177,6 +180,8 @@ private int Index = -1;
                     }
                 }
 
+                Layout.MainLayout.locations.Add("hello");
+            
                 ListSize = Entries.Count.ToString();
                 readerEvents = OrganizeEventsByReader(Entries);
                 eventsByDayOfWeek = OrganizeEventsByDayOfWeek(Entries);
