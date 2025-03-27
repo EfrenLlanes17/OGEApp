@@ -28,19 +28,27 @@
 <h3 style="font-weight: bold; margin-top: 7mm;">Entries/Exits: @entriesAndExit</h3>
 <h3 style="font-weight: bold; margin-top: 7mm;">People: @amountPeople</h3>
 
-<div>
-    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
-    <MudGrid>
-         
-    </MudGrid>
+<div style="display: flex; justify-content: center; align-items: center; gap: 20px; width: 100%;">
+    <div style="width: 50%; display: flex; justify-content: center;">
+        <div style="transform: scale(0.90); transform-origin: center;">
+            <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+        </div>
+    </div>
+
+    <div style="width: 50%; display: flex; justify-content: center;">
+        <div style="transform: scale(0.90); transform-origin: center;">
+            <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+        </div>
+    </div>
+
+    <div style="width: 50%; display: flex; justify-content: center;">
+        <div style="transform: scale(0.90); transform-origin: center;">
+            <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+        </div>
+    </div>
 </div>
 
-<div>
-    <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;"  ChartOptions="@Options"/>
-    <MudGrid>
-         
-    </MudGrid>
-</div>
+
 
 
 
