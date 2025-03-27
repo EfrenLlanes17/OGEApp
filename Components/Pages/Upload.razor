@@ -188,6 +188,9 @@ private int Index = -1;
                 eventsByDayOfWeek = OrganizeEventsByDayOfWeek(Entries);
 
                 Pages.Activity.entriesAndExit =  Entries.Count;
+
+                Pages.Activity.amountPeople =  GetUniquePeopleCount();
+
                 foreach(string s in GetLocations()){
                     Layout.MainLayout.locations.Add(s);
                 }
@@ -222,6 +225,10 @@ private int Index = -1;
     public List<string> GetLocations()
 {
     return Entries.Select(e => e.Location).Distinct().ToList();
+}
+private int GetUniquePeopleCount()
+{
+    return Entries.Select(e => e.IDHash).Distinct().Count();
 }
 
 
