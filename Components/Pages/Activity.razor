@@ -41,6 +41,17 @@
 </div>
 
 
+        
+
+       
+        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;">Bar Chart</h2>
+            <div style="transform: scale(0.80); transform-origin: top;">
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="Options"/>
+            </div>
+        </div> 
+
+
 <div style="text-align: center; width: 100%;">
     @if(showContent){
 
@@ -48,21 +59,21 @@
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;">Bar Chart</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;">Line Chart 1</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;">Line Chart 2</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
@@ -89,21 +100,23 @@
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;">Most Active Readers</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
+        @* // more than 100 percent *@
+
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;">Most Active People</h2>
-            <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabelsforPeople" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+            <div style="transform: scale(0.70); transform-origin: top;">
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPeople" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;">Most Active Panels</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
@@ -151,15 +164,17 @@
     fill: white !important;
 }
 
-.mud-chart-bar {
-        stroke-width: 40px;
-    }
+
 
 
 
 </style>
 
 @code {
+
+    
+
+    
 
      private bool showContent = true;
 
@@ -169,6 +184,8 @@
         
         
     }
+
+    
 
     
 
@@ -187,9 +204,14 @@
 
         public string[] XAxisLabelsforPeople = Pages.Upload.XAxisLabelsforPeople;
 
-        private int Index = -1; 
+        private int selIndex = -1; 
 
         public ChartOptions Options = new ChartOptions();
+        
+        
+
+     
+
 
 
 
@@ -201,6 +223,10 @@
     protected override void OnInitialized()
     {
         Console.WriteLine("Page has loaded! Running initialization logic...");
+        Options.YAxisLabelPosition = MudBlazor.YAxisLabelPosition.Left;
+        Options.ShowLegendLabels = false;
+        
+        //Options.YAxisTicks = 30;
         // Your startup logic here
     }
 
