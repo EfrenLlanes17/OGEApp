@@ -143,9 +143,15 @@ private int Index = -1;
     public static List<ChartSeries> SeriesPeople = new List<ChartSeries>()
     {
     };
+
+    public static List<ChartSeries> SeriesReaders = new List<ChartSeries>()
+    {
+    };
     public string[] XAxisLabels = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
     public static string[] XAxisLabelsforPeople = {};
+
+    public static string[] XAxisLabelsforReaders = {};
 
 
     public async Task FileUploaded(InputFileChangeEventArgs e)
@@ -197,6 +203,9 @@ private int Index = -1;
                 SeriesPeople.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePeopleCounts().ToArray()});
                 XAxisLabelsforPeople = GetTopActivePeopleNames().ToArray();
 
+                SeriesReaders.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts().ToArray()});
+                XAxisLabelsforReaders= GetTopActiveReaders().ToArray();
+
 
                 Pages.Activity.entriesAndExit =  Entries.Count;
 
@@ -229,6 +238,26 @@ private List<double> GetTopActivePeopleCounts(int topN = 5)
 {
     return Entries
         .GroupBy(e => e.IDHash)
+        .OrderByDescending(g => g.Count())
+        .Take(topN)
+        .Select(g => (double)g.Count()) // Convert count to double
+        .ToList();
+}
+
+  private List<string> GetTopActiveReaders(int topN = 5)
+{
+    return Entries
+        .GroupBy(e => e.ReaderDesc.Substring(22))
+        .OrderByDescending(g => g.Count())
+        .Take(topN)
+        .Select(g => g.Key)
+        .ToList();
+}
+
+private List<double> GetTopActiveReadersCounts(int topN = 5)
+{
+    return Entries
+        .GroupBy(e => e.ReaderDesc)
         .OrderByDescending(g => g.Count())
         .Take(topN)
         .Select(g => (double)g.Count()) // Convert count to double

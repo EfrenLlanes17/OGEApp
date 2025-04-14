@@ -40,7 +40,7 @@
     </div>
 </div>
 
-
+            
 
 <div style="text-align: center; width: 100%;">
     @if(showContent){
@@ -90,7 +90,7 @@
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Most Active Readers</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series3" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
@@ -190,9 +190,13 @@
 
         public List<ChartSeries> Series2 = Upload.SeriesPeople;
 
+        public List<ChartSeries> Series3 = Upload.SeriesReaders;
+
         public string[] XAxisLabels = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
         public string[] XAxisLabelsforPeople = Pages.Upload.XAxisLabelsforPeople;
+
+        public string[] XAxisLabelsforReaders = Pages.Upload.XAxisLabelsforReaders;
 
         private int selIndex = -1; 
 
@@ -212,7 +216,7 @@
 
     protected override void OnInitialized()
     {
-        Console.WriteLine("Page has loaded! Running initialization logic...");
+        
         Options.YAxisLabelPosition = MudBlazor.YAxisLabelPosition.Left;
         Options.ShowLegendLabels = false;
         
