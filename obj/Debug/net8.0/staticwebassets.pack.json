@@ -1,31 +1,31 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-13\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
       "PackagePath": "staticwebassets\\OGEApp.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp\\wwwroot\\app.css",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-13\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-13\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-13\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-13\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp\\wwwroot\\images\\whiteInflowLogo.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-13\\wwwroot\\images\\whiteInflowLogo.png",
       "PackagePath": "staticwebassets\\images\\whiteInflowLogo.png"
     },
     {
-      "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp\\wwwroot\\images\\whiteOGELogo.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\OGEApp\\OGEApp-13\\wwwroot\\images\\whiteOGELogo.png",
       "PackagePath": "staticwebassets\\images\\whiteOGELogo.png"
     },
     {

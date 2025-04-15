@@ -106,7 +106,7 @@
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Most Active Panels</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
@@ -191,12 +191,15 @@
         public List<ChartSeries> Series2 = Upload.SeriesPeople;
 
         public List<ChartSeries> Series3 = Upload.SeriesReaders;
+        public List<ChartSeries> Series4 = Upload.SeriesPanel;
 
         public string[] XAxisLabels = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
         public string[] XAxisLabelsforPeople = Pages.Upload.XAxisLabelsforPeople;
 
         public string[] XAxisLabelsforReaders = Pages.Upload.XAxisLabelsforReaders;
+
+        public string[] XAxisLabelsforPanels = Pages.Upload.XAxisLabelsforPanels;
 
         private int selIndex = -1; 
 
