@@ -159,6 +159,9 @@ private int Index = -1;
 
     public static string[] XAxisLabelsforPanels = {};
 
+    public static DateTime firstDay;
+    public static DateTime LastDay;
+
 
     public async Task FileUploaded(InputFileChangeEventArgs e)
     {
@@ -215,6 +218,16 @@ private int Index = -1;
                 SeriesPanel.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts().ToArray()});
                 XAxisLabelsforPanels= GetTopActivePanels().ToArray();
 
+                @* Console.WriteLine(Entries.Last().Time);
+                Console.WriteLine( DateTime.Parse(Entries.Last().Time).ToString());
+                Console.WriteLine(GetFirstDate().ToString());
+                Console.WriteLine(GetLastDate().ToString()); *@
+                
+                firstDay = GetFirstDate();
+                LastDay = GetLastDate();
+
+                Pages.Activity.selectedDateMin = firstDay;
+                Pages.Activity.selectedDateMax = LastDay;
 
                 Pages.Activity.entriesAndExit =  Entries.Count;
 
@@ -232,6 +245,34 @@ private int Index = -1;
             }
         }
     }
+
+
+    public DateTime GetFirstDate()
+{
+    return Entries
+        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Where(dt => dt.HasValue)
+        .Select(dt => dt.Value)
+        .OrderBy(dt => dt)
+        .FirstOrDefault();
+}
+
+public DateTime GetLastDate()
+{
+    
+    return Entries
+        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Where(dt => dt.HasValue)
+        .Select(dt => dt.Value)
+        .OrderByDescending(dt => dt)
+        .FirstOrDefault();
+}
+
+
+
+
+
+
 
     private List<string> GetTopActivePeopleNames(int topN = 5)
 {
