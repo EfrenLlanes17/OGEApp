@@ -56,9 +56,11 @@
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Line Chart 1</h2>
-            <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-right: 15%;">Line Chart 1</h2>
+            <div  style="color: white; font-size: 100px; margin-bottom: 5px;  margin-right: 10%;">
+            @foreach(var s in errorsfound){
+                <h3>@s</h3>
+            }
             </div>
         </div>
 
@@ -77,13 +79,13 @@
     }
 </div>
 
-<div style="text-align: center; width: 100%;">
+<div style="text-align: center; width: 97%;">
     @if(!showContent){
 
        
 
 
-    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
+    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 0px; width: 100%;">
 
  <button style="font-size: 75px; background-color: black; color: white; border-radius: 5px; padding: 20px 40px; cursor: pointer; padding-top: 6%;" @onclick="nextGraphs">
     &lt;
@@ -239,6 +241,14 @@ private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
 
       public static int entriesAndExit { get; set; } = 0;
 
+      private List<string> errorsfound = new List<string>
+    {
+        "Error 1: Invalid input.",
+        "Error 2: Network issue.",
+        "Error 3: Permission denied."
+    };
+
+
       public static int amountPeople { get; set; } = 0;
 
        public List<ChartSeries> Series = Upload.Series;
@@ -284,8 +294,7 @@ private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
     protected override void OnInitialized()
     {
         Options.InterpolationOption = InterpolationOption.NaturalSpline;
-        Options.YAxisLabelPosition = MudBlazor.YAxisLabelPosition.Left;
-        Options.ShowLegendLabels = false;
+        
 
         Series5 = Series3;
         
