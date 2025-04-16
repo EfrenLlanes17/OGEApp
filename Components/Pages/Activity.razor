@@ -283,7 +283,7 @@ private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
 
     protected override void OnInitialized()
     {
-        
+        Options.InterpolationOption = InterpolationOption.NaturalSpline;
         Options.YAxisLabelPosition = MudBlazor.YAxisLabelPosition.Left;
         Options.ShowLegendLabels = false;
 
