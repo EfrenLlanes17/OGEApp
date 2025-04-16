@@ -23,14 +23,16 @@
         <h1 style="font-weight: bold; margin-top: 7mm;">Timeframe</h1>
 
         <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;">
-            <input type="date" @bind="selectedDateMin" 
+            <input type="date" @bind="selectedDateMin"
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
             
             <span style="color: white; font-size: 18px;">To</span>
 
-            <input type="date" @bind="selectedDateMax" 
+            <input type="date" @bind="selectedDateMax"
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
         </div>
+         @GetDaysBetweenDates(selectedDateMin, selectedDateMax) Days 
+      
     </div>
 
     <!-- Left Column: Entries/Exits and People Count -->
@@ -45,11 +47,11 @@
 <div style="text-align: center; width: 100%;">
     @if(showContent){
 
-    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Bar Chart</h2>
+    <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
+        <div class="mostActiveReadersPop" style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Avg Area Population Per Day</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@changeReadersToPop(Series3)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
@@ -158,6 +160,10 @@
     font-size: 55%
 }
 
+.mostActiveReadersPop .mud-charts-xaxis text {
+    font-size: 55%
+}
+
 
 </style>
 
@@ -176,12 +182,60 @@
         
     }
 
+    private void OnDateChanged()
+    {
+        // Your logic goes here (for example, updating charts or series data)
+        Console.WriteLine($"Selected Date Range: {selectedDateMin.ToShortDateString()} - {selectedDateMax.ToShortDateString()}");
+
+        // Add any other functionality you'd like when the dates change
+        // For instance, you might want to update Series5
+        UpdateSeriesData();
+    }
+
+    public int GetDaysBetweenDates(DateTime selectedDateMin, DateTime selectedDateMax)
+{
+    return (selectedDateMax - selectedDateMin).Days;
+}
+
+private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
+{
+    var s2 = new List<ChartSeries>();
+    int days = GetDaysBetweenDates(selectedDateMin, selectedDateMax);
+
+    foreach (var series in s1)
+    {
+        // Clone the data array
+        var newData = (double[])series.Data.Clone();
+
+        // Modify the cloned data
+        for (int i = 0; i < newData.Length; i++)
+        {
+            newData[i] /= days;
+        }
+
+        // Create a new ChartSeries with copied properties and modified data
+        s2.Add(new ChartSeries
+        {
+            Name = series.Name,
+            Data = newData
+        });
+    }
+
+    return s2;
+}
+
+
+
+
+
     
 
     
 
       public static DateTime selectedDateMin { get; set; } = DateTime.Today;
       public static DateTime selectedDateMax { get; set; } = DateTime.Today;
+
+      
 
       public static int entriesAndExit { get; set; } = 0;
 
@@ -191,8 +245,10 @@
 
         public List<ChartSeries> Series2 = Upload.SeriesPeople;
 
-        public List<ChartSeries> Series3 = Upload.SeriesReaders;
+        public  List<ChartSeries> Series3 = Upload.SeriesReaders;
         public List<ChartSeries> Series4 = Upload.SeriesPanel;
+
+        public  List<ChartSeries> Series5;
 
         public string[] XAxisLabels = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
@@ -218,11 +274,20 @@
         Navigation.NavigateTo("/");
     }
 
+    public void UpdateSeriesData()
+{
+    // Update Series5 (which is linked to Series3)
+    Series5 = changeReadersToPop(Series3); // Apply your changes dynamically
+}
+
+
     protected override void OnInitialized()
     {
         
         Options.YAxisLabelPosition = MudBlazor.YAxisLabelPosition.Left;
         Options.ShowLegendLabels = false;
+
+        Series5 = Series3;
         
         //Options.YAxisTicks = 30;
         // Your startup logic here
