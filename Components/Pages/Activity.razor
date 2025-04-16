@@ -87,7 +87,7 @@
     &lt;
 </button>
 
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+        <div class="mostActiveReaders" style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Most Active Readers</h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series3" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
@@ -154,8 +154,9 @@
     fill: white !important;
 }
 
-
-
+.mostActiveReaders .mud-charts-xaxis text {
+    font-size: 55%
+}
 
 
 </style>
