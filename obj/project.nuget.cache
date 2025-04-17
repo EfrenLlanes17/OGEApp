@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jkyLm1CNafNQOmSOhspk9zQe5ohu7Nt6lScbMQT7oS5jc4kySnwl/izD3Bgn0ElXn8HMOxzLgrF0d0+3txZXDg==",
+  "dgSpecHash": "JcWrlk/5QQLEAKEjUPDLu+Ge9EuqXik01HdpS/ecMUlJGg9r3pLSKeta9pfdCz5U8wF9PYib0rMbZr/crtKuzg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp\\OGEApp\\OGEApp.csproj",
+  "projectFilePath": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp\\OGEApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\el1101034\\.nuget\\packages\\microsoft.aspnetcore.authorization\\8.0.12\\microsoft.aspnetcore.authorization.8.0.12.nupkg.sha512",
     "C:\\Users\\el1101034\\.nuget\\packages\\microsoft.aspnetcore.components\\8.0.12\\microsoft.aspnetcore.components.8.0.12.nupkg.sha512",
