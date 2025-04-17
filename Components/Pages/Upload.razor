@@ -231,16 +231,16 @@ private int Index = -1;
                    Console.WriteLine(s);
                 }
 
-                List<string> machineIssues = Entries
-                    .GroupBy(e => e.Machine)  
-                    .Select(g => g.Key.ToString() + " "+ g.Count().ToString())  
-                    .ToList();
-
-               
-                foreach (string machine in machineIssues)
-                {
-                    Console.WriteLine(machine);
-                }
+                // List<string> machineIssues = Entries
+                //    .GroupBy(e => e.ReaderDesc)  
+                //    .Select(g => g.Key.ToString() + " "+ g.Count().ToString())  
+                //    .ToList();
+//
+               //
+                //foreach (string machine in machineIssues)
+                //{
+                //    Console.WriteLine(machine);
+               // } 
 
 
                 
@@ -273,42 +273,45 @@ private int Index = -1;
 
     public List<string> CheckForPotentialIssues(List<ReaderEvent> entries)
 {
-    const int SCAN_THRESHOLD = 90; // The machine or reader threshold to look for
+    const int SCAN_THRESHOLDForPannel = 90; 
+    const int SCAN_THRESHOLDForReader = 90; 
     List<string> issues = new List<string>();
 
-    // Check if any machine value is within 100 scans of the threshold (1000)
+   
     var machineIssues = entries
-        .GroupBy(e => e.Machine)  // Group by machine number
-        .Where(g => g.Count() >= SCAN_THRESHOLD)
+        .GroupBy(e => e.Machine)  
+        .Where(g => g.Count() >= SCAN_THRESHOLDForPannel)
         .Select(g => new { Machine = g.Key, Count = g.Count() })
         .ToList();
 
-    // Check if any reader description value is within 100 scans of the threshold (1000)
+        
+
+    
     var readerDescIssues = entries
-        .GroupBy(e => e.ReaderDesc)  // Group by reader description
-        .Where(g => g.Count() >= 100 && g.Key.Contains("1000"))  // This assumes you are looking for "1000" in the description
+        .GroupBy(e => e.ReaderDesc)  
+        .Where(g => g.Count() >= SCAN_THRESHOLDForReader)  
         .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
         .ToList();
 
-    // Add machine issues to the list if any found
+    
     if (machineIssues.Any())
     {
         foreach (var issue in machineIssues)
         {
-            issues.Add($"Issue detected with Machine {issue.Machine} : {issue.Count} scans near threshold of {SCAN_THRESHOLD}");
+            issues.Add($"Issue detected with Machine {issue.Machine} : {issue.Count} scans near threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
-    // Add reader description issues to the list if any found
+    
     if (readerDescIssues.Any())
     {
         foreach (var issue in readerDescIssues)
         {
-            issues.Add($"Issue detected with ReaderDesc {issue.ReaderDesc} : {issue.Count} scans near or over threshold of {SCAN_THRESHOLD}");
+            issues.Add($"Issue detected with ReaderDesc {issue.ReaderDesc} : {issue.Count} scans near or over threshold of {SCAN_THRESHOLDForReader}");
         }
     }
 
-    // If no issues found, add a message to the list
+   
     if (!issues.Any())
     {
         issues.Add("No issues detected with machines or reader descriptions.");
