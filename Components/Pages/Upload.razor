@@ -273,41 +273,70 @@ private int Index = -1;
 
     public List<string> CheckForPotentialIssues(List<ReaderEvent> entries)
 {
-    const int SCAN_THRESHOLDForPannel = 90; 
-    const int SCAN_THRESHOLDForReader = 90; 
+    int SCAN_THRESHOLDForPannel = 4000; 
+    int nearPannel = 100;
+
+    int SCAN_THRESHOLDForReader = 2000; 
+    int nearReader = 100;
     List<string> issues = new List<string>();
 
    
-    var machineIssues = entries
+    var machineIssuesOver = entries
         .GroupBy(e => e.Machine)  
         .Where(g => g.Count() >= SCAN_THRESHOLDForPannel)
         .Select(g => new { Machine = g.Key, Count = g.Count() })
         .ToList();
 
-        
+         var machineIssuesNear = entries
+        .GroupBy(e => e.Machine)  
+        .Where(g => g.Count() + nearPannel >= SCAN_THRESHOLDForPannel && g.Count() < SCAN_THRESHOLDForPannel)
+        .Select(g => new { Machine = g.Key, Count = g.Count() })
+        .ToList();
 
     
-    var readerDescIssues = entries
+    var readerDescIssuesOver = entries
         .GroupBy(e => e.ReaderDesc)  
         .Where(g => g.Count() >= SCAN_THRESHOLDForReader)  
         .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
         .ToList();
 
+        var readerDescIssuesNear = entries
+        .GroupBy(e => e.ReaderDesc)  
+        .Where(g => g.Count() + nearReader >= SCAN_THRESHOLDForReader && g.Count() < SCAN_THRESHOLDForReader)  
+        .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
+        .ToList();
+
     
-    if (machineIssues.Any())
+    if (machineIssuesOver.Any())
     {
-        foreach (var issue in machineIssues)
+        foreach (var issue in machineIssuesOver)
+        {
+            issues.Add($"Issue detected with Machine {issue.Machine} : {issue.Count} scans over threshold of {SCAN_THRESHOLDForPannel}");
+        }
+    }
+
+    if (machineIssuesNear.Any())
+    {
+        foreach (var issue in machineIssuesNear)
         {
             issues.Add($"Issue detected with Machine {issue.Machine} : {issue.Count} scans near threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
     
-    if (readerDescIssues.Any())
+    if (readerDescIssuesOver.Any())
     {
-        foreach (var issue in readerDescIssues)
+        foreach (var issue in readerDescIssuesOver)
         {
-            issues.Add($"Issue detected with ReaderDesc {issue.ReaderDesc} : {issue.Count} scans near or over threshold of {SCAN_THRESHOLDForReader}");
+            issues.Add($"Issue detected with ReaderDesc {issue.ReaderDesc} : {issue.Count} scans over threshold of {SCAN_THRESHOLDForReader}");
+        }
+    }
+
+    if (readerDescIssuesNear.Any())
+    {
+        foreach (var issue in readerDescIssuesNear)
+        {
+            issues.Add($"Issue detected with ReaderDesc {issue.ReaderDesc} : {issue.Count} scans near threshold of {SCAN_THRESHOLDForReader}");
         }
     }
 
