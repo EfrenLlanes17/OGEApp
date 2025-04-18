@@ -174,6 +174,18 @@
 
 @code {
 
+    private static List<Upload.ReaderEvent> GetFilteredEntries()
+{
+    return Upload.Entries
+        .Where(e =>
+            DateTime.TryParse(e.Time, out DateTime eventDate) &&
+            eventDate >= selectedDateMin &&
+            eventDate <= selectedDateMax)
+        .ToList();
+}
+
+
+
     
 
     
@@ -222,7 +234,90 @@ private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
 
 
 public static void OnDateChange(){
-    Console.WriteLine($"Min: {selectedDateMin}" + " " + $"Max: {selectedDateMax}");
+    //Console.WriteLine($"Min: {selectedDateMin}" + " " + $"Max: {selectedDateMax}");
+   
+    //Console.WriteLine(GetFilteredEntries().Count);
+    Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntries());
+
+
+}
+
+public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entries)
+{
+    int SCAN_THRESHOLDForPannel = 4000; 
+    int nearPannel = 100;
+
+    int SCAN_THRESHOLDForReader = 2000; 
+    int nearReader = 100;
+    List<string> issues = new List<string>();
+
+   
+    var machineIssuesOver = entries
+        .GroupBy(e => e.Machine)  
+        .Where(g => g.Count() >= SCAN_THRESHOLDForPannel)
+        .Select(g => new { Machine = g.Key, Count = g.Count() })
+        .ToList();
+
+         var machineIssuesNear = entries
+        .GroupBy(e => e.Machine)  
+        .Where(g => g.Count() + nearPannel >= SCAN_THRESHOLDForPannel && g.Count() < SCAN_THRESHOLDForPannel)
+        .Select(g => new { Machine = g.Key, Count = g.Count() })
+        .ToList();
+
+    
+    var readerDescIssuesOver = entries
+        .GroupBy(e => e.ReaderDesc)  
+        .Where(g => g.Count() >= SCAN_THRESHOLDForReader)  
+        .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
+        .ToList();
+
+        var readerDescIssuesNear = entries
+        .GroupBy(e => e.ReaderDesc)  
+        .Where(g => g.Count() + nearReader >= SCAN_THRESHOLDForReader && g.Count() < SCAN_THRESHOLDForReader)  
+        .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
+        .ToList();
+
+    
+    if (machineIssuesOver.Any())
+    {
+        foreach (var issue in machineIssuesOver)
+        {
+            issues.Add($"Machine {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
+        }
+    }
+
+    if (machineIssuesNear.Any())
+    {
+        foreach (var issue in machineIssuesNear)
+        {
+            issues.Add($"Machine {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
+        }
+    }
+
+    
+    if (readerDescIssuesOver.Any())
+    {
+        foreach (var issue in readerDescIssuesOver)
+        {
+            issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForReader}");
+        }
+    }
+
+    if (readerDescIssuesNear.Any())
+    {
+        foreach (var issue in readerDescIssuesNear)
+        {
+            issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForReader}");
+        }
+    }
+
+   
+    if (!issues.Any())
+    {
+        issues.Add("No issues detected with machines or reader descriptions.");
+    }
+
+    return issues;
 }
 
 

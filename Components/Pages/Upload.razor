@@ -128,7 +128,7 @@
 
     private Dictionary<string, List<ReaderEvent>> readerEvents = new();
     public static Dictionary<string, List<ReaderEvent>> eventsByDayOfWeek = new();
-    private List<ReaderEvent> Entries = new();
+    public static List<ReaderEvent> Entries = new();
 
 
 
@@ -237,16 +237,15 @@ private int Index = -1;
 
                 listOfErrors = CheckForPotentialIssues(Entries);
 
-                // List<string> machineIssues = Entries
-                //    .GroupBy(e => e.ReaderDesc)  
-                //    .Select(g => g.Key.ToString() + " "+ g.Count().ToString())  
-                //    .ToList();
-//
-               //
-                //foreach (string machine in machineIssues)
-                //{
-                //    Console.WriteLine(machine);
-               // } 
+                 @* List<string> machineIssues = Entries
+                    .GroupBy(e => e.DevID)  
+                    .Select(g => g.Key.ToString() + " "+ g.Count().ToString())  
+                    .ToList();
+
+               
+                
+                    Console.WriteLine(machineIssues.Count); *@
+                
 
 
                 
