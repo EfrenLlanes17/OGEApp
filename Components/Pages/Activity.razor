@@ -31,7 +31,7 @@
             <input type="date" @bind="selectedDateMax"
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
         </div>
-         @GetDaysBetweenDates(selectedDateMin, selectedDateMax) Days 
+         @* @GetDaysBetweenDates(selectedDateMin, selectedDateMax) Days  *@
       
     </div>
 
@@ -255,7 +255,23 @@ public static void OnDateChange(){
     Series3.Clear();
     Series3.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts(GetFilteredEntries()).ToArray()});
 
+//This is for locations
+@* Layout.MainLayout.locations.Clear();
+                foreach(string s in GetLocations()){
+                    Layout.MainLayout.locations.Add(s);
+                } *@
 
+
+//This is for unique people count
+amountPeople = GetUniquePeopleCount(GetFilteredEntries());
+
+//This is for entries/exists
+entriesAndExit = GetFilteredEntries().Count;
+}
+
+private static int GetUniquePeopleCount(List<Upload.ReaderEvent> entries)
+{
+    return entries.Select(e => e.IDHash).Distinct().Count();
 }
 
  private static List<string> GetTopActiveReaders(List<Upload.ReaderEvent> entries, int topN = 5)
