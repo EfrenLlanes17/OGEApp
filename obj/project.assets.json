@@ -748,11 +748,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp-1\\OGEApp.csproj",
+      "projectUniqueName": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-3\\OGEApp.csproj",
       "projectName": "OGEApp",
-      "projectPath": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp-1\\OGEApp.csproj",
+      "projectPath": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-3\\OGEApp.csproj",
       "packagesPath": "C:\\Users\\el1101034\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\OGEApp\\OGEApp-1\\obj\\",
+      "outputPath": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
