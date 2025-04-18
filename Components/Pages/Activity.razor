@@ -237,13 +237,40 @@ public static void OnDateChange(){
     //Console.WriteLine($"Min: {selectedDateMin}" + " " + $"Max: {selectedDateMax}");
    
     //Console.WriteLine(GetFilteredEntries().Count);
+    //This is for the warning flags
     Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntries());
     
+    //This is for most active people
     XAxisLabelsforPeople = GetTopActivePeopleNames(GetFilteredEntries()).ToArray();
     Series2.Clear();
     Series2.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePeopleCounts(GetFilteredEntries()).ToArray()});
 
+//This is for Pannel
+    XAxisLabelsforPanels = GetTopActivePanels(GetFilteredEntries()).ToArray();
+    Series4.Clear();
+    Series4.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts(GetFilteredEntries()).ToArray()});
 
+
+}
+
+private static List<string> GetTopActivePanels(List<Upload.ReaderEvent> entries, int topN = 5)
+{
+    return entries
+        .GroupBy(e => e.Machine.ToString())
+        .OrderByDescending(g => g.Count())
+        .Take(topN)
+        .Select(g => g.Key)
+        .ToList();
+}
+
+private static List<double> GetTopActivePanelCounts(List<Upload.ReaderEvent> entries,int topN = 5)
+{
+    return entries
+        .GroupBy(e => e.Machine.ToString())
+        .OrderByDescending(g => g.Count())
+        .Take(topN)
+        .Select(g => (double)g.Count()) // Convert count to double
+        .ToList();
 }
 
 private static List<double> GetTopActivePeopleCounts(List<Upload.ReaderEvent> entries, int topN = 5)
@@ -414,7 +441,7 @@ public static DateTime selectedDateMax
     
 
         public  List<ChartSeries> Series3 = Upload.SeriesReaders;
-        public List<ChartSeries> Series4 = Upload.SeriesPanel;
+        public static List<ChartSeries> Series4 = Upload.SeriesPanel;
 
         public  List<ChartSeries> Series5;
 
@@ -424,7 +451,7 @@ public static DateTime selectedDateMax
 
         public string[] XAxisLabelsforReaders = Pages.Upload.XAxisLabelsforReaders;
 
-        public string[] XAxisLabelsforPanels = Pages.Upload.XAxisLabelsforPanels;
+        public static string[] XAxisLabelsforPanels = Pages.Upload.XAxisLabelsforPanels;
 
         private int selIndex = -1; 
 

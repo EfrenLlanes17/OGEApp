@@ -264,6 +264,7 @@ private int Index = -1;
 
                 Pages.Activity.amountPeople =  GetUniquePeopleCount();
 
+                Layout.MainLayout.locations.Clear();
                 foreach(string s in GetLocations()){
                     Layout.MainLayout.locations.Add(s);
                 }
@@ -501,6 +502,7 @@ private int GetUniquePeopleCount()
                 
             }
         }
+        Series.Clear();
         Series.Add(new ChartSeries() { Name = "# of Entries", Data = new double[] { dictionary["Sunday"].Count, dictionary["Monday"].Count, dictionary["Tuesday"].Count, dictionary["Wednesday"].Count, dictionary["Thursday"].Count, dictionary["Friday"].Count, dictionary["Saturday"].Count} });
         return dictionary;
     }
