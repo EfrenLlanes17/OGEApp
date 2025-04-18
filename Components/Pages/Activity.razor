@@ -267,7 +267,42 @@ amountPeople = GetUniquePeopleCount(GetFilteredEntries());
 
 //This is for entries/exists
 entriesAndExit = GetFilteredEntries().Count;
+
+//This is for scan Activations
+OrganizeEventsByDayOfWeek(GetFilteredEntries());
 }
+
+
+
+
+private static void OrganizeEventsByDayOfWeek(List<Upload.ReaderEvent> events)
+    {
+        var dictionary = new Dictionary<string, List<Upload.ReaderEvent>>
+        {
+            {"Sunday", new List<Upload.ReaderEvent>()},
+            {"Monday", new List<Upload.ReaderEvent>()},
+            {"Tuesday", new List<Upload.ReaderEvent>()},
+            {"Wednesday", new List<Upload.ReaderEvent>()},
+            {"Thursday", new List<Upload.ReaderEvent>()},
+            {"Friday", new List<Upload.ReaderEvent>()},
+            {"Saturday", new List<Upload.ReaderEvent>()}
+        };
+
+        
+
+        foreach (var evt in events)
+        {
+            if (DateTime.TryParse(evt.Time, out DateTime eventDate))
+            {
+                string dayOfWeek = eventDate.ToString("dddd");
+                dictionary[dayOfWeek].Add(evt);
+                
+            }
+        }
+        Series.Clear();
+        Series.Add(new ChartSeries() { Name = "# of Entries", Data = new double[] { dictionary["Sunday"].Count, dictionary["Monday"].Count, dictionary["Tuesday"].Count, dictionary["Wednesday"].Count, dictionary["Thursday"].Count, dictionary["Friday"].Count, dictionary["Saturday"].Count} });
+    }
+
 
 private static int GetUniquePeopleCount(List<Upload.ReaderEvent> entries)
 {
@@ -475,7 +510,7 @@ public static DateTime selectedDateMax
 
       public static int amountPeople { get; set; } = 0;
 
-       public List<ChartSeries> Series = Upload.Series;
+       public static List<ChartSeries> Series = Upload.Series;
 
         public static List<ChartSeries> Series2 = Upload.SeriesPeople;
 
