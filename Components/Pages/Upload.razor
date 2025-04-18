@@ -167,6 +167,10 @@ private int Index = -1;
     public static DateTime LastDay;
 
 
+    public static List<string> listOfErrors = new List<string>();
+
+
+
     public async Task FileUploaded(InputFileChangeEventArgs e)
     {
         Console.WriteLine("Hello");
@@ -227,9 +231,11 @@ private int Index = -1;
                 Console.WriteLine(GetFirstDate().ToString());
                 Console.WriteLine(GetLastDate().ToString()); *@
 
-                foreach(string s in CheckForPotentialIssues(Entries).ToArray()){
+                @* foreach(string s in CheckForPotentialIssues(Entries).ToArray()){
                    Console.WriteLine(s);
-                }
+                } *@
+
+                listOfErrors = CheckForPotentialIssues(Entries);
 
                 // List<string> machineIssues = Entries
                 //    .GroupBy(e => e.ReaderDesc)  
@@ -311,7 +317,7 @@ private int Index = -1;
     {
         foreach (var issue in machineIssuesOver)
         {
-            issues.Add($"Issue detected with Machine {issue.Machine} : {issue.Count} scans over threshold of {SCAN_THRESHOLDForPannel}");
+            issues.Add($"Machine {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
@@ -319,7 +325,7 @@ private int Index = -1;
     {
         foreach (var issue in machineIssuesNear)
         {
-            issues.Add($"Issue detected with Machine {issue.Machine} : {issue.Count} scans near threshold of {SCAN_THRESHOLDForPannel}");
+            issues.Add($"Machine {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
@@ -328,7 +334,7 @@ private int Index = -1;
     {
         foreach (var issue in readerDescIssuesOver)
         {
-            issues.Add($"Issue detected with ReaderDesc {issue.ReaderDesc} : {issue.Count} scans over threshold of {SCAN_THRESHOLDForReader}");
+            issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForReader}");
         }
     }
 
@@ -336,7 +342,7 @@ private int Index = -1;
     {
         foreach (var issue in readerDescIssuesNear)
         {
-            issues.Add($"Issue detected with ReaderDesc {issue.ReaderDesc} : {issue.Count} scans near threshold of {SCAN_THRESHOLDForReader}");
+            issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForReader}");
         }
     }
 

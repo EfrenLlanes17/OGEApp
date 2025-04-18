@@ -42,7 +42,7 @@
     </div>
 </div>
 
-            
+    
 
 <div style="text-align: center; width: 100%;">
     @if(showContent){
@@ -56,10 +56,13 @@
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-right: 15%;">Line Chart 1</h2>
-            <div  style="color: white; font-size: 100px; margin-bottom: 5px;  margin-right: 10%;">
-            @foreach(var s in errorsfound){
-                <h3>@s</h3>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 24%;">Warning Flags</h2>
+            <div  style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 10%; margin-top: 5%;">
+            @foreach(var s in Upload.listOfErrors.Take(4)){
+                <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
+                <img src="images/error.jpeg" alt="Error Img" width="35" height="35" style="margin-left: 10px;">
+                <h3 style="font-size: 17px; margin-bottom: 5%; margin-top: 1%;">@s</h3>
+                </div>
             }
             </div>
         </div>
@@ -254,6 +257,8 @@ private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
        public List<ChartSeries> Series = Upload.Series;
 
         public List<ChartSeries> Series2 = Upload.SeriesPeople;
+
+    
 
         public  List<ChartSeries> Series3 = Upload.SeriesReaders;
         public List<ChartSeries> Series4 = Upload.SeriesPanel;
