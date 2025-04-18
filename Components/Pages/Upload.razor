@@ -255,7 +255,7 @@ private int Index = -1;
                 
                 
                 firstDay = GetFirstDate();
-                LastDay = GetLastDate();
+                LastDay = GetLastDate().AddDays(1);
 
                 Pages.Activity.selectedDateMin = firstDay;
                 Pages.Activity.selectedDateMax = LastDay;
