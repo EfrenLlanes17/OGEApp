@@ -221,6 +221,11 @@ private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
 }
 
 
+public static void OnDateChange(){
+    Console.WriteLine($"Min: {selectedDateMin}" + " " + $"Max: {selectedDateMax}");
+}
+
+
 
 
 
@@ -244,7 +249,9 @@ public static DateTime selectedDateMin
     {
         if (value <= _selectedDateMax)
         {
+            
             _selectedDateMin = value;
+            OnDateChange();
         }
     }
 }
@@ -256,7 +263,9 @@ public static DateTime selectedDateMax
     {
         if (value >= _selectedDateMin)
         {
+            
             _selectedDateMax = value;
+            OnDateChange();
         }
     }
 }
