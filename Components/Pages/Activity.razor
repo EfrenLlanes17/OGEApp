@@ -49,14 +49,14 @@
 
     <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
         <div class="mostActiveReadersPop" style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Avg Area Population Per Day</h2>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Avg Area Population Per Day</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@changeReadersToPop(Series3)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 24%;">Warning Flags</h2>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 24%;"><b>Warning Flags</b></h2>
             <div  style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 10%; margin-top: 5%;">
             @foreach(var s in Upload.listOfErrors.Take(4)){
                 <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
@@ -68,7 +68,7 @@
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Scan Activations</h2>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Scan Activations</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
@@ -95,7 +95,7 @@
 </button>
 
         <div class="mostActiveReaders" style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Most Active Readers</h2>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Most Active Readers</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series3" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
@@ -104,14 +104,14 @@
         @* // more than 100 percent *@
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px; margin-left: 15%;">Most Active People</h2>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px; margin-left: 15%;"><b>Most Active People</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPeople" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;">Most Active Panels</h2>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Most Active Panels</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
