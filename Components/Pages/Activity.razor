@@ -238,8 +238,33 @@ public static void OnDateChange(){
    
     //Console.WriteLine(GetFilteredEntries().Count);
     Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntries());
+    
+    XAxisLabelsforPeople = GetTopActivePeopleNames(GetFilteredEntries()).ToArray();
+    Series2.Clear();
+    Series2.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePeopleCounts(GetFilteredEntries()).ToArray()});
 
 
+}
+
+private static List<double> GetTopActivePeopleCounts(List<Upload.ReaderEvent> entries, int topN = 5)
+{
+    return entries
+        .GroupBy(e => e.IDHash)
+        .OrderByDescending(g => g.Count())
+        .Take(topN)
+        .Select(g => (double)g.Count()) // Convert count to double
+        .ToList();
+}
+
+
+private static List<string> GetTopActivePeopleNames(List<Upload.ReaderEvent> entries,int topN = 5)
+{
+    return entries
+        .GroupBy(e => e.IDHash.Substring(0,10))
+        .OrderByDescending(g => g.Count())
+        .Take(topN)
+        .Select(g => g.Key)
+        .ToList();
 }
 
 public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entries)
@@ -384,7 +409,7 @@ public static DateTime selectedDateMax
 
        public List<ChartSeries> Series = Upload.Series;
 
-        public List<ChartSeries> Series2 = Upload.SeriesPeople;
+        public static List<ChartSeries> Series2 = Upload.SeriesPeople;
 
     
 
@@ -395,7 +420,7 @@ public static DateTime selectedDateMax
 
         public string[] XAxisLabels = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
 
-        public string[] XAxisLabelsforPeople = Pages.Upload.XAxisLabelsforPeople;
+        public static string[] XAxisLabelsforPeople = Pages.Upload.XAxisLabelsforPeople;
 
         public string[] XAxisLabelsforReaders = Pages.Upload.XAxisLabelsforReaders;
 

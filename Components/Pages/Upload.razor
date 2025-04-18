@@ -216,13 +216,15 @@ private int Index = -1;
                 readerEvents = OrganizeEventsByReader(Entries);
                 eventsByDayOfWeek = OrganizeEventsByDayOfWeek(Entries);
             
-
+                SeriesPeople.Clear();
                 SeriesPeople.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePeopleCounts().ToArray()});
                 XAxisLabelsforPeople = GetTopActivePeopleNames().ToArray();
 
+                SeriesReaders.Clear();
                 SeriesReaders.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts().ToArray()});
                 XAxisLabelsforReaders= GetTopActiveReaders().ToArray();
 
+                SeriesPanel.Clear();
                 SeriesPanel.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts().ToArray()});
                 XAxisLabelsforPanels= GetTopActivePanels().ToArray();
 
@@ -235,6 +237,7 @@ private int Index = -1;
                    Console.WriteLine(s);
                 } *@
 
+                
                 listOfErrors = CheckForPotentialIssues(Entries);
 
                  @* List<string> machineIssues = Entries
