@@ -187,15 +187,6 @@
         
     }
 
-    private void OnDateChanged()
-    {
-        // Your logic goes here (for example, updating charts or series data)
-        Console.WriteLine($"Selected Date Range: {selectedDateMin.ToShortDateString()} - {selectedDateMax.ToShortDateString()}");
-
-        // Add any other functionality you'd like when the dates change
-        // For instance, you might want to update Series5
-        UpdateSeriesData();
-    }
 
     public int GetDaysBetweenDates(DateTime selectedDateMin, DateTime selectedDateMax)
 {
@@ -237,8 +228,41 @@ private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
 
     
 
-      public static DateTime selectedDateMin { get; set; } = DateTime.Today;
-      public static DateTime selectedDateMax { get; set; } = DateTime.Today;
+      @* public static DateTime selectedDateMin { get; set; } = DateTime.Today;
+      public static DateTime selectedDateMax { get; set; } = DateTime.Today; *@
+
+
+
+
+private static DateTime _selectedDateMin = DateTime.Today;
+private static DateTime _selectedDateMax = DateTime.Today;
+
+public static DateTime selectedDateMin
+{
+    get => _selectedDateMin;
+    set
+    {
+        if (value <= _selectedDateMax)
+        {
+            _selectedDateMin = value;
+        }
+    }
+}
+
+public static DateTime selectedDateMax
+{
+    get => _selectedDateMax;
+    set
+    {
+        if (value >= _selectedDateMin)
+        {
+            _selectedDateMax = value;
+        }
+    }
+}
+
+
+
 
       
 
