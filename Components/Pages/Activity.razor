@@ -238,7 +238,7 @@ public static void OnDateChange(){
    
     //Console.WriteLine(GetFilteredEntries().Count);
     //This is for the warning flags
-    Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntries());
+    @* Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntries()); *@
     
     //This is for most active people
     XAxisLabelsforPeople = GetTopActivePeopleNames(GetFilteredEntries()).ToArray();
