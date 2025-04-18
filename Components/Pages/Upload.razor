@@ -173,7 +173,7 @@ private int Index = -1;
 
     public async Task FileUploaded(InputFileChangeEventArgs e)
     {
-        Console.WriteLine("Hello");
+        
         var browserFile = e.File;
         file = browserFile;
 
@@ -233,10 +233,10 @@ private int Index = -1;
                 Console.WriteLine(GetFirstDate().ToString());
                 Console.WriteLine(GetLastDate().ToString()); *@
 
-                @* foreach(string s in CheckForPotentialIssues(Entries).ToArray()){
+                foreach(string s in CheckForPotentialIssues(Entries).ToArray()){
                    Console.WriteLine(s);
-                } *@
-                Console.WriteLine(CheckForPotentialIssues(Entries).Count);
+                }
+                @* Console.WriteLine(CheckForPotentialIssues(Entries).Count); *@
 
                 
                 listOfErrors = CheckForPotentialIssues(Entries);
@@ -286,9 +286,28 @@ private int Index = -1;
     int SCAN_THRESHOLDForPannel = 10000; //4000
     int nearPannel = 100;
 
-    int SCAN_THRESHOLDForReader = 10000; //200
+    int SCAN_THRESHOLDForReader = 10000; //2000
     int nearReader = 100;
+
+    int closingTime = 23;
+
+    int openingTime = 2;
+
+//Does not account for Day lights saving time and only works for UTE to CTE. Regular is +6 but its DST
+    int openingTimeUtc = openingTime +  5;
+    int closingTimeUtc = closingTime + 5 ;
+    if(closingTimeUtc > 12){
+        closingTimeUtc -= 12;
+    }
+
     List<string> issues = new List<string>();
+
+    var afterHours = entries
+    .Where(e => 
+    DateTime.Parse(e.Time).Hour < openingTimeUtc || DateTime.Parse(e.Time).Hour > closingTimeUtc)
+    .Select(e => new { e.IDHash, e.Time, e.ReaderDesc })
+    .ToList();
+
 
     var duplicateScans = entries
     .OrderBy(e => e.IDHash).ThenBy(e => e.Time)
@@ -333,6 +352,14 @@ private int Index = -1;
         .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
         .ToList();
 
+        if (afterHours.Any())
+    {
+        foreach (var scan in afterHours)
+            {
+                issues.Add($"{scan.IDHash} scanned at {scan.ReaderDesc} at {scan.Time} — outside regular hours.");
+            }
+    }
+
 
 
     if (machineIssuesOver.Any())
@@ -369,13 +396,13 @@ private int Index = -1;
         }
     }
 
-    if (duplicateScans.Any())
+    @* if (duplicateScans.Any())
     {
         foreach (var dup in duplicateScans)
         {
     issues.Add($"Duplicate scan detected for {dup.IDHash.Substring(0,10)} at {dup.ReaderDesc} at {dup.Time}.");
         }
-    }
+    } *@
 
    
     if (!issues.Any())
