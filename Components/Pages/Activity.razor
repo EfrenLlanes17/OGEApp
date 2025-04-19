@@ -41,11 +41,15 @@
 
         <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;">
             <input type="date" @bind="selectedDateMin"
+                min="@Upload.firstDay.ToString("yyyy-MM-dd")" 
+                max="@Upload.LastDay.ToString("yyyy-MM-dd")"
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
             
             <span style="color: white; font-size: 18px;">To</span>
 
             <input type="date" @bind="selectedDateMax"
+                min="@Upload.firstDay.ToString("yyyy-MM-dd")" 
+                max="@Upload.LastDay.ToString("yyyy-MM-dd")"
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
         </div>
          @* @GetDaysBetweenDates(selectedDateMin, selectedDateMax) Days  *@
