@@ -64,6 +64,7 @@
        @Upload.ReadersOver
        @Upload.ReadersNear
        @Upload.afterHoursBool
+       @Upload.dupBool
       
     </div>
 
@@ -170,6 +171,15 @@
            style="width:30%; height: 20px;" />
     <label for="closeTimeCheckbox" style="color: white; font-size: 18px; min-width: 100px;">
         Show "Regular Hours" Issue
+    </label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+    <input id="closeTimeCheckbox" type="checkbox"
+           @bind="Upload.dupBool"
+           style="width:30%; height: 20px;" />
+    <label for="closeTimeCheckbox" style="color: white; font-size: 18px; min-width: 100px;">
+        Show "Duplicate Scan" Issue
     </label>
         </div>
 
@@ -607,7 +617,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
 
 
 
-    if (machineIssuesOver.Any())
+    if (machineIssuesOver.Any() && Upload.PanelsOver)
     {
         foreach (var issue in machineIssuesOver)
         {
@@ -615,7 +625,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
         }
     }
 
-     if (readerDescIssuesOver.Any())
+     if (readerDescIssuesOver.Any() && Upload.ReadersOver)
     {
         foreach (var issue in readerDescIssuesOver)
         {
@@ -623,7 +633,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
         }
     }
 
-     if (afterHours.Any())
+     if (afterHours.Any() && Upload.afterHoursBool)
     {
         foreach (var scan in afterHours)
             {
@@ -631,7 +641,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
             }
     }
 
-    if (machineIssuesNear.Any())
+    if (machineIssuesNear.Any() && Upload.PanelsNear)
     {
         foreach (var issue in machineIssuesNear)
         {
@@ -641,7 +651,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
 
     
 
-    if (readerDescIssuesNear.Any())
+    if (readerDescIssuesNear.Any() && Upload.ReadersNear)
     {
         foreach (var issue in readerDescIssuesNear)
         {
@@ -649,7 +659,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
         }
     }
 
-    if (duplicateScans.Any())
+    if (duplicateScans.Any() && Upload.dupBool)
     {
         foreach (var dup in duplicateScans)
         {

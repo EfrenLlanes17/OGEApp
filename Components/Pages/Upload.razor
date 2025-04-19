@@ -191,6 +191,8 @@ public static Boolean ReadersNear= true;
 
 public static Boolean afterHoursBool = true;
 
+public static Boolean dupBool = true;
+
 
 
     public async Task FileUploaded(InputFileChangeEventArgs e)
@@ -378,7 +380,7 @@ public static Boolean afterHoursBool = true;
 
 
 
-    if (machineIssuesOver.Any())
+    if (machineIssuesOver.Any() && PanelsOver)
     {
         foreach (var issue in machineIssuesOver)
         {
@@ -386,7 +388,7 @@ public static Boolean afterHoursBool = true;
         }
     }
 
-     if (readerDescIssuesOver.Any())
+     if (readerDescIssuesOver.Any() && ReadersOver)
     {
         foreach (var issue in readerDescIssuesOver)
         {
@@ -394,7 +396,7 @@ public static Boolean afterHoursBool = true;
         }
     }
 
-     if (afterHours.Any())
+     if (afterHours.Any() && afterHoursBool)
     {
         foreach (var scan in afterHours)
             {
@@ -402,7 +404,7 @@ public static Boolean afterHoursBool = true;
             }
     }
 
-    if (machineIssuesNear.Any())
+    if (machineIssuesNear.Any() && PanelsNear)
     {
         foreach (var issue in machineIssuesNear)
         {
@@ -412,7 +414,7 @@ public static Boolean afterHoursBool = true;
 
     
 
-    if (readerDescIssuesNear.Any())
+    if (readerDescIssuesNear.Any() && ReadersNear)
     {
         foreach (var issue in readerDescIssuesNear)
         {
@@ -420,7 +422,7 @@ public static Boolean afterHoursBool = true;
         }
     }
 
-    if (duplicateScans.Any())
+    if (duplicateScans.Any() && dupBool)
     {
         foreach (var dup in duplicateScans)
         {
