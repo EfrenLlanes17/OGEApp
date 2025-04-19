@@ -59,6 +59,11 @@
        @Upload.nearReader
        @Upload.openTime
        @Upload.closeTime
+       @Upload.PanelsOver
+       @Upload.PanelsNear
+       @Upload.ReadersOver
+       @Upload.ReadersNear
+       @Upload.afterHoursBool
       
     </div>
 
@@ -88,6 +93,15 @@
             <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Threshold for Panels</label>
         </div>
 
+         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+    <input id="closeTimeCheckbox" type="checkbox"
+           @bind="Upload.PanelsOver"
+           style="width:30%; height: 20px;" />
+    <label for="closeTimeCheckbox" style="color: white; font-size: 18px; min-width: 100px;">
+        Show "Panels Over" Issue
+    </label>
+        </div>
+
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
             <input id="inputText" type="text"
                 @bind="Upload.nearPannel"
@@ -96,10 +110,28 @@
         </div>
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+    <input id="closeTimeCheckbox" type="checkbox"
+           @bind="Upload.PanelsNear"
+           style="width:30%; height: 20px;" />
+    <label for="closeTimeCheckbox" style="color: white; font-size: 18px; min-width: 100px;">
+        Show "Panels Near" Issue
+    </label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
             <input id="inputText" type="text"
                 @bind="Upload.SCAN_THRESHOLDForReader"
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
             <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Threshold for Readers</label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+    <input id="closeTimeCheckbox" type="checkbox"
+           @bind="Upload.ReadersOver"
+           style="width:30%; height: 20px;" />
+    <label for="closeTimeCheckbox" style="color: white; font-size: 18px; min-width: 100px;">
+        Show "Readers Over" Issue
+    </label>
         </div>
         
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
@@ -107,6 +139,15 @@
                 @bind="Upload.nearReader"
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
             <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Near Threshold for Readers</label>
+        </div>
+
+         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+    <input id="closeTimeCheckbox" type="checkbox"
+           @bind="Upload.ReadersNear"
+           style="width:30%; height: 20px;" />
+    <label for="closeTimeCheckbox" style="color: white; font-size: 18px; min-width: 100px;">
+        Show "Readers Near" Issue
+    </label>
         </div>
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
@@ -122,6 +163,17 @@
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
             <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Closing time (EX: 10PM --> 22)</label>
         </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+    <input id="closeTimeCheckbox" type="checkbox"
+           @bind="Upload.afterHoursBool"
+           style="width:30%; height: 20px;" />
+    <label for="closeTimeCheckbox" style="color: white; font-size: 18px; min-width: 100px;">
+        Show "Regular Hours" Issue
+    </label>
+        </div>
+
+
 
         
 
