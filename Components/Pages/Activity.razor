@@ -53,10 +53,12 @@
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
         </div>
          @* @GetDaysBetweenDates(selectedDateMin, selectedDateMax) Days  *@
-         @SCAN_THRESHOLDForPannel
-       @SCAN_THRESHOLDForReader
-       @nearPannel
-       @nearReader
+         @Upload.SCAN_THRESHOLDForPannel
+       @Upload.SCAN_THRESHOLDForReader
+       @Upload.nearPannel
+       @Upload.nearReader
+       @Upload.openTime
+       @Upload.closeTime
       
     </div>
 
@@ -81,30 +83,44 @@
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
             <input id="inputText" type="text"
-                @bind="SCAN_THRESHOLDForPannel"
+                @bind="Upload.SCAN_THRESHOLDForPannel"
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
             <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Threshold for Panels</label>
         </div>
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
             <input id="inputText" type="text"
-                @bind="nearPannel"
+                @bind="Upload.nearPannel"
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
             <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Near Threshold for Panels</label>
         </div>
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
             <input id="inputText" type="text"
-                @bind="SCAN_THRESHOLDForReader"
+                @bind="Upload.SCAN_THRESHOLDForReader"
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
             <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Threshold for Readers</label>
         </div>
         
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
             <input id="inputText" type="text"
-                @bind="nearReader"
+                @bind="Upload.nearReader"
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
             <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Near Threshold for Readers</label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+            <input id="inputText" type="text"
+                @bind="Upload.openTime"
+                style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
+            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Opening time (EX: 5AM --> 5)</label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+            <input id="inputText" type="text"
+                @bind="Upload.closeTime"
+                style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
+            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Closing time (EX: 10PM --> 22)</label>
         </div>
 
         
@@ -269,8 +285,8 @@ void ShowModal() => IsVisible = true;
    void HideModal()
 {
     IsVisible = false;
-
-
+    Upload.listOfErrors = CheckForPotentialIssues(Upload.Entries);
+    Console.WriteLine(CheckForPotentialIssues(Upload.Entries).Count);
 }
 
     [Parameter] public bool IsVisible { get; set; }
@@ -466,13 +482,48 @@ private static List<string> GetTopActivePeopleNames(List<Upload.ReaderEvent> ent
 
 public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entries)
 {
-    //int SCAN_THRESHOLDForPannel = 4000; 
+    int SCAN_THRESHOLDForPannel = Upload.SCAN_THRESHOLDForPannel; 
 
-    //int nearPannel = 100;
+    int nearPannel = Upload.nearPannel;
 
-    //int SCAN_THRESHOLDForReader = 2000; 
-    //int nearReader = 100;
+    int SCAN_THRESHOLDForReader = Upload.SCAN_THRESHOLDForReader; 
+    int nearReader = Upload.nearReader;
+    int closingTime = Upload.closeTime;
+
+    int openingTime = Upload.openTime;
+
+//Does not account for Day lights saving time and only works for UTE to CTE. Regular is +6 but its DST
+    int openingTimeUtc = openingTime +  5;
+    int closingTimeUtc = closingTime + 5 ;
+    if(closingTimeUtc > 12){
+        closingTimeUtc -= 12;
+    }
+
     List<string> issues = new List<string>();
+
+    var afterHours = entries
+    .Where(e => 
+    DateTime.Parse(e.Time).Hour < openingTimeUtc || DateTime.Parse(e.Time).Hour > closingTimeUtc)
+    .Select(e => new { e.IDHash, e.Time, e.ReaderDesc })
+    .ToList();
+
+
+    var duplicateScans = entries
+    .OrderBy(e => e.IDHash).ThenBy(e => e.Time)
+    .GroupBy(e => e.IDHash)
+    .SelectMany(group =>
+        group.Zip(group.Skip(1), (a, b) => new { Prev = a, Curr = b , PrevTime = DateTime.Parse(a.Time), CurrTime = DateTime.Parse(b.Time) })
+             .Where(pair =>
+                 pair.Prev.ReaderDesc == pair.Curr.ReaderDesc &&
+                 pair.Prev.IDHash == pair.Curr.IDHash &&
+                  pair.Prev.DevID == pair.Curr.DevID &&
+                  pair.Prev.Machine == pair.Curr.Machine &&
+                 pair.CurrTime  == pair.PrevTime 
+             )
+             .Select(pair => pair.Curr)
+    )
+    .ToList();
+
 
    
     var machineIssuesOver = entries
@@ -500,13 +551,32 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
         .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
         .ToList();
 
-    
+       
+
+
+
     if (machineIssuesOver.Any())
     {
         foreach (var issue in machineIssuesOver)
         {
             issues.Add($"Machine {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
         }
+    }
+
+     if (readerDescIssuesOver.Any())
+    {
+        foreach (var issue in readerDescIssuesOver)
+        {
+            issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForReader}");
+        }
+    }
+
+     if (afterHours.Any())
+    {
+        foreach (var scan in afterHours)
+            {
+                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {scan.Time} — outside regular hours.");
+            }
     }
 
     if (machineIssuesNear.Any())
@@ -518,13 +588,6 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
     }
 
     
-    if (readerDescIssuesOver.Any())
-    {
-        foreach (var issue in readerDescIssuesOver)
-        {
-            issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForReader}");
-        }
-    }
 
     if (readerDescIssuesNear.Any())
     {
@@ -534,10 +597,18 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
         }
     }
 
+    if (duplicateScans.Any())
+    {
+        foreach (var dup in duplicateScans)
+        {
+    issues.Add($"Duplicate scan detected for {dup.IDHash.Substring(0,10)} at {dup.ReaderDesc} at {dup.Time}.");
+        }
+    }
+
    
     if (!issues.Any())
     {
-        issues.Add("No issues detected with machines or reader descriptions.");
+        issues.Add("No issues detected with machines or readers.");
     }
 
     return issues;
@@ -560,13 +631,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
 private static DateTime _selectedDateMin = DateTime.Today;
 private static DateTime _selectedDateMax = DateTime.Today;
 
-public static int SCAN_THRESHOLDForPannel = 4000;
 
-public static int SCAN_THRESHOLDForReader = 2000;
-
-public static int nearPannel = 100;
-
-public static int nearReader = 100;
 
 
 public static DateTime selectedDateMin

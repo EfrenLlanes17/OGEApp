@@ -169,6 +169,18 @@ private int Index = -1;
 
     public static List<string> listOfErrors = new List<string>();
 
+public static int openTime = 9;
+
+public static int closeTime = 17;
+
+public static int SCAN_THRESHOLDForPannel = 4000;
+
+public static int SCAN_THRESHOLDForReader = 2000;
+
+public static int nearPannel = 100;
+
+public static int nearReader = 100;
+
 
 
     public async Task FileUploaded(InputFileChangeEventArgs e)
@@ -283,15 +295,15 @@ private int Index = -1;
 
     public List<string> CheckForPotentialIssues(List<ReaderEvent> entries)
 {
-    int SCAN_THRESHOLDForPannel = 4000; //4000
+    @* int SCAN_THRESHOLDForPannel = 4000; //4000
     int nearPannel = 100;
 
     int SCAN_THRESHOLDForReader = 2000; //2000
-    int nearReader = 100;
+    int nearReader = 100; *@
 
-    int closingTime = 23;
+    int closingTime = closeTime;
 
-    int openingTime = 2;
+    int openingTime = openTime;
 
 //Does not account for Day lights saving time and only works for UTE to CTE. Regular is +6 but its DST
     int openingTimeUtc = openingTime +  5;
