@@ -1,0 +1,33 @@
+@page "/fulllist"
+@rendermode InteractiveServer
+
+@inject NavigationManager Navigation
+
+<PageTitle>FullList</PageTitle>
+
+
+<h1>FullList</h1>
+
+<style>
+    body {
+        background-color: black;
+        color: white;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+
+    input {
+  color-scheme: dark;
+}
+
+
+</style>
+
+@code{
+
+    
+    public static string[] Labels { get; set; }
+
+    
+    public static ChartSeries[] Series { get; set; }
+     
+}

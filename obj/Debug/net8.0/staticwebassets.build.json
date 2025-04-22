@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Z7UJTbAeWBmb5c/GfdPMZD/h5PScVXf0W7oQXrHDO1Q=",
+  "Hash": "Ja5fOm6r6PbVoDXniyMjVvbePekMPmnOnoI3ZGfP4LY=",
   "Source": "OGEApp",
   "BasePath": "_content/OGEApp",
   "Mode": "Default",
@@ -186,6 +186,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.png"
+    },
+    {
+      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-4\\wwwroot\\images\\check.png",
+      "SourceId": "OGEApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-4\\wwwroot\\",
+      "BasePath": "_content/OGEApp",
+      "RelativePath": "images/check.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\check.png"
     },
     {
       "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-4\\wwwroot\\images\\error.jpeg",

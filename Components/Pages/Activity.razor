@@ -277,7 +277,7 @@
             </div>
         </div>
 
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleChartClick">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Most Active Panels</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
@@ -350,6 +350,15 @@
             eventDate <= selectedDateMax)
         .ToList();
 }
+
+ private void HandleChartClick()
+    {
+        
+        
+        Navigation.NavigateTo("/fulllist");
+
+        // You can do more here — like show a modal or trigger logic
+    }
 
 void ShowModal() => IsVisible = true;
    void HideModal()

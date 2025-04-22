@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
+      "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-4\\wwwroot\\images\\check.png",
+      "PackagePath": "staticwebassets\\images\\check.png"
+    },
+    {
       "Id": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-4\\wwwroot\\images\\error.jpeg",
       "PackagePath": "staticwebassets\\images\\error.jpeg"
     },
