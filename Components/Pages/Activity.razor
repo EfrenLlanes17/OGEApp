@@ -270,7 +270,7 @@
 
         @* // more than 100 percent *@
 
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandlePersonChartClick">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px; margin-left: 15%;"><b>Most Active People</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPeople" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
@@ -350,19 +350,51 @@
             eventDate <= selectedDateMax)
         .ToList();
 }
-
- private void HandlePannelChartClick()
+ private void HandlePersonChartClick()
     {
         
         Fulllist.Labels = GetTopActivePeopleNamesNoLimit(Upload.Entries).ToArray();
-        Fulllist.Series = GetTopActivePanelCountsNoLimit(Upload.Entries).ToArray();
-        Fulllist.item = "Pannel";
+        Fulllist.Series = GetTopActivePeopleCountsNoLimit(Upload.Entries).ToArray();
+        Fulllist.item = "Person";
+        Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
         
     }
 
-    private static List<string> GetTopActivePeopleNamesNoLimit(List<Upload.ReaderEvent> entries)
+    private static List<double> GetTopActivePeopleCountsNoLimit(List<Upload.ReaderEvent> entries)
+{
+    return entries
+        .GroupBy(e => e.IDHash)
+        .OrderByDescending(g => g.Count())
+        .Select(g => (double)g.Count()) // Convert count to double
+        .ToList();
+}
+
+
+private static List<string> GetTopActivePeopleNamesNoLimit(List<Upload.ReaderEvent> entries)
+{
+    return entries
+        .GroupBy(e => e.IDHash.Substring(0,10))
+        .OrderByDescending(g => g.Count())
+        .Select(g => g.Key)
+        .ToList();
+}
+
+
+ private void HandlePannelChartClick()
+    {
+        
+        Fulllist.Labels = GetTopActivePannelNamesNoLimit(Upload.Entries).ToArray();
+        Fulllist.Series = GetTopActivePanelCountsNoLimit(Upload.Entries).ToArray();
+        Fulllist.item = "Pannel";
+        Fulllist.isFlags = false;
+        Navigation.NavigateTo("/fulllist");
+
+        
+    }
+
+    private static List<string> GetTopActivePannelNamesNoLimit(List<Upload.ReaderEvent> entries)
 {
     return entries
         .GroupBy(e => e.Machine.ToString())
