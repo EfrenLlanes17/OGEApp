@@ -214,7 +214,7 @@
             </div>
         </div>
 
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleFlagsChartClick">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 24%;"><b>Safety Flags</b></h2>
             <div  style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 10%; margin-top: 5%;">
             @foreach(var s in Upload.listOfErrors.Take(4)){
@@ -261,7 +261,7 @@
     &lt;
 </button>
 
-        <div class="mostActiveReaders" style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+        <div class="mostActiveReaders" style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleReaderChartClick">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Most Active Readers</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series3" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
@@ -350,6 +350,50 @@
             eventDate <= selectedDateMax)
         .ToList();
 }
+
+private void HandleFlagsChartClick()
+    {
+        
+        Fulllist.Labels = CheckForPotentialIssues(Upload.Entries).ToArray();
+        Fulllist.item = "Warning";
+        Fulllist.isFlags = true;
+        Navigation.NavigateTo("/fulllist");
+
+        
+    }
+
+private void HandleReaderChartClick()
+    {
+        
+        Fulllist.Labels = GetTopActiveReadersNoLimit(Upload.Entries).ToArray();
+        Fulllist.Series = GetTopActiveReadersCountsNoLimit(Upload.Entries).ToArray();
+        Fulllist.item = "Reader";
+        Fulllist.isFlags = false;
+        Navigation.NavigateTo("/fulllist");
+
+        
+    }
+
+    private static List<string> GetTopActiveReadersNoLimit(List<Upload.ReaderEvent> entries)
+{
+    return entries
+        .GroupBy(e => e.ReaderDesc.Substring(22))
+        .OrderByDescending(g => g.Count())
+        .Select(g => g.Key)
+        .ToList();
+}
+
+private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderEvent> entries)
+{
+    return entries
+        .GroupBy(e => e.ReaderDesc)
+        .OrderByDescending(g => g.Count())
+        .Select(g => (double)g.Count()) // Convert count to double
+        .ToList();
+}
+
+
+
  private void HandlePersonChartClick()
     {
         
