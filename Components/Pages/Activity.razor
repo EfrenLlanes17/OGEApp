@@ -277,7 +277,7 @@
             </div>
         </div>
 
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleChartClick">
+        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandlePannelChartClick">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Most Active Panels</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
@@ -351,14 +351,34 @@
         .ToList();
 }
 
- private void HandleChartClick()
+ private void HandlePannelChartClick()
     {
         
-        
+        Fulllist.Labels = GetTopActivePeopleNamesNoLimit(Upload.Entries).ToArray();
+        Fulllist.Series = GetTopActivePanelCountsNoLimit(Upload.Entries).ToArray();
+        Fulllist.item = "Pannel";
         Navigation.NavigateTo("/fulllist");
 
-        // You can do more here — like show a modal or trigger logic
+        
     }
+
+    private static List<string> GetTopActivePeopleNamesNoLimit(List<Upload.ReaderEvent> entries)
+{
+    return entries
+        .GroupBy(e => e.Machine.ToString())
+        .OrderByDescending(g => g.Count())
+        .Select(g => g.Key)
+        .ToList();
+}
+
+private static List<double> GetTopActivePanelCountsNoLimit(List<Upload.ReaderEvent> entries)
+{
+    return entries
+        .GroupBy(e => e.Machine.ToString())
+        .OrderByDescending(g => g.Count())
+        .Select(g => (double)g.Count()) // Convert count to double
+        .ToList();
+}
 
 void ShowModal() => IsVisible = true;
    void HideModal()

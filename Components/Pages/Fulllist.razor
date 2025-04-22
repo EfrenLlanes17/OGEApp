@@ -5,8 +5,22 @@
 
 <PageTitle>FullList</PageTitle>
 
+<MudButton Variant="Variant.Filled"
+               Color="Color.Primary"
+               StartIcon="@Icons.Material.Filled.ArrowBack"
+               OnClick="backToActivity">
+        <b style="text-align: left; width: 100%;">Activity</b>
+    </MudButton>
 
-<h1>FullList</h1>
+
+
+ @for(int i = 0; i< Labels.Length; i++ ){
+                
+               
+                
+                <h3 style="font-size: 17px; margin-bottom: 5%; margin-top: 1%;">@item @Labels[i] has @Series[i] scans</h3>
+                
+                }
 
 <style>
     body {
@@ -28,6 +42,13 @@
     public static string[] Labels { get; set; }
 
     
-    public static ChartSeries[] Series { get; set; }
+    public static double[] Series { get; set; }
+
+    public static string item  { get; set; }
+
+        private void backToActivity()
+    {
+        Navigation.NavigateTo("/activity");
+    }
      
 }
