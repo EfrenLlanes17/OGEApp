@@ -18,7 +18,16 @@
                 
                
                 
-                <h3 style="font-size: 17px; margin-bottom: 5%; margin-top: 1%;">@item @Labels[i] has @Series[i] scans</h3>
+               <div style="margin: 10px 0; padding: 12px; border-radius: 10px; background-color:  rgb(29, 29, 29); color: white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
+    <h3 style="font-size: 18px; margin: 0;">
+        <span style="font-weight: bold; color: #ffffff;">#@(i + 1)</span>
+        <span style="margin-left: 10px;">@item @Labels[i]</span>
+    </h3>
+    <p style="margin: 4px 0 0 28px; font-size: 15px;">
+        <strong>Scans:</strong> @Series[i]
+    </p>
+</div>
+
                 
                 }
 
