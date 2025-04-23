@@ -1,8 +1,129 @@
 @page "/map"
 @rendermode InteractiveServer
 
-@* If page does not work. close current build. do these commands in terminal:   dotnet clean         then do          dotnet watch build *@
 <PageTitle>map</PageTitle>
 
-<h1>Map</h1>
+@if(hotPoints){
 
+<div style="display: flex; flex-direction: column; align-items: center; margin-top: 1.5%;">
+    <!-- Labels above the bar -->
+    
+    <div style="width: 60%; display: flex; justify-content: space-between; margin-bottom: 5px; margin-right: 5%; font-size: 14px;">
+        <span style="font-weight: bold;">Most Active</span>
+        <span style="font-weight: bold; margin-right: 75%;">Least Active</span>
+    </div>
+
+    <!-- Bar and checkboxes in one row -->
+    <div style="display: flex; align-items: center; width: 65%; gap: 20px; margin-right: 0%">
+        <!-- Gradient Bar -->
+
+        
+        <div style="
+            flex: 1;
+            height: 20px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue);
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        ">
+        </div>
+
+        
+<div style="margin-left: 50%; ">
+        <!-- Checkboxes -->
+        <label class="custom-checkbox panels-color" style="margin-right: 10px;">
+            <input type="checkbox" @bind="panels" />Panels  
+        </label>
+
+        <label class="custom-checkbox readers-color" style="margin-right: 10px;">
+            <input type="checkbox" @bind="readers" />Readers  
+        </label>
+
+        <label class="custom-checkbox hotpoints-color">
+            <input type="checkbox" @bind="hotPoints" />Hot Points  
+        </label>
+
+        </div>
+    </div>
+</div>
+
+}
+
+else{
+           
+<div style="margin-left: 66%; margin-top: 2.92%;">
+        <!-- Checkboxes -->
+        <label class="custom-checkbox panels-color" style="margin-right: 10px;">
+            <input type="checkbox" @bind="panels" />Panels  
+        </label>
+
+        <label class="custom-checkbox readers-color" style="margin-right: 10px;">
+            <input type="checkbox" @bind="readers" />Readers  
+        </label>
+
+        <label class="custom-checkbox hotpoints-color">
+            <input type="checkbox" @bind="hotPoints" />Hot Points  
+        </label>
+
+        </div>
+    
+
+
+}
+
+
+
+
+<div style="text-align: center; margin-top: 5px;">
+    <img src="images/map1.jpeg" alt="OGE map" width="67%" height="50%" />
+</div>
+
+<style>
+    body {
+        background-color: black;
+        color: white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    input {
+        color-scheme: dark;
+    }
+
+    .custom-checkbox input[type="checkbox"] {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    .custom-checkbox input[type="checkbox"]:checked {
+        background-color: currentColor;
+       
+    }
+
+    .panels-color input[type="checkbox"] {
+        color: red;
+    }
+
+    .readers-color input[type="checkbox"] {
+        color: green;
+    }
+
+    .hotpoints-color input[type="checkbox"] {
+        color: linear-gradient(90deg, red, orange, yellow, green, blue);
+        
+    }
+
+    .hotpoints-color input[type="checkbox"]:checked {
+        background: linear-gradient(90deg, red, orange, yellow, green, blue);
+    }
+</style>
+
+@code {
+    private bool panels = false;
+    private bool readers = false;
+    private bool hotPoints = false;
+}
