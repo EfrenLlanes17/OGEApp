@@ -15,7 +15,7 @@
 
             <!-- Right-aligned section -->
             <div style="font-size: 20px; text-decoration: none; color: white; font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                <select name="locations" id="locations" style="background-color: rgb(29, 29, 29); border: none; color: white; text-align: right; font-weight: bold;">
+                <select @bind="selectedLocation"  name="locations" id="locations" style="background-color: rgb(29, 29, 29); border: none; color: white; text-align: right; font-weight: bold;">
                     <option value="">Location</option>
                     @foreach(var loc in getLocations()){
                         <option value=@loc>@loc</option>
@@ -33,8 +33,11 @@
     </main>
 </div>
 
+
 @code{
     //public static List<string> locations = new List<string>();
+
+     public static string selectedLocation ="";
 
         public static List<string> locations = new List<string>();
 
