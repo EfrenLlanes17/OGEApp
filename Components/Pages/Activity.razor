@@ -29,6 +29,8 @@
 
 
 
+
+
 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 100px;">
     <!-- Left Column: Activity Title -->
     <div>
@@ -52,6 +54,14 @@
                 max="@Upload.LastDay.ToString("yyyy-MM-dd")"
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
         </div>
+                <select @bind="location"  name="locations" id="locations" style="fit-content; background-color: black; border: white; color: white; text-align: center; font-weight: bold; margin-top: 10px;">
+                    <option value="">Location</option>
+                    @foreach(var loc in getLocations()){
+                        <option value=@loc>@loc</option>
+                    }
+                </select>
+
+        
          @* @GetDaysBetweenDates(selectedDateMin, selectedDateMax) Days  *@
          @* @Upload.SCAN_THRESHOLDForPannel
        @Upload.SCAN_THRESHOLDForReader
@@ -345,6 +355,8 @@
 
 @code {
 
+    
+
     private static List<Upload.ReaderEvent> GetFilteredEntries()
 {
     return Upload.Entries
@@ -468,14 +480,20 @@ void ShowModal() => IsVisible = true;
     Console.WriteLine(CheckForPotentialIssues(Upload.Entries).Count);
 }
 
+
+  public static List<string> getLocations(){
+            return listOflocations;
+        }
+
     [Parameter] public bool IsVisible { get; set; }
     [Parameter] public string Title { get; set; }
     [Parameter] public EventCallback OnClose { get; set; }
     [Parameter] public RenderFragment ChildContent { get; set; }
 
 
-
+ public static List<string> listOflocations = new List<string>();
     
+    public static string location = "";
 
     
 

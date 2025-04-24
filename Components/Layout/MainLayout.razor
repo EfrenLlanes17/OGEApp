@@ -15,12 +15,14 @@
 
             <!-- Right-aligned section -->
             <div style="font-size: 20px; text-decoration: none; color: white; font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-                <select @bind="selectedLocation"  name="locations" id="locations" style="background-color: rgb(29, 29, 29); border: none; color: white; text-align: right; font-weight: bold;">
+                @* <select onchange="testFunc"  name="locations" id="locations" style="background-color: rgb(29, 29, 29); border: none; color: white; text-align: right; font-weight: bold;">
                     <option value="">Location</option>
+                    <option value="testLoc">testLoc</option>
                     @foreach(var loc in getLocations()){
                         <option value=@loc>@loc</option>
                     }
                 </select>
+                @selectedLocation *@
 
                 <NavLink href="activity" style="text-decoration: none; color: white; margin-left: 15px;">Activity</NavLink>
                 <NavLink href="map" style="text-decoration: none; color: white; margin-left: 15px;">Map</NavLink>
@@ -41,6 +43,9 @@
 
         public static List<string> locations = new List<string>();
 
+public void testFunc(){
+    Console.WriteLine("Hello");
+}
 
         public static List<string> getLocations(){
             return locations;

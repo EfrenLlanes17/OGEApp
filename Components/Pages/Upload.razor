@@ -289,11 +289,11 @@ public static Boolean dupBool = false;
 
                 Pages.Activity.amountPeople =  GetUniquePeopleCount();
 
-                Layout.MainLayout.locations.Clear();
+                Components.Pages.Activity.listOflocations.Clear();
                 foreach(string s in GetLocations()){
-                    Layout.MainLayout.locations.Add(s);
+                    Components.Pages.Activity.listOflocations.Add(s);
                 }
-                Layout.MainLayout.selectedLocation = GetLocations().ToArray()[0];
+                Components.Pages.Activity.location = GetLocations().ToArray()[0];
 
 
 
