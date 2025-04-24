@@ -3,6 +3,10 @@
 
 <PageTitle>map</PageTitle>
 
+
+
+
+
 @if(hotPoints){
 
 <div style="display: flex; flex-direction: column; align-items: center; margin-top: 1.5%;">
@@ -26,6 +30,9 @@
             box-shadow: 0 0 5px rgba(0,0,0,0.2);
         ">
         </div>
+
+        
+
 
         
 <div style="margin-left: 50%; ">
@@ -70,12 +77,130 @@ else{
 
 }
 
+@if(panels){
 
+    <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 210px;
+           left: 795px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+    <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 560px;
+           left: 350px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+    <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 510px;
+           left: 820px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+    <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 545px;
+           left: 800px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+     <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 425px;
+           left: 1000px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+     <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 500px;
+           left: 960px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+    <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 450px;
+           left: 1100px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+     <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 510px;
+           left: 1100px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+    <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 240px;
+           left: 1310px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+    <i class="fas fa-map-marker-alt"
+     @onclick="OnPannelClick"
+       style="
+           position: absolute;
+           top: 470px;
+           left: 1280px;
+           color: red;
+           font-size: 42px;
+           z-index: 10;">
+    </i>
+
+}
+
+
+ 
 
 
 <div style="text-align: center; margin-top: 5px;">
     <img src="images/map1.jpeg" alt="OGE map" width="67%" height="50%" />
 </div>
+
+
+
 
 <style>
     body {
@@ -122,8 +247,17 @@ else{
     }
 </style>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
 @code {
     private bool panels = false;
     private bool readers = false;
     private bool hotPoints = false;
+
+    private void OnPannelClick()
+    {
+        Console.WriteLine("Pannel clicked!");
+        // Or do something Blazor-y like opening a modal, showing details, etc.
+    }
 }
