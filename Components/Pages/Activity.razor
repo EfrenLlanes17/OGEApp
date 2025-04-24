@@ -54,7 +54,7 @@
                 max="@Upload.LastDay.ToString("yyyy-MM-dd")"
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
         </div>
-                <select @bind="location"  name="locations" id="locations" style="fit-content; background-color: black; border: white; color: white; text-align: center; font-weight: bold; margin-top: 10px;">
+                <select @bind="location"  name="locations" id="locations" style="fit-content; background-color: black; border: white; color: white; text-align: center; font-weight: bold; margin-top: 10px;" >
                     <option value="">Location</option>
                     @foreach(var loc in getLocations()){
                         <option value=@loc>@loc</option>
@@ -493,7 +493,74 @@ void ShowModal() => IsVisible = true;
 
  public static List<string> listOflocations = new List<string>();
     
-    public static string location = "";
+   
+    private static string _location = "";
+
+public static string location
+{
+    get => _location;
+    set
+    {
+        if (_location != value)
+        {
+            _location = value;
+            OnLocationChanged(value);
+        }
+    }
+}
+
+ private static List<Upload.ReaderEvent> GetFilteredEntriesByName()
+{
+    return Upload.Entries
+        .Where(e =>e.Location.Equals(location))
+        .ToList();
+}
+
+private static void OnLocationChanged(string newValue)
+{
+    Console.WriteLine($"Location changed to: {newValue}");
+
+    //Console.WriteLine($"Min: {selectedDateMin}" + " " + $"Max: {selectedDateMax}");
+   
+    //Console.WriteLine(GetFilteredEntries().Count);
+    //This is for the warning flags
+     Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntriesByName()); 
+    
+    //This is for most active people
+    XAxisLabelsforPeople = GetTopActivePeopleNames(GetFilteredEntriesByName()).ToArray();
+    Series2.Clear();
+    Series2.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePeopleCounts(GetFilteredEntriesByName()).ToArray()});
+
+//This is for Pannels
+    XAxisLabelsforPanels = GetTopActivePanels(GetFilteredEntriesByName()).ToArray();
+    Series4.Clear();
+    Series4.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts(GetFilteredEntriesByName()).ToArray()});
+
+//This is for Readers
+    XAxisLabelsforReaders = GetTopActiveReaders(GetFilteredEntriesByName()).ToArray();
+    Series3.Clear();
+    Series3.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts(GetFilteredEntriesByName()).ToArray()});
+
+//This is for locations
+@* Layout.MainLayout.locations.Clear();
+                foreach(string s in GetLocations()){
+                    Layout.MainLayout.locations.Add(s);
+                } *@
+
+
+//This is for unique people count
+amountPeople = GetUniquePeopleCount(GetFilteredEntriesByName());
+
+//This is for entries/exists
+entriesAndExit = GetFilteredEntriesByName().Count;
+
+//This is for scan Activations
+OrganizeEventsByDayOfWeek(GetFilteredEntriesByName());
+  
+
+  
+}
+
 
     
 
