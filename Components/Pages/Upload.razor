@@ -152,6 +152,10 @@ private int Index = -1;
     {
     };
 
+    public static List<ChartSeries> SeriesTimes = new List<ChartSeries>()
+    {
+    };
+
     public static List<ChartSeries> SeriesPanel = new List<ChartSeries>()
     {
     };
@@ -160,6 +164,8 @@ private int Index = -1;
     public static string[] XAxisLabelsforPeople = {};
 
     public static string[] XAxisLabelsforReaders = {};
+
+    public static string[] XAxisLabelsforTimes = {};
 
     public static string[] XAxisLabelsforPanels = {};
 
@@ -247,6 +253,10 @@ public static Boolean dupBool = false;
                 SeriesReaders.Clear();
                 SeriesReaders.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts().ToArray()});
                 XAxisLabelsforReaders= GetTopActiveReaders().ToArray();
+
+                SeriesTimes.Clear();
+                SeriesTimes.Add(new ChartSeries() { Name = "# of Entries", Data = GetHourCounts().ToArray()});
+                XAxisLabelsforTimes= GetMostActiveHours().ToArray();
 
                 SeriesPanel.Clear();
                 SeriesPanel.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts().ToArray()});
@@ -464,6 +474,31 @@ public DateTime GetLastDate()
 }
 
 
+public List<string> GetMostActiveHours()
+{
+    return Entries
+        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Where(dt => dt.HasValue)
+        .GroupBy(dt => dt.Value.Hour)
+        .OrderByDescending(g => g.Count())
+        .Take(5)
+        .Select(g => $"{((g.Key + 24 - 5) % 24):00}:00")  // Wraps hour to stay within 0–23
+        .ToList();
+}
+
+
+
+public List<double> GetHourCounts()
+{
+    return Entries
+        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Where(dt => dt.HasValue)
+        .GroupBy(dt => dt.Value.Hour)
+        .OrderByDescending(g => g.Count())
+        .Take(5)
+        .Select(g => (double)g.Count())
+        .ToList();
+}
 
 
 

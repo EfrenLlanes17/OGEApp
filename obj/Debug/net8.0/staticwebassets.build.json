@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "IY+iWhXMllG1/gLW0p1qzPriC0YCJG535ksF4YNQ/wk=",
+  "Hash": "0yZuVT91v2ALf04wkLywKuWU7NB9mvCoTFVASFcL+60=",
   "Source": "OGEApp",
   "BasePath": "_content/OGEApp",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "OGEApp\\wwwroot",
       "Source": "OGEApp",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor.thememanager\\3.0.0\\staticwebassets\\MudBlazorThemeManager.css",
+      "Identity": "C:\\Users\\efren\\.nuget\\packages\\mudblazor.thememanager\\3.0.0\\staticwebassets\\MudBlazorThemeManager.css",
       "SourceId": "MudBlazor.ThemeManager",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor.thememanager\\3.0.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\efren\\.nuget\\packages\\mudblazor.thememanager\\3.0.0\\staticwebassets\\",
       "BasePath": "_content/MudBlazor.ThemeManager",
       "RelativePath": "MudBlazorThemeManager.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor.thememanager\\3.0.0\\staticwebassets\\MudBlazorThemeManager.css"
+      "OriginalItemSpec": "C:\\Users\\efren\\.nuget\\packages\\mudblazor.thememanager\\3.0.0\\staticwebassets\\MudBlazorThemeManager.css"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\MudBlazor.min.css",
+      "Identity": "C:\\Users\\efren\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\MudBlazor.min.css",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\efren\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\MudBlazor.min.css"
+      "OriginalItemSpec": "C:\\Users\\efren\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\MudBlazor.min.css"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\MudBlazor.min.js",
+      "Identity": "C:\\Users\\efren\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\MudBlazor.min.js",
       "SourceId": "MudBlazor",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\",
+      "ContentRoot": "C:\\Users\\efren\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\",
       "BasePath": "_content/MudBlazor",
       "RelativePath": "MudBlazor.min.js",
       "AssetKind": "All",
@@ -71,13 +71,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\el1101034\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\MudBlazor.min.js"
+      "OriginalItemSpec": "C:\\Users\\efren\\.nuget\\packages\\mudblazor\\8.0.0\\staticwebassets\\MudBlazor.min.js"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OGEApp.styles.css",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OGEApp.styles.css",
       "SourceId": "OGEApp",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "OGEApp.styles.css",
       "AssetKind": "All",
@@ -90,13 +90,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OGEApp.styles.css"
+      "OriginalItemSpec": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\obj\\Debug\\net8.0\\scopedcss\\bundle\\OGEApp.styles.css"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
       "SourceId": "OGEApp",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "OGEApp.bundle.scp.css",
       "AssetKind": "All",
@@ -109,13 +109,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\app.css",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -150,10 +150,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -169,10 +169,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\favicon.png",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -188,10 +188,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\images\\check.png",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\images\\check.png",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "images/check.png",
       "AssetKind": "All",
@@ -207,10 +207,10 @@
       "OriginalItemSpec": "wwwroot\\images\\check.png"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\images\\error.jpeg",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\images\\error.jpeg",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "images/error.jpeg",
       "AssetKind": "All",
@@ -226,10 +226,10 @@
       "OriginalItemSpec": "wwwroot\\images\\error.jpeg"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\images\\map1.jpeg",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\images\\map1.jpeg",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "images/map1.jpeg",
       "AssetKind": "All",
@@ -245,10 +245,10 @@
       "OriginalItemSpec": "wwwroot\\images\\map1.jpeg"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\images\\settings.png",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\images\\settings.png",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "images/settings.png",
       "AssetKind": "All",
@@ -264,10 +264,10 @@
       "OriginalItemSpec": "wwwroot\\images\\settings.png"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\images\\whiteInflowLogo.png",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\images\\whiteInflowLogo.png",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "images/whiteInflowLogo.png",
       "AssetKind": "All",
@@ -283,10 +283,10 @@
       "OriginalItemSpec": "wwwroot\\images\\whiteInflowLogo.png"
     },
     {
-      "Identity": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\images\\whiteOGELogo.png",
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\images\\whiteOGELogo.png",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\el1101034\\Desktop\\Efren Capstone\\CapQuiz\\OGEApp\\OGEApp-5\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp\\wwwroot\\",
       "BasePath": "_content/OGEApp",
       "RelativePath": "images/whiteOGELogo.png",
       "AssetKind": "All",

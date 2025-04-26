@@ -218,9 +218,9 @@
 
     <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
         <div class="mostActiveReadersPop" style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Avg Area Population Per Day</b></h2>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Avg Scans At Times</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@changeReadersToPop(Series3)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="changechartToMatchTimeFrame(Series6)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforTimes" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
@@ -579,7 +579,7 @@ OrganizeEventsByDayOfWeek(GetFilteredEntriesByName());
     return (selectedDateMax - selectedDateMin).Days + 1;
 }
 
-private List<ChartSeries> changeReadersToPop(List<ChartSeries> s1)
+private List<ChartSeries> changechartToMatchTimeFrame(List<ChartSeries> s1)
 {
     var s2 = new List<ChartSeries>();
     int days = GetDaysBetweenDates(selectedDateMin, selectedDateMax);
@@ -947,7 +947,7 @@ public static DateTime selectedDateMax
 
         public static List<ChartSeries> Series2 = Upload.SeriesPeople;
 
-    
+      public static List<ChartSeries> Series6 = Upload.SeriesTimes;
 
         public static List<ChartSeries> Series3 = Upload.SeriesReaders;
         public static List<ChartSeries> Series4 = Upload.SeriesPanel;
@@ -961,6 +961,8 @@ public static DateTime selectedDateMax
         public static string[] XAxisLabelsforReaders = Pages.Upload.XAxisLabelsforReaders;
 
         public static string[] XAxisLabelsforPanels = Pages.Upload.XAxisLabelsforPanels;
+
+        public static string[] XAxisLabelsforTimes = Pages.Upload.XAxisLabelsforTimes;
 
         private int selIndex = -1; 
 
@@ -981,7 +983,7 @@ public static DateTime selectedDateMax
     public void UpdateSeriesData()
 {
     // Update Series5 (which is linked to Series3)
-    Series5 = changeReadersToPop(Series3); // Apply your changes dynamically
+    //Series5 = changeReadersToPop(Series3); // Apply your changes dynamically
 }
 
 
