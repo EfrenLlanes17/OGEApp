@@ -117,7 +117,7 @@
             <input id="inputText" type="text"
                 @bind="Upload.nearPannel"
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
-            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Near Threshold for Panels</label>
+            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">'Near' dist from Thres for Panels</label>
         </div>
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
@@ -149,7 +149,7 @@
             <input id="inputText" type="text"
                 @bind="Upload.nearReader"
                 style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
-            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Scan Near Threshold for Readers</label>
+            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Near' dist from Thres for Readers</label>
         </div>
 
          <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
@@ -245,9 +245,9 @@
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Scan Activations</b></h2>
+            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Avg Scan Activations</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                <MudChart ChartType="ChartType.Bar" ChartSeries="changechartToMatchTimeFrame(Series)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
@@ -477,7 +477,7 @@ void ShowModal() => IsVisible = true;
 {
     IsVisible = false;
     Upload.listOfErrors = CheckForPotentialIssues(Upload.Entries);
-    Console.WriteLine(CheckForPotentialIssues(Upload.Entries).Count);
+    
 }
 
 
@@ -518,7 +518,7 @@ public static string location
 
 private static void OnLocationChanged(string newValue)
 {
-    Console.WriteLine($"Location changed to: {newValue}");
+    
 
     //Console.WriteLine($"Min: {selectedDateMin}" + " " + $"Max: {selectedDateMax}");
    
@@ -540,6 +540,11 @@ private static void OnLocationChanged(string newValue)
     XAxisLabelsforReaders = GetTopActiveReaders(GetFilteredEntriesByName()).ToArray();
     Series3.Clear();
     Series3.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts(GetFilteredEntriesByName()).ToArray()});
+
+    //This is for Times
+    XAxisLabelsforTimes = GetMostActiveHours(GetFilteredEntriesByName()).ToArray();
+    Series6.Clear();
+    Series6.Add(new ChartSeries() { Name = "# of Entries", Data = GetHourCounts(GetFilteredEntriesByName()).ToArray()});
 
 //This is for locations
 @* Layout.MainLayout.locations.Clear();
@@ -629,6 +634,11 @@ public static void OnDateChange(){
     Series3.Clear();
     Series3.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts(GetFilteredEntries()).ToArray()});
 
+    //This is for Times
+    XAxisLabelsforTimes = GetMostActiveHours(GetFilteredEntries()).ToArray();
+    Series6.Clear();
+    Series6.Add(new ChartSeries() { Name = "# of Entries", Data = GetHourCounts(GetFilteredEntries()).ToArray()});
+
 //This is for locations
 @* Layout.MainLayout.locations.Clear();
                 foreach(string s in GetLocations()){
@@ -644,6 +654,32 @@ entriesAndExit = GetFilteredEntries().Count;
 
 //This is for scan Activations
 OrganizeEventsByDayOfWeek(GetFilteredEntries());
+}
+
+public static List<string> GetMostActiveHours(List<Upload.ReaderEvent> events)
+{
+    return events
+        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Where(dt => dt.HasValue)
+        .GroupBy(dt => dt.Value.Hour)
+        .OrderByDescending(g => g.Count())
+        .Take(5)
+        .Select(g => $"{((g.Key + 24 - 5) % 24):00}:00")  // Wraps hour to stay within 0–23
+        .ToList();
+}
+
+
+
+public static List<double> GetHourCounts(List<Upload.ReaderEvent> events)
+{
+    return events
+        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Where(dt => dt.HasValue)
+        .GroupBy(dt => dt.Value.Hour)
+        .OrderByDescending(g => g.Count())
+        .Take(5)
+        .Select(g => (double)g.Count())
+        .ToList();
 }
 
 
@@ -823,7 +859,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
     {
         foreach (var issue in machineIssuesOver)
         {
-            issues.Add($"Machine {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
+            issues.Add($"Pannel {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
@@ -847,7 +883,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
     {
         foreach (var issue in machineIssuesNear)
         {
-            issues.Add($"Machine {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
+            issues.Add($"Pannel {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 

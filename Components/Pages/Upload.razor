@@ -395,7 +395,7 @@ public static Boolean dupBool = false;
     {
         foreach (var issue in machineIssuesOver)
         {
-            issues.Add($"Machine {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
+            issues.Add($"Pannel {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
@@ -419,7 +419,7 @@ public static Boolean dupBool = false;
     {
         foreach (var issue in machineIssuesNear)
         {
-            issues.Add($"Machine {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
+            issues.Add($"Pannel {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
