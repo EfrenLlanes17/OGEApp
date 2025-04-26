@@ -218,14 +218,14 @@
 
     <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 105%;" >
         <div class="mostActiveReadersPop" style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleTimesChartClick">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-right: 5%;"><b>Avg Scans At Times</b></h2>
+            <h2 style="color: white; font-size: 22px; margin-bottom: 5px;  margin-right: 5%;"><b>Avg Scans At Times</b></h2>
             <div style=" transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="changechartToMatchTimeFrame(Series6)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforTimes" Width="100%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
         <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleFlagsChartClick">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 10%;"><b>Safety Flags</b></h2>
+            <h2 style="color: white; font-size: 22px; margin-bottom: 5px;  margin-left: 10%;"><b>Safety Flags</b></h2>
             <div  style="color: white; font-size: 20px; margin-bottom: 5px;  margin-top: 8%;">
             @foreach(var s in Upload.listOfErrors.Take(4)){
                 if(!s.Equals("No issues detected with machines or readers.")){
@@ -245,13 +245,13 @@
         </div>
 
         <div class="mostActiveScanAct" style="width: 55%; display: flex; flex-direction: column; align-items: center;">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-right: 10%;"><b>Avg Scan Activations</b></h2>
+            <h2 style="color: white; font-size: 22px; margin-bottom: 5px;  margin-right: 8%;"><b>Avg Scan Activations</b></h2>
             <div style=" transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="changechartToMatchTimeFrame(Series)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="95%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
-        <button style="font-size: 75px; background-color: black; color: white; border-radius: 5px; padding-right: 4%; cursor: pointer; padding-top: 8%;" @onclick="nextGraphs">
+        <button style="font-size: 75px; background-color: black; color: white;  margin-right: 4%; cursor: pointer; padding-top: 8%; text-align: center; width: 5%;" @onclick="nextGraphs">
            > 
         </button>
 
@@ -265,32 +265,32 @@
        
 
 
-    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 0px; width: 100%;">
+    <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; width: 100%;">
 
- <button style="font-size: 75px; background-color: black; color: white; border-radius: 5px; padding: 20px 40px; cursor: pointer; padding-top: 6%;" @onclick="nextGraphs">
+ <button style="font-size: 75px; background-color: black; color: white; cursor: pointer; padding-top: 9%;" @onclick="nextGraphs">
     &lt;
 </button>
 
         <div class="mostActiveReaders" style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleReaderChartClick">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Most Active Readers</b></h2>
-            <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series3" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+            <h2 style="color: white; font-size: 22px; margin-bottom: 5px;  margin-left: 0%;"><b>Most Active Readers</b></h2>
+            <div style=" transform-origin: top;">
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series3" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="105%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
         @* // more than 100 percent *@
 
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandlePersonChartClick">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px; margin-left: 15%;"><b>Most Active People</b></h2>
-            <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPeople" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+        <div  class="mostActivePeople"style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandlePersonChartClick">
+            <h2 style="color: white; font-size: 22px; margin-bottom: 5px; margin-left: 4%;"><b>Most Active People</b></h2>
+            <div style=" transform-origin: top;">
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPeople" Width="105%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
-        <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandlePannelChartClick">
-            <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Most Active Panels</b></h2>
-            <div style="transform: scale(0.80); transform-origin: top;">
-                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+        <div class="mostActiveScanAct" style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandlePannelChartClick">
+            <h2 style="color: white; font-size: 22px; margin-bottom: 5px;  margin-left: 0%;"><b>Most Active Panels</b></h2>
+            <div style=" transform-origin: top; ">
+                <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="105%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
             </div>
         </div>
 
@@ -339,7 +339,7 @@
 }
 
 .mud-charts-yaxis text {
-    font-size: 62%
+    font-size: 62.5%
 }
 
 .mud-chart-legend-item{
@@ -348,7 +348,7 @@
 
 
 .mostActiveReaders .mud-charts-xaxis text {
-    font-size: 55%
+    font-size: 65%
 }
 
  .mostActiveReadersPop .mud-charts-xaxis text {
@@ -358,6 +358,12 @@
  .mostActiveScanAct .mud-charts-xaxis text {
     font-size: 100%
 } 
+
+ .mostActivePeople .mud-charts-xaxis text {
+    font-size: 70%
+} 
+
+
 
 
 </style>
