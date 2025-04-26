@@ -216,8 +216,8 @@
 <div style="text-align: center; width: 100%;">
     @if(showContent){
 
-    <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;" @onclick="HandleTimesChartClick">
-        <div class="mostActiveReadersPop" style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+    <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;" >
+        <div class="mostActiveReadersPop" style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleTimesChartClick">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Avg Scans At Times</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
                 <MudChart ChartType="ChartType.Bar" ChartSeries="changechartToMatchTimeFrame(Series6)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforTimes" Width="120%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
@@ -341,6 +341,11 @@
 .mud-charts-yaxis text {
     font-size: 62%
 }
+
+.mud-chart-legend-item{
+    visibility: hidden;
+}
+
 
 .mostActiveReaders .mud-charts-xaxis text {
     font-size: 55%
