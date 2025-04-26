@@ -216,7 +216,7 @@
 <div style="text-align: center; width: 100%;">
     @if(showContent){
 
-    <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
+    <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;" @onclick="HandleTimesChartClick">
         <div class="mostActiveReadersPop" style="width: 50%; display: flex; flex-direction: column; align-items: center;">
             <h2 style="color: white; font-size: 20px; margin-bottom: 5px;  margin-left: 15%;"><b>Avg Scans At Times</b></h2>
             <div style="transform: scale(0.80); transform-origin: top;">
@@ -413,7 +413,7 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
  private void HandlePersonChartClick()
     {
         
-        Fulllist.Labels = GetTopActivePeopleNamesNoLimit(Upload.Entries).ToArray();
+        Fulllist.Labels = GetMostActiveHoursNoLimit(Upload.Entries).ToArray();
         Fulllist.Series = GetTopActivePeopleCountsNoLimit(Upload.Entries).ToArray();
         Fulllist.item = "Person";
         Fulllist.isFlags = false;
@@ -421,6 +421,42 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
 
         
     }
+
+    private void HandleTimesChartClick()
+    {
+        
+        Fulllist.Labels = GetMostActiveHoursNoLimit(Upload.Entries).ToArray();
+        Fulllist.Series = GetHourCountsNoLimit(Upload.Entries).ToArray();
+        Fulllist.item = "Time";
+        Fulllist.isFlags = false;
+        Navigation.NavigateTo("/fulllist");
+
+        
+    }
+
+    public static List<string> GetMostActiveHoursNoLimit(List<Upload.ReaderEvent> events)
+{
+    return events
+        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Where(dt => dt.HasValue)
+        .GroupBy(dt => dt.Value.Hour)
+        .OrderByDescending(g => g.Count())
+        .Select(g => $"{((g.Key + 24 - 5) % 24):00}:00")  // Wraps hour to stay within 0–23
+        .ToList();
+}
+
+
+
+public static List<double> GetHourCountsNoLimit(List<Upload.ReaderEvent> events)
+{
+    return events
+        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Where(dt => dt.HasValue)
+        .GroupBy(dt => dt.Value.Hour)
+        .OrderByDescending(g => g.Count())
+        .Select(g => (double)g.Count())
+        .ToList();
+}
 
     private static List<double> GetTopActivePeopleCountsNoLimit(List<Upload.ReaderEvent> entries)
 {
