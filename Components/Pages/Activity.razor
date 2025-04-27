@@ -498,7 +498,7 @@ private static List<string> GetTopActivePeopleNamesNoLimit(List<Upload.ReaderEve
         
         Fulllist.Labels = GetTopActivePannelNamesNoLimit(Upload.Entries).ToArray();
         Fulllist.Series = GetTopActivePanelCountsNoLimit(Upload.Entries).ToArray();
-        Fulllist.item = "Pannel";
+        Fulllist.item = "Panel";
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
@@ -910,7 +910,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
     {
         foreach (var issue in machineIssuesOver)
         {
-            issues.Add($"Pannel {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
+            issues.Add($"Panel {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
@@ -934,7 +934,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
     {
         foreach (var issue in machineIssuesNear)
         {
-            issues.Add($"Pannel {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
+            issues.Add($"Panel {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
         }
     }
 
