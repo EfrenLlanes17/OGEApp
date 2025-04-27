@@ -606,9 +606,9 @@ else{
             @* Issues *@
              <div style="">
                 <h1 style="font-size: 30px; margin-bottom: 0.5cm;"><u>Issues</u></h1>
-                @foreach(var s in panelIssues.Take(4)){
+                @foreach(var s in CheckForPotentialIssuesWithPanel(Upload.Entries).Take(4)){
                 if(!s.Equals("No issues detected with machines or readers.")){
-                <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 2.5cm;">
+                <div  style="display: flex; align-items: flex-start; gap: 20px; width: 12cm;">
                 <img src="images/error.jpeg" alt="Error Img" width="35" height="35" style="">
                 <h3 style="font-size: 17px; margin-bottom: 5%; margin-top: 1%;">@s</h3>
                 </div>
@@ -726,13 +726,14 @@ else{
     public static void OnPanelClick(int i)
     {
        Console.WriteLine($"Pannel clicked! {i}");
-       IsPanelVisible = true;
        pannelNum = i;
        panelScans = GetPanelScanCount(i);
        panelIssues.Clear();
        panelIssues.Add("No issues detected with machines or readers.");
        panelReaders.Clear();
        panelReaders.Add(4);
+
+       IsPanelVisible = true;
 
     }
 
@@ -763,4 +764,93 @@ private void HandleButtonClick(string message)
         Console.WriteLine("Reader clicked!");
         // Or do something Blazor-y like opening a modal, showing details, etc.
     }
+
+
+
+public static List<string> CheckForPotentialIssuesWithPanel(List<Upload.ReaderEvent> entries)
+{
+    entries =  entries.Where(e => e.Machine == pannelNum).ToList();
+
+    int SCAN_THRESHOLDForPannel = Upload.SCAN_THRESHOLDForPannel; 
+
+    int nearPannel = Upload.nearPannel;
+
+    @* int SCAN_THRESHOLDForReader = Upload.SCAN_THRESHOLDForReader; 
+    int nearReader = Upload.nearReader;
+    int closingTime = Upload.closeTime;
+
+    int openingTime = Upload.openTime; *@
+
+//Does not account for Day lights saving time and only works for UTE to CTE. Regular is +6 but its DST
+    @* int openingTimeUtc = openingTime +  5;
+    int closingTimeUtc = closingTime + 5 ;
+    if(closingTimeUtc > 12){
+        closingTimeUtc -= 12;
+    } *@
+
+    List<string> issues = new List<string>();
+
+    @* var afterHours = entries
+    .Where(e => 
+    DateTime.Parse(e.Time).Hour < openingTimeUtc || DateTime.Parse(e.Time).Hour > closingTimeUtc)
+    .Select(e => new { e.IDHash, e.Time, e.ReaderDesc })
+    .ToList(); *@
+
+
+   
+    var machineIssuesOver = entries
+        .GroupBy(e => e.Machine)  
+        .Where(g => g.Count() >= SCAN_THRESHOLDForPannel)
+        .Select(g => new { Machine = g.Key, Count = g.Count() })
+        .ToList();
+
+         var machineIssuesNear = entries
+        .GroupBy(e => e.Machine)  
+        .Where(g => g.Count() + nearPannel >= SCAN_THRESHOLDForPannel && g.Count() < SCAN_THRESHOLDForPannel)
+        .Select(g => new { Machine = g.Key, Count = g.Count() })
+        .ToList();
+
+
+       
+
+
+
+    if (machineIssuesOver.Any() && Upload.PanelsOver)
+    {
+        foreach (var issue in machineIssuesOver)
+        {
+            issues.Add($"Panel {issue.Machine} has {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForPannel}");
+        }
+    }
+
+   
+@* 
+     if (afterHours.Any() && Upload.afterHoursBool)
+    {
+        foreach (var scan in afterHours)
+            {
+                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {scan.Time} — outside regular hours.");
+            }
+    } *@
+
+    if (machineIssuesNear.Any() && Upload.PanelsNear)
+    {
+        foreach (var issue in machineIssuesNear)
+        {
+            issues.Add($"Panel {issue.Machine} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForPannel}");
+        }
+    }
+
+    
+
+
+   
+    if (!issues.Any())
+    {
+        issues.Add("No issues detected with machines or readers.");
+    }
+
+    return issues;
+}
+
 }
