@@ -12,6 +12,8 @@
     if(hotPoints){
          panels = false;
         readers = false;
+        maintenance  = false;
+
     }
 
 <div style="display: flex; flex-direction: column; align-items: center; margin-top: 1.5%;">
@@ -40,7 +42,7 @@
 
 
         
-<div style="margin-left: 50%; ">
+<div style="margin-left: 38%; ">
         <!-- Checkboxes -->
         <label class="custom-checkbox panels-color" style="margin-right: 10px;">
             <input type="checkbox" @bind="panels" />Panels  
@@ -48,6 +50,10 @@
 
         <label class="custom-checkbox readers-color" style="margin-right: 10px;">
             <input type="checkbox" @bind="readers" />Readers  
+        </label>
+
+         <label class="custom-checkbox main-color" style="margin-right: 10px;">
+            <input type="checkbox" @bind="maintenance" />Maintenance  
         </label>
 
         <label class="custom-checkbox hotpoints-color">
@@ -64,21 +70,21 @@
        position: absolute;
        top: 210px;
        left: 795px;
-       color: @scansToColorPanel(10);
+       color: @scansToColorPanel(39);
        font-size: 42px;
        z-index: 10;">
 </i>
 
 <i class="fas fa-map-marker-alt"
     @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 123 STORE ROOM"))"
-    style="position: absolute; top: 560px; left: 370px; color:@scansToColorReader("Hello"); font-size: 42px; z-index: 10;">
+    style="position: absolute; top: 560px; left: 370px; color:@scansToColorReader("DOOR TESTING FACILITY 123 STORE ROOM"); font-size: 42px; z-index: 10;">
     </i>
 
 }
 
 else{
            
-<div style="margin-left: 66%; margin-top: 2.92%;">
+<div style="margin-left: 58.235%; margin-top: 2.92%;">
         <!-- Checkboxes -->
         <label class="custom-checkbox panels-color" style="margin-right: 10px;">
             <input type="checkbox" @bind="panels" />Panels  
@@ -86,6 +92,10 @@ else{
 
         <label class="custom-checkbox readers-color" style="margin-right: 10px;">
             <input type="checkbox" @bind="readers" />Readers  
+        </label>
+
+        <label class="custom-checkbox main-color" style="margin-right: 10px;">
+            <input type="checkbox" @bind="maintenance" />Maintenance  
         </label>
 
         <label class="custom-checkbox hotpoints-color">
@@ -548,7 +558,12 @@ else{
         color: red;
     }
 
-    .readers-color input[type="checkbox"] {
+    .main-color input[type="checkbox"]:checked {
+        background: linear-gradient(to right, red 50%, green 50%);
+
+    }
+
+    .readers-color input[type="checkbox"]{
         color: green;
     }
 
@@ -568,6 +583,8 @@ else{
 @code {
     private bool panels = true;
     private bool readers = false;
+
+    private bool maintenance  = false;
     private bool hotPoints = false;
 
     public static bool IsPanelVisible { get; set; }
