@@ -176,7 +176,7 @@ else{
 
 // Admin
 <i class="fas fa-pager"
-   @onclick="() => OnPanelClick(182)"
+   @onclick="() => OnPanelClick(274)"
    style="
        position: absolute;
        top: 240px;
@@ -599,13 +599,13 @@ else{
 
             @* info *@
             <div style="">
-                        <h1 style="font-size: 30px;"><u>Info</u></h1>
+                        <h1 style="font-size: 30px; "><u>Info</u></h1>
                         <p style="font-size: 20px;">Scans: @panelScans</p>
             </div>
 
             @* Issues *@
              <div style="">
-                <h1 style="font-size: 30px;"><u>Issues</u></h1>
+                <h1 style="font-size: 30px; margin-bottom: 0.5cm;"><u>Issues</u></h1>
                 @foreach(var s in panelIssues.Take(4)){
                 if(!s.Equals("No issues detected with machines or readers.")){
                 <div  style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 2.5cm;">
@@ -728,7 +728,7 @@ else{
        Console.WriteLine($"Pannel clicked! {i}");
        IsPanelVisible = true;
        pannelNum = i;
-       panelScans = 500;
+       panelScans = GetPanelScanCount(i);
        panelIssues.Clear();
        panelIssues.Add("No issues detected with machines or readers.");
        panelReaders.Clear();
@@ -742,6 +742,14 @@ else{
     
     
 }
+
+public static int GetPanelScanCount(int machineId)
+{
+    return Upload.Entries
+        .Where(e => e.Machine == machineId)  
+        .Count();  
+}
+
 
 private void HandleButtonClick(string message)
 {
