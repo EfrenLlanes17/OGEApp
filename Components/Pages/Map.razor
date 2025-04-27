@@ -9,6 +9,11 @@
 
 @if(hotPoints){
 
+    if(hotPoints){
+         panels = false;
+        readers = false;
+    }
+
 <div style="display: flex; flex-direction: column; align-items: center; margin-top: 1.5%;">
     <!-- Labels above the bar -->
     
@@ -52,6 +57,22 @@
         </div>
     </div>
 </div>
+
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(39)"
+   style="
+       position: absolute;
+       top: 210px;
+       left: 795px;
+       color: @scansToColorPanel(10);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+<i class="fas fa-map-marker-alt"
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 123 STORE ROOM"))"
+    style="position: absolute; top: 560px; left: 370px; color:@scansToColorReader("Hello"); font-size: 42px; z-index: 10;">
+    </i>
 
 }
 
@@ -566,6 +587,16 @@ else{
     public static List<string> panelIssues = new List<string>();
 
     public static List<int> panelReaders = new List<int>();
+
+      
+
+    public static string scansToColorPanel(int i){
+        return "yellow";
+    }
+
+    public static string scansToColorReader(string str){
+        return "yellow";
+    }
 
     public static void OnPanelClick(int i)
     {
