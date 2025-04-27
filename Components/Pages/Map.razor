@@ -433,7 +433,7 @@ else{
     <div class="modal-content" @onclick:stopPropagation 
          style="background: rgb(0, 0, 0); padding: 20px; border-radius: 12px; border: 2px solid white; max-width: 500px; width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
         
-        <h3 style="text-align: center; font-size: 45px;">@readerName</h3>
+        <h3 style="text-align: center; font-size: 30px;">@readerName</h3>
         
         <div class="modal-body" style="margin-top: 10px;">
             @ChildContent
@@ -468,7 +468,7 @@ else{
              <div style="">
                 <h1 style="font-size: 30px;"><u>Connected Panel</u></h1>
                 @foreach(int i in GetUniquePannel()){
-                <button   @onclick="@(() => OnPanelClick(i))" style="padding: 10px 20px; color: white; border: none; border-radius: 5px; font-size: 13px;">
+                <button   @onclick="@(() => OnPanelClick(i))" style="padding: 10px 20px; color: white; border: none; border-radius: 5px; font-size: 20px;">
                     • <u style="margin-left: 0.5cm;"> @i</u>
 
                    
