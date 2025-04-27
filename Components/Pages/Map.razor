@@ -626,9 +626,9 @@ else{
             @* Connected Readers *@
              <div style="">
                 <h1 style="font-size: 30px;"><u>Connected Readers</u></h1>
-                @foreach(int i in panelReaders){
-                <button   @onclick="@(() => HandleButtonClick("Reader " + i))" style="padding: 10px 20px; color: white; border: none; border-radius: 5px; font-size: 23px;">
-                    • <u style="margin-left: 0.5cm;"> @i</u>
+                @foreach(string str in GetUniqueReaderDescs()){
+                <button   @onclick="@(() => HandleButtonClick("Reader " + str))" style="padding: 10px 20px; color: white; border: none; border-radius: 5px; font-size: 13px;">
+                    • <u style="margin-left: 0.5cm;"> @str</u>
 
                    
               
@@ -764,6 +764,16 @@ private void HandleButtonClick(string message)
         Console.WriteLine("Reader clicked!");
         // Or do something Blazor-y like opening a modal, showing details, etc.
     }
+
+    public static List<string> GetUniqueReaderDescs()
+{
+    return Upload.Entries
+        .Where(e => e.Machine == pannelNum)  
+        .Select(e => e.ReaderDesc)               
+        .Distinct()                              
+        .ToList();                               
+}
+
 
 
 
