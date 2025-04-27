@@ -64,6 +64,11 @@
     </div>
 </div>
 
+
+
+
+
+// Welding Area
 <i class="fas fa-pager"
    @onclick="() => OnPanelClick(39)"
    style="
@@ -74,6 +79,115 @@
        font-size: 42px;
        z-index: 10;">
 </i>
+
+// Storage Room
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(34)"
+   style="
+       position: absolute;
+       top: 560px;
+       left: 350px;
+       color: @scansToColorPanel(34);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+// CEM BLGD #1
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(285)"
+   style="
+       position: absolute;
+       top: 510px;
+       left: 820px;
+       color: @scansToColorPanel(285);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+// CEM BLGD #2
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(286)"
+   style="
+       position: absolute;
+       top: 545px;
+       left: 800px;
+       color: @scansToColorPanel(286);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+// Tank Farm
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(322)"
+   style="
+       position: absolute;
+       top: 425px;
+       left: 1000px;
+       color: @scansToColorPanel(322);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+// Cntrl Rm
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(182)"
+   style="
+       position: absolute;
+       top: 480px;
+       left: 960px;
+       color: @scansToColorPanel(182);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+// Load Doc
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(323)"
+   style="
+       position: absolute;
+       top: 450px;
+       left: 1100px;
+       color: @scansToColorPanel(323);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+// Main Gate
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(25)"
+   style="
+       position: absolute;
+       top: 500px;
+       left: 1100px;
+       color: @scansToColorPanel(25);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+// Admin
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(274)"
+   style="
+       position: absolute;
+       top: 240px;
+       left: 1310px;
+       color: @scansToColorPanel(274);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
+// CEM BLGD #3
+<i class="fas fa-pager"
+   @onclick="() => OnPanelClick(287)"
+   style="
+       position: absolute;
+       top: 470px;
+       left: 1280px;
+       color: @scansToColorPanel(287);
+       font-size: 42px;
+       z-index: 10;">
+</i>
+
 
 <i class="fas fa-map-marker-alt"
     @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 123 STORE ROOM"))"
@@ -608,8 +722,49 @@ else{
       
 
     public static string scansToColorPanel(int i){
-        return "yellow";
+        
+        return GetColor(GetPanelScanCount(i),Pages.Upload.SCAN_THRESHOLDForPannel);
     }
+
+   private static string GetColor(int scans, int threshold)
+{
+    double ratio = Math.Clamp((double)scans / threshold, 0, 1);
+
+    if (ratio >= 0.75)
+    {
+        // Red to Orange
+        int r = 255;
+        int g = (int)((1 - ratio) / 0.25 * 165); // 0 to 165
+        int b = 0;
+        return $"rgb({r}, {g}, {b})";
+    }
+    else if (ratio >= 0.5)
+    {
+        // Orange to Yellow
+        int r = 255;
+        int g = 165 + (int)((0.75 - ratio) / 0.25 * (255 - 165)); // 165 to 255
+        int b = 0;
+        return $"rgb({r}, {g}, {b})";
+    }
+    else if (ratio >= 0.25)
+    {
+        // Yellow to Green
+        int r = (int)((0.5 - ratio) / 0.25 * 255); // 255 to 0
+        int g = 255;
+        int b = 0;
+        return $"rgb({r}, {g}, {b})";
+    }
+    else
+    {
+        // Green to Blue
+        int r = 0;
+        int g = (int)(ratio / 0.25 * 255); // 0 to 255
+        int b = 255 - (int)(ratio / 0.25 * 255); // 255 to 0
+        return $"rgb({r}, {g}, {b})";
+    }
+}
+
+
 
     public static string scansToColorReader(string str){
         return "yellow";
