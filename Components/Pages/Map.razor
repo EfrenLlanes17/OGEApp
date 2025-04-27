@@ -204,384 +204,167 @@ else{
 @if(readers){
 
     //Storage Room
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 560px;
-           left: 370px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 123 STORE ROOM"))"
+    style="position: absolute; top: 560px; left: 370px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
     //CEM BLGD #1
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 510px;
-           left: 790px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 132 CEM BLGD #1 DR"))"
+    style="position: absolute; top: 510px; left: 790px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
     //CEM BLGD #2
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 545px;
-           left: 830px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 133 CEM BLGD #2 DR"))"
+    style="position: absolute; top: 545px; left: 830px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
     //CEM BLGD #3
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 470px;
-           left: 1250px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 134 CEM BLGD #3 DR"))"
+    style="position: absolute; top: 470px; left: 1250px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
     //Tank Farm
-     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 405px;
-           left: 1025px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
-    </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 440px;
-           left: 1030px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 117 TANK FARM ENTR"))"
+    style="position: absolute; top: 405px; left: 1025px; color: green; font-size: 42px; z-index: 10;">
+    </i>
+    <i class="fas fa-map-marker-alt"
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 118 TANK FARM EXIT"))"
+    style="position: absolute; top: 440px; left: 1030px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
     //Load Doc
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 410px;
-           left: 1100px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 116 LOAD DOC ENTR"))"
+    style="position: absolute; top: 410px; left: 1100px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 420px;
-           left: 1070px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 115 LOAD DOC EXIT"))"
+    style="position: absolute; top: 420px; left: 1070px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 450px;
-           left: 1150px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 141-E Contractor Turnstile ENT"))"
+    style="position: absolute; top: 450px; left: 1150px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
     //Admin
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 250px;
-           left: 1230px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 112 ADMIN ADA ENTRY"))"
+    style="position: absolute; top: 250px; left: 1230px; color: green; font-size: 42px; z-index: 10;">
     </i>
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 210px;
-           left: 1230px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 111 ADMIN ADA EXIT"))"
+    style="position: absolute; top: 210px; left: 1230px; color: green; font-size: 42px; z-index: 10;">
     </i>
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 280px;
-           left: 1310px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 108 ADMIN GATE ENTRY LOWER"))"
+    style="position: absolute; top: 280px; left: 1310px; color: green; font-size: 42px; z-index: 10;">
     </i>
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 250px;
-           left: 1400px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 108-E ADMIN GATE ENTRY UPPER"))"
+    style="position: absolute; top: 250px; left: 1400px; color: green; font-size: 42px; z-index: 10;">
     </i>
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 210px;
-           left: 1400px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 107 ADMIN GATE EXIT LOWER"))"
+    style="position: absolute; top: 210px; left: 1400px; color: green; font-size: 42px; z-index: 10;">
     </i>
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 200px;
-           left: 1310px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 109 ADMIN TURN EXIT"))"
+    style="position: absolute; top: 200px; left: 1310px; color: green; font-size: 42px; z-index: 10;">
     </i>
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 240px;
-           left: 1270px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 110 ADMIN TURN ENTRY"))"
+    style="position: absolute; top: 240px; left: 1270px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
     //Cntrl Rm
-     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 520px;
-           left: 960px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
-    </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 520px;
-           left: 1040px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 105 CNTRL RM SW DR"))"
+    style="position: absolute; top: 520px; left: 960px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 520px;
-           left: 1000px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 119 CNTRL RM NW DR"))"
+    style="position: absolute; top: 520px; left: 1040px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 520px;
-           left: 920px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 121 DATA RM SW DR"))"
+    style="position: absolute; top: 520px; left: 1000px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 510px;
-           left: 890px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 122 DATA RM NW DR"))"
+    style="position: absolute; top: 520px; left: 920px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 470px;
-           left: 890px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 120 CNTRL RM NE DR"))"
+    style="position: absolute; top: 510px; left: 890px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 440px;
-           left: 960px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 106 CNTRL RM SE DR"))"
+    style="position: absolute; top: 470px; left: 890px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 400px;
-           left: 950px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 105-E CNTRL RM SW DR"))"
+    style="position: absolute; top: 440px; left: 960px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 390px;
-           left: 900px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 119-E CNTRL RM NW DR"))"
+    style="position: absolute; top: 400px; left: 950px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 420px;
-           left: 880px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 121-E DATA RM SW RD"))"
+    style="position: absolute; top: 390px; left: 900px; color: green; font-size: 42px; z-index: 10;">
+    </i>
+    <i class="fas fa-map-marker-alt"
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 120-E CNTRL RM NE DR"))"
+    style="position: absolute; top: 420px; left: 880px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
     //Main Gate
-     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 520px;
-           left: 1075px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
-    </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 520px;
-           left: 1125px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 102 MAIN GATE ENTRY LOWER"))"
+    style="position: absolute; top: 520px; left: 1075px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 510px;
-           left: 1160px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 101 GUARD SHACK PLANT ENTRY"))"
+    style="position: absolute; top: 520px; left: 1125px; color: green; font-size: 42px; z-index: 10;">
     </i>
-
     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 480px;
-           left: 1190px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 103 MAIN GATE EXIT LOWER"))"
+    style="position: absolute; top: 510px; left: 1160px; color: green; font-size: 42px; z-index: 10;">
+    </i>
+    <i class="fas fa-map-marker-alt"
+    @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 100 GUARD SHACK PUBLIC ENTRY"))"
+    style="position: absolute; top: 480px; left: 1190px; color: green; font-size: 42px; z-index: 10;">
     </i>
 
 //Welding Area
-    <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 205px;
-           left: 755px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
-    </i>
+<i class="fas fa-map-marker-alt"
+   @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 125 WELDING OFFICE"))"
+   style="position: absolute; top: 205px; left: 755px; color: green; font-size: 42px; z-index: 10;">
+</i>
 
-     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 250px;
-           left: 795px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
-    </i>
+<i class="fas fa-map-marker-alt"
+   @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 124 WELDING AREA"))"
+   style="position: absolute; top: 250px; left: 795px; color: green; font-size: 42px; z-index: 10;">
+</i>
 
-     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 210px;
-           left: 830px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
-    </i>
+<i class="fas fa-map-marker-alt"
+   @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 124-E WELDING AREA"))"
+   style="position: absolute; top: 210px; left: 830px; color: green; font-size: 42px; z-index: 10;">
+</i>
 
-     <i class="fas fa-map-marker-alt"
-     @onclick="OnReaderClick"
-       style="
-           position: absolute;
-           top: 250px;
-           left: 755px;
-           color: green;
-           font-size: 42px;
-           z-index: 10;">
-    </i>
+<i class="fas fa-map-marker-alt"
+   @onclick="@(() => HandleButtonClick("DOOR TESTING FACILITY 125-E WELDING OFFICE"))"
+   style="position: absolute; top: 250px; left: 755px; color: green; font-size: 42px; z-index: 10;">
+</i>
+
+
+
+
 
 }
 
@@ -627,8 +410,66 @@ else{
              <div style="">
                 <h1 style="font-size: 30px;"><u>Connected Readers</u></h1>
                 @foreach(string str in GetUniqueReaderDescs()){
-                <button   @onclick="@(() => HandleButtonClick("Reader " + str))" style="padding: 10px 20px; color: white; border: none; border-radius: 5px; font-size: 13px;">
+                <button   @onclick="@(() => HandleButtonClick(str))" style="padding: 10px 20px; color: white; border: none; border-radius: 5px; font-size: 13px;">
                     • <u style="margin-left: 0.5cm;"> @str</u>
+
+                   
+              
+                </button>
+                }
+                        
+            </div>
+            
+
+        </div>
+    </div>
+    </div> 
+
+}
+
+@if (IsReaderVisible)
+{
+    <div class="modal-backdrop" @onclick="HideModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+    <div class="modal-content" @onclick:stopPropagation 
+         style="background: rgb(0, 0, 0); padding: 20px; border-radius: 12px; border: 2px solid white; max-width: 500px; width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+        
+        <h3 style="text-align: center; font-size: 45px;">@readerName</h3>
+        
+        <div class="modal-body" style="margin-top: 10px;">
+            @ChildContent
+
+            @* info *@
+            <div style="">
+                        <h1 style="font-size: 30px; "><u>Info</u></h1>
+                        <p style="font-size: 20px;">Scans: @readerNum</p>
+            </div>
+
+            @* Issues *@
+             <div style="">
+                <h1 style="font-size: 30px; margin-bottom: 0.5cm;"><u>Issues</u></h1>
+                @foreach(var s in CheckForPotentialIssuesWithReader(Upload.Entries).Take(4)){
+                if(!s.Equals("No issues detected with machines or readers.")){
+                <div  style="display: flex; align-items: flex-start; gap: 20px; width: 12cm;">
+                <img src="images/error.jpeg" alt="Error Img" width="35" height="35" style="">
+                <h3 style="font-size: 17px; margin-bottom: 5%; margin-top: 1%;">@s</h3>
+                </div>
+                }
+                else{
+                    <div  style="display: flex; align-items: flex-start; gap: 20px; width: 12cm; margin-right: 10cm;">
+                    <img src="images/check.png" alt="Error Img" width="35" height="35" style="">
+                    <h3 style="font-size: 17px; margin-bottom: 5%; margin-top: 1%;">@s</h3>
+                </div>
+                }
+            }
+                        
+            </div>
+
+            @* Connected Readers *@
+             <div style="">
+                <h1 style="font-size: 30px;"><u>Connected Panel</u></h1>
+                @foreach(int i in GetUniquePannel()){
+                <button   @onclick="@(() => OnPanelClick(i))" style="padding: 10px 20px; color: white; border: none; border-radius: 5px; font-size: 13px;">
+                    • <u style="margin-left: 0.5cm;"> @i</u>
 
                    
               
@@ -710,22 +551,25 @@ else{
 
     public static bool IsPanelVisible { get; set; }
 
-   
+    public static bool IsReaderVisible { get; set; }
+
+   public static string readerName;
 
     public static RenderFragment ChildContent { get; set; }
 
     public static int pannelNum;
+    public static int readerNum;
 
     public static int panelScans;
 
 
-     public static List<string> panelIssues = new List<string>();
+    public static List<string> panelIssues = new List<string>();
 
     public static List<int> panelReaders = new List<int>();
 
     public static void OnPanelClick(int i)
     {
-       Console.WriteLine($"Pannel clicked! {i}");
+       
        pannelNum = i;
        panelScans = GetPanelScanCount(i);
        panelIssues.Clear();
@@ -740,6 +584,7 @@ else{
      void HideModal()
 {
     IsPanelVisible = false;
+    IsReaderVisible = false;
     
     
 }
@@ -751,25 +596,40 @@ public static int GetPanelScanCount(int machineId)
         .Count();  
 }
 
+public static int GetReaderScanCount(string name)
+{
+    return Upload.Entries
+        .Where(e => e.ReaderDesc == name)  
+        .Count();  
+}
+
 
 private void HandleButtonClick(string message)
 {
-    Console.WriteLine($"Button clicked with message: {message}");
+   
+   
+    readerName = message; 
+    readerNum = GetReaderScanCount(readerName);
+    IsReaderVisible = true;
 }
 
 
   
-    private void OnReaderClick()
-    {
-        Console.WriteLine("Reader clicked!");
-        // Or do something Blazor-y like opening a modal, showing details, etc.
-    }
 
     public static List<string> GetUniqueReaderDescs()
 {
     return Upload.Entries
         .Where(e => e.Machine == pannelNum)  
         .Select(e => e.ReaderDesc)               
+        .Distinct()                              
+        .ToList();                               
+}
+
+public static List<int> GetUniquePannel()
+{
+    return Upload.Entries
+        .Where(e => e.ReaderDesc == readerName)  
+        .Select(e => e.Machine)               
         .Distinct()                              
         .ToList();                               
 }
@@ -853,6 +713,79 @@ public static List<string> CheckForPotentialIssuesWithPanel(List<Upload.ReaderEv
 
     
 
+
+   
+    if (!issues.Any())
+    {
+        issues.Add("No issues detected with machines or readers.");
+    }
+
+    return issues;
+}
+
+
+public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderEvent> entries)
+{
+    entries =  entries.Where(e => e.ReaderDesc == readerName).ToList();
+
+    int SCAN_THRESHOLDForReader = Upload.SCAN_THRESHOLDForReader; 
+    int nearReader = Upload.nearReader;
+   
+
+
+    List<string> issues = new List<string>();
+
+    @* var afterHours = entries
+    .Where(e => 
+    DateTime.Parse(e.Time).Hour < openingTimeUtc || DateTime.Parse(e.Time).Hour > closingTimeUtc)
+    .Select(e => new { e.IDHash, e.Time, e.ReaderDesc })
+    .ToList(); *@
+
+
+
+  
+    
+    var readerDescIssuesOver = entries
+        .GroupBy(e => e.ReaderDesc)  
+        .Where(g => g.Count() >= SCAN_THRESHOLDForReader)  
+        .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
+        .ToList();
+
+        var readerDescIssuesNear = entries
+        .GroupBy(e => e.ReaderDesc)  
+        .Where(g => g.Count() + nearReader >= SCAN_THRESHOLDForReader && g.Count() < SCAN_THRESHOLDForReader)  
+        .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
+        .ToList();
+
+       
+
+
+
+     if (readerDescIssuesOver.Any() && Upload.ReadersOver)
+    {
+        foreach (var issue in readerDescIssuesOver)
+        {
+            issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForReader}");
+        }
+    }
+@* 
+     if (afterHours.Any() && Upload.afterHoursBool)
+    {
+        foreach (var scan in afterHours)
+            {
+                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {scan.Time} — outside regular hours.");
+            }
+    } *@
+
+    
+
+    if (readerDescIssuesNear.Any() && Upload.ReadersNear)
+    {
+        foreach (var issue in readerDescIssuesNear)
+        {
+            issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForReader}");
+        }
+    }
 
    
     if (!issues.Any())
