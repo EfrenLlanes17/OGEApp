@@ -415,6 +415,10 @@ public void CreatePdf()
 
     var smallFont = new XFont("Times New Roman", 17, XFontStyle.Regular);
 
+    var verySmallFont = new XFont("Times New Roman", 13, XFontStyle.Regular);
+
+    var veryVerySmallFont = new XFont("Times New Roman", 9, XFontStyle.Regular);
+
 
  
 
@@ -467,21 +471,56 @@ public void CreatePdf()
         new XRect(-150, 330, page.Width, page.Height), 
         XStringFormats.TopCenter);
 
-
- 
-
-
         gfx.DrawString("• Avg Scans At Times: ", smallFont, XBrushes.Black, 
         new XRect(-150, 360, page.Width, page.Height), 
         XStringFormats.TopCenter);
+
+        var series = changechartToMatchTimeFrame(Series6)[0]; // first chart series
+
+                for (int i = 0; i < 5; i++)
+                {
+                    gfx.DrawString(
+                         XAxisLabelsforTimes[i] + "   " + (int)series.Data[i] + " scans" , 
+                        verySmallFont, 
+                        XBrushes.Black,
+                        new XRect(0, 365 + (i * 13), page.Width, page.Height),
+                        XStringFormats.TopCenter
+                    );
+                }
+
 
         gfx.DrawString("• Saftey Flags: ", smallFont, XBrushes.Black, 
         new XRect(-150, 430, page.Width, page.Height), 
         XStringFormats.TopCenter);
 
+
+                for (int i = 0; i < 5; i++)
+                {
+                    gfx.DrawString(
+                         Upload.listOfErrors.ToArray()[i] , 
+                        veryVerySmallFont, 
+                        XBrushes.Black,
+                        new XRect(0, 450 + (i * 10), page.Width, page.Height),
+                        XStringFormats.TopCenter
+                    );
+                }
+
         gfx.DrawString("• Avg Scan Activations: ", smallFont, XBrushes.Black, 
         new XRect(-150, 500, page.Width, page.Height), 
         XStringFormats.TopCenter);
+
+        series = changechartToMatchTimeFrame(Series)[0]; 
+
+                for (int i = 0; i < 5; i++)
+                {
+                    gfx.DrawString(
+                         XAxisLabels[i] + "   " + (int)series.Data[i] + " scans" , 
+                        verySmallFont, 
+                        XBrushes.Black,
+                        new XRect(0, 500 + (i * 13), page.Width, page.Height),
+                        XStringFormats.TopCenter
+                    );
+                }
 
         gfx.DrawString("• Most Active Reader: ", smallFont, XBrushes.Black, 
         new XRect(-150, 570, page.Width, page.Height), 
