@@ -411,8 +411,23 @@ public void CreatePdf()
     var gfx = XGraphics.FromPdfPage(page);
     var font = new XFont("Arial", 20, XFontStyle.Bold);
 
-    gfx.DrawString("This is a test line!", font, XBrushes.Black, 
-        new XRect(0, 50, page.Width, page.Height), 
+ 
+
+    string imagePath = "wwwroot/images/redOGELogo.png";  
+    XImage OGELogo = XImage.FromFile(imagePath);
+
+
+    string imagePath2 = "wwwroot/images/inflowLogo.png";  
+    XImage inflowLogo = XImage.FromFile(imagePath2);
+    
+    
+     gfx.DrawImage(inflowLogo, 20, 20, 150, 65);  // Position (50, 50), Size (150x150)
+
+    // Image on the top-right (adjust position as needed)
+    gfx.DrawImage(OGELogo, page.Width - 170, 20, 150, 70);
+
+       gfx.DrawString("This is a test line!", font, XBrushes.Black, 
+        new XRect(0, 350, page.Width, page.Height), 
         XStringFormats.TopCenter);
 
     document.Save(pdfPath);
