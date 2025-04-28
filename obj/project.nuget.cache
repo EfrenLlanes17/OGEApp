@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "L62IAOXdlpo=",
+  "dgSpecHash": "2GBTpbp87sU=",
   "success": true,
   "projectFilePath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\OGEApp.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,10 @@
     "C:\\Users\\efren\\.nuget\\packages\\microsoft.jsinterop\\8.0.12\\microsoft.jsinterop.8.0.12.nupkg.sha512",
     "C:\\Users\\efren\\.nuget\\packages\\mudblazor\\8.0.0\\mudblazor.8.0.0.nupkg.sha512",
     "C:\\Users\\efren\\.nuget\\packages\\mudblazor.thememanager\\3.0.0\\mudblazor.thememanager.3.0.0.nupkg.sha512",
+    "C:\\Users\\efren\\.nuget\\packages\\pdfsharpcore\\1.3.67\\pdfsharpcore.1.3.67.nupkg.sha512",
+    "C:\\Users\\efren\\.nuget\\packages\\sharpziplib\\1.4.2\\sharpziplib.1.4.2.nupkg.sha512",
+    "C:\\Users\\efren\\.nuget\\packages\\sixlabors.fonts\\1.0.0-beta17\\sixlabors.fonts.1.0.0-beta17.nupkg.sha512",
+    "C:\\Users\\efren\\.nuget\\packages\\sixlabors.imagesharp\\1.0.4\\sixlabors.imagesharp.1.0.4.nupkg.sha512",
     "C:\\Users\\efren\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512"
   ],
   "logs": []

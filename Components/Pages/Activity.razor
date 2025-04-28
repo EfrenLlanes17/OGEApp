@@ -3,6 +3,11 @@
 
 @inject NavigationManager Navigation
 
+@using PdfSharpCore.Pdf;
+@using PdfSharpCore.Drawing;
+@using System.IO;
+
+
 <PageTitle>activity</PageTitle>
 
 
@@ -16,12 +21,30 @@
         <b style="text-align: left; width: 100%;">Upload</b>
     </MudButton>
 
-    <!-- Show Popup button aligned to the right -->
-    <div style="text-align: right;">
-    <button class="btn btn-primary" style="background: transparent; border: transparent;" @onclick="ShowModal">
-        <img src="images/settings.png" alt="Settings Icon" style="width: 40px; height: 38px;" />
+   <div style="display: flex; justify-content: space-between; align-items: center;">
+    <!-- Download PDF button -->
+    <button @onclick="CreatePdf" style="
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.726);
+        border-radius: 12px;
+        background-color: transparent;
+        color: white;
+    ">
+        Download PDF
     </button>
+
+    <!-- Show Popup button aligned to the right -->
+    <div>
+        <button class="btn btn-primary" style="background: transparent; border: transparent;" @onclick="ShowModal">
+            <img src="images/settings.png" alt="Settings Icon" style="width: 40px; height: 38px;" />
+        </button>
+    </div>
 </div>
+
+
+
 
 </div>
 
@@ -60,6 +83,9 @@
                         <option value=@loc>@loc</option>
                     }
                 </select>
+
+                
+
 
         
          @* @GetDaysBetweenDates(selectedDateMin, selectedDateMax) Days  *@
@@ -369,6 +395,29 @@
 </style>
 
 @code {
+
+    
+public void CreatePdf()
+{
+
+    
+    
+    string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+    string dateNow = DateTime.Now.ToString("MMddyyyy_HHmmss");
+    string pdfPath = Path.Combine(desktopPath, $"Inflow_Summary_{dateNow}.pdf");
+
+    var document = new PdfDocument();
+    var page = document.AddPage();
+    var gfx = XGraphics.FromPdfPage(page);
+    var font = new XFont("Arial", 20, XFontStyle.Bold);
+
+    gfx.DrawString("This is a test line!", font, XBrushes.Black, 
+        new XRect(0, 50, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+    document.Save(pdfPath);
+    document.Close();
+}
 
     
 

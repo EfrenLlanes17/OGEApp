@@ -1353,3 +1353,8 @@ C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\obj\Debug\net8.0\r
 C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\obj\Debug\net8.0\OGEApp.pdb
 C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\obj\Debug\net8.0\OGEApp.genruntimeconfig.cache
 C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\obj\Debug\net8.0\ref\OGEApp.dll
+C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\bin\Debug\net8.0\PdfSharpCore.dll
+C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\bin\Debug\net8.0\ICSharpCode.SharpZipLib.dll
+C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\bin\Debug\net8.0\SixLabors.Fonts.dll
+C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\bin\Debug\net8.0\SixLabors.ImageSharp.dll
+C:\Users\efren\OneDrive\Desktop\Code Projects\blaze1\OGEApp-3\bin\Debug\net8.0\de\PdfSharpCore.resources.dll
