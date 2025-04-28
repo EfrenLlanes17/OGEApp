@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5+Bhzy3EednQGnudLFFKG85i9nTRkO3vKm6PPOVEWDY=",
+  "Hash": "cqlkLOEWtllfNuUWQg1SFQFSSPKT+yS+d7rgsIJPZZs=",
   "Source": "OGEApp",
   "BasePath": "_content/OGEApp",
   "Mode": "Default",
@@ -226,6 +226,25 @@
       "OriginalItemSpec": "wwwroot\\images\\error.jpeg"
     },
     {
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\images\\inflowLogo.png",
+      "SourceId": "OGEApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\",
+      "BasePath": "_content/OGEApp",
+      "RelativePath": "images/inflowLogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\inflowLogo.png"
+    },
+    {
       "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\images\\map1.jpeg",
       "SourceId": "OGEApp",
       "SourceType": "Discovered",
@@ -243,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\map1.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\images\\redOGELogo.png",
+      "SourceId": "OGEApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\",
+      "BasePath": "_content/OGEApp",
+      "RelativePath": "images/redOGELogo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\redOGELogo.png"
     },
     {
       "Identity": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\images\\settings.png",

@@ -29,8 +29,16 @@
       "PackagePath": "staticwebassets\\images\\error.jpeg"
     },
     {
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\images\\inflowLogo.png",
+      "PackagePath": "staticwebassets\\images\\inflowLogo.png"
+    },
+    {
       "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\images\\map1.jpeg",
       "PackagePath": "staticwebassets\\images\\map1.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\images\\redOGELogo.png",
+      "PackagePath": "staticwebassets\\images\\redOGELogo.png"
     },
     {
       "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-3\\wwwroot\\images\\settings.png",
