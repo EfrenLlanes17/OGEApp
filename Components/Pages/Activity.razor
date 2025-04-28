@@ -409,7 +409,12 @@ public void CreatePdf()
     var document = new PdfDocument();
     var page = document.AddPage();
     var gfx = XGraphics.FromPdfPage(page);
-    var font = new XFont("Arial", 20, XFontStyle.Bold);
+    var bigFont = new XFont("Times New Roman", 30, XFontStyle.Bold);
+
+    var regularFont = new XFont("Times New Roman", 20, XFontStyle.Regular);
+
+    var smallFont = new XFont("Times New Roman", 18, XFontStyle.Regular);
+
 
  
 
@@ -421,13 +426,32 @@ public void CreatePdf()
     XImage inflowLogo = XImage.FromFile(imagePath2);
     
     
-     gfx.DrawImage(inflowLogo, 20, 20, 150, 65);  // Position (50, 50), Size (150x150)
+     gfx.DrawImage(inflowLogo, 20, 20, 150, 60);  // Position (50, 50), Size (150x150)
 
     // Image on the top-right (adjust position as needed)
-    gfx.DrawImage(OGELogo, page.Width - 170, 20, 150, 70);
+    gfx.DrawImage(OGELogo, page.Width - 170, 20, 150, 65);
 
-       gfx.DrawString("This is a test line!", font, XBrushes.Black, 
-        new XRect(0, 350, page.Width, page.Height), 
+
+
+
+       gfx.DrawString("Inflow Summary", bigFont, XBrushes.Black, 
+        new XRect(0, 100, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("General Information", regularFont, XBrushes.Black, 
+        new XRect(-200, 150, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Uploaded File: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 200, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Time Frame: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 250, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Location: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 300, page.Width, page.Height), 
         XStringFormats.TopCenter);
 
     document.Save(pdfPath);
