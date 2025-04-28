@@ -413,7 +413,7 @@ public void CreatePdf()
 
     var regularFont = new XFont("Times New Roman", 20, XFontStyle.Regular);
 
-    var smallFont = new XFont("Times New Roman", 18, XFontStyle.Regular);
+    var smallFont = new XFont("Times New Roman", 17, XFontStyle.Regular);
 
 
  
@@ -443,16 +443,54 @@ public void CreatePdf()
         XStringFormats.TopCenter);
 
         gfx.DrawString("• Uploaded File: ", smallFont, XBrushes.Black, 
-        new XRect(-150, 200, page.Width, page.Height), 
+        new XRect(-150, 180, page.Width, page.Height), 
         XStringFormats.TopCenter);
 
         gfx.DrawString("• Time Frame: ", smallFont, XBrushes.Black, 
-        new XRect(-150, 250, page.Width, page.Height), 
+        new XRect(-150, 210, page.Width, page.Height), 
         XStringFormats.TopCenter);
 
         gfx.DrawString("• Location: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 240, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("Information Summary", regularFont, XBrushes.Black, 
+        new XRect(-200, 270, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Total Scans: ", smallFont, XBrushes.Black, 
         new XRect(-150, 300, page.Width, page.Height), 
         XStringFormats.TopCenter);
+
+        gfx.DrawString("• Unique People: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 330, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Avg Scans At Times: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 360, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Saftey Flags: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 430, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Avg Scan Activations: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 500, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Most Active Reader: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 570, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Most Active People: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 640, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        gfx.DrawString("• Most Active Panels: ", smallFont, XBrushes.Black, 
+        new XRect(-150, 710, page.Width, page.Height), 
+        XStringFormats.TopCenter);
+
+        
 
     document.Save(pdfPath);
     document.Close();
