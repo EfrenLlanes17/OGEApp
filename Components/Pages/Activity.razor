@@ -422,11 +422,11 @@ public void CreatePdf()
     double marginLeft = 30;
     double marginTop = 30;
     double lineSpacing = 20;
-    double currentY = marginTop;
+    double currentY = 0; // scoot layout up by 75px
 
-    // Header Logos - smaller size
-    gfx.DrawImage(inflowLogo, marginLeft, currentY, 100, 40);
-    gfx.DrawImage(ogeLogo, page.Width - marginLeft - 100, currentY, 100, 40);
+    // Header Logos
+    gfx.DrawImage(inflowLogo, marginLeft, currentY + 20, 100, 35);
+    gfx.DrawImage(ogeLogo, page.Width - marginLeft - 100, currentY+ 15, 100, 40);
     currentY += 50;
 
     // Title
