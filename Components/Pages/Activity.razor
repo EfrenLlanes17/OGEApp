@@ -394,11 +394,38 @@
 
 </style>
 
+<div class="d-flex justify-content-center">
+    @if (showSuccess)
+    {
+        <div class="alert alert-success alert-dismissible fade show" style="width: 25%;" role="alert">
+            @successMessage
+            <button type="button" class="btn-close" aria-label="Close" @onclick="() => showSuccess = false"></button>
+        </div>
+    }
+    @if (showError)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" style="width: 25%;" role="alert">
+            @errorMessage
+            <button type="button" class="btn-close" aria-label="Close" @onclick="() => showError = false"></button>
+        </div>
+    }
+</div>
+
+
+
+
 @code {
 
+    private string successMessage;
+    private string errorMessage;
+    private bool showSuccess = false;
+    private bool showError = false;
     
 public void CreatePdf()
 {
+try
+    {
+
     string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
     string dateNow = DateTime.Now.ToString("MMddyyyy_HHmmss");
     string pdfPath = Path.Combine(desktopPath, $"Inflow_Summary_{dateNow}.pdf");
@@ -528,6 +555,20 @@ public void CreatePdf()
 
     document.Save(pdfPath);
     document.Close();
+
+    successMessage = "PDF successfully created on your Desktop.";
+            errorMessage = null;
+            showSuccess = true;
+            showError = false;
+    }
+
+    catch (Exception ex)
+    {
+        errorMessage = $"An error occurred while creating the PDF: {ex.Message}";
+            successMessage = null;
+            showSuccess = false;
+            showError = true;
+    }
 }
 
 
