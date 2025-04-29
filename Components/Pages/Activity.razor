@@ -399,9 +399,6 @@
     
 public void CreatePdf()
 {
-
-    
-    
     string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
     string dateNow = DateTime.Now.ToString("MMddyyyy_HHmmss");
     string pdfPath = Path.Combine(desktopPath, $"Inflow_Summary_{dateNow}.pdf");
@@ -409,173 +406,126 @@ public void CreatePdf()
     var document = new PdfDocument();
     var page = document.AddPage();
     var gfx = XGraphics.FromPdfPage(page);
-    var bigFont = new XFont("Times New Roman", 30, XFontStyle.Bold);
 
-    var regularFont = new XFont("Times New Roman", 20, XFontStyle.Regular);
+    // Fonts - slightly smaller
+    var bigFont = new XFont("Times New Roman", 26, XFontStyle.Bold);
+    var headerFont = new XFont("Times New Roman", 18, XFontStyle.Bold);
+    var regularFont = new XFont("Times New Roman", 14, XFontStyle.Regular);
+    var smallFont = new XFont("Times New Roman", 11, XFontStyle.Regular);
+    var tinyFont = new XFont("Times New Roman", 9, XFontStyle.Regular);
 
-    var smallFont = new XFont("Times New Roman", 17, XFontStyle.Regular);
+    // Images - smaller
+    XImage inflowLogo = XImage.FromFile("wwwroot/images/inflowLogo.png");
+    XImage ogeLogo = XImage.FromFile("wwwroot/images/redOGELogo.png");
 
-    var verySmallFont = new XFont("Times New Roman", 13, XFontStyle.Regular);
+    // Layout variables
+    double marginLeft = 30;
+    double marginTop = 30;
+    double lineSpacing = 20;
+    double currentY = marginTop;
 
-    var veryVerySmallFont = new XFont("Times New Roman", 9, XFontStyle.Regular);
+    // Header Logos - smaller size
+    gfx.DrawImage(inflowLogo, marginLeft, currentY, 100, 40);
+    gfx.DrawImage(ogeLogo, page.Width - marginLeft - 100, currentY, 100, 40);
+    currentY += 50;
 
-
- 
-
-    string imagePath = "wwwroot/images/redOGELogo.png";  
-    XImage OGELogo = XImage.FromFile(imagePath);
-
-
-    string imagePath2 = "wwwroot/images/inflowLogo.png";  
-    XImage inflowLogo = XImage.FromFile(imagePath2);
-    
-    
-     gfx.DrawImage(inflowLogo, 20, 20, 150, 60);  // Position (50, 50), Size (150x150)
-
-    // Image on the top-right (adjust position as needed)
-    gfx.DrawImage(OGELogo, page.Width - 170, 20, 150, 65);
-
-
-
-
-       gfx.DrawString("Inflow Summary", bigFont, XBrushes.Black, 
-        new XRect(0, 100, page.Width, page.Height), 
+    // Title
+    gfx.DrawString("Inflow Summary", bigFont, XBrushes.Black,
+        new XRect(0, currentY, page.Width, page.Height),
         XStringFormats.TopCenter);
+    currentY += 40;
 
-        gfx.DrawString("General Information", regularFont, XBrushes.Black, 
-        new XRect(-200, 150, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    // General Information
+    gfx.DrawString("General Information", headerFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing;
 
-        gfx.DrawString("• Uploaded File: " + Pages.Upload.FileName, smallFont, XBrushes.Black, 
-        new XRect(-150, 180, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    gfx.DrawString($"• Uploaded File: {Pages.Upload.FileName}", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing;
 
-        gfx.DrawString("• Time Frame: " + selectedDateMin.ToString("MM-dd-yyyy") + " to " + selectedDateMax.ToString("MM-dd-yyyy"), smallFont, XBrushes.Black, 
-        new XRect(-150, 210, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    gfx.DrawString($"• Time Frame: {selectedDateMin:MM-dd-yyyy} to {selectedDateMax:MM-dd-yyyy}", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing;
 
+    gfx.DrawString($"• Location: {location}", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing * 2;
 
-        gfx.DrawString("• Location: " + location, smallFont, XBrushes.Black, 
-        new XRect(-150, 240, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    // Information Summary
+    gfx.DrawString("Information Summary", headerFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing;
 
-        gfx.DrawString("Information Summary", regularFont, XBrushes.Black, 
-        new XRect(-200, 270, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    gfx.DrawString($"• Total Scans: {entriesAndExit}", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing;
 
-        gfx.DrawString("• Total Scans: " + entriesAndExit, smallFont, XBrushes.Black, 
-        new XRect(-150, 300, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    gfx.DrawString($"• Unique People: {amountPeople}", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing;
 
-        gfx.DrawString("• Unique People: " + amountPeople, smallFont, XBrushes.Black, 
-        new XRect(-150, 330, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    gfx.DrawString($"• Avg Scans At Times:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
 
-        gfx.DrawString("• Avg Scans At Times: ", smallFont, XBrushes.Black, 
-        new XRect(-150, 360, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    var series = changechartToMatchTimeFrame(Series6)[0];
+    for (int i = 0; i < 5; i++)
+    {
+        gfx.DrawString($"    - {XAxisLabelsforTimes[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 15;
+    }
 
-        var series = changechartToMatchTimeFrame(Series6)[0]; // first chart series
+    currentY += 8;
+    gfx.DrawString("• Safety Flags:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
 
-                for (int i = 0; i < 5; i++)
-                {
-                    gfx.DrawString(
-                         XAxisLabelsforTimes[i] + "   " + (int)series.Data[i] + " scans" , 
-                        verySmallFont, 
-                        XBrushes.Black,
-                        new XRect(0, 365 + (i * 13), page.Width, page.Height),
-                        XStringFormats.TopCenter
-                    );
-                }
+    for (int i = 0; i < Math.Min(Upload.listOfErrors.Count, 5); i++)
+    {
+        gfx.DrawString($"    - {Upload.listOfErrors[i]}", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 13;
+    }
 
+    currentY += 8;
+    gfx.DrawString("• Avg Scan Activations:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
 
-        gfx.DrawString("• Saftey Flags: ", smallFont, XBrushes.Black, 
-        new XRect(-150, 430, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    series = changechartToMatchTimeFrame(Series)[0];
+    for (int i = 0; i < 5; i++)
+    {
+        gfx.DrawString($"    - {XAxisLabels[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 15;
+    }
 
+    currentY += 8;
+    gfx.DrawString("• Most Active Reader:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
 
-                for (int i = 0; i < 5; i++)
-                {
-                    gfx.DrawString(
-                         Upload.listOfErrors.ToArray()[i] , 
-                        veryVerySmallFont, 
-                        XBrushes.Black,
-                        new XRect(0, 450 + (i * 10), page.Width, page.Height),
-                        XStringFormats.TopCenter
-                    );
-                }
+    series = Series3[0];
+    for (int i = 0; i < 5; i++)
+    {
+        gfx.DrawString($"    - {XAxisLabelsforReaders[i]}: {(int)series.Data[i]} scans", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 13;
+    }
 
-        gfx.DrawString("• Avg Scan Activations: ", smallFont, XBrushes.Black, 
-        new XRect(-150, 500, page.Width, page.Height), 
-        XStringFormats.TopCenter);
+    currentY += 8;
+    gfx.DrawString("• Most Active People:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
 
-        series = changechartToMatchTimeFrame(Series)[0]; 
+    series = Series2[0];
+    for (int i = 0; i < 5; i++)
+    {
+        gfx.DrawString($"    - {XAxisLabelsforPeople[i]}: {(int)series.Data[i]} scans", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 13;
+    }
 
-                for (int i = 0; i < 5; i++)
-                {
-                    gfx.DrawString(
-                         XAxisLabels[i] + "   " + (int)series.Data[i] + " scans" , 
-                        verySmallFont, 
-                        XBrushes.Black,
-                        new XRect(0, 500 + (i * 13), page.Width, page.Height),
-                        XStringFormats.TopCenter
-                    );
-                }
+    currentY += 8;
+    gfx.DrawString("• Most Active Panels:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
 
-        gfx.DrawString("• Most Active Reader: ", smallFont, XBrushes.Black, 
-        new XRect(-150, 570, page.Width, page.Height), 
-        XStringFormats.TopCenter);
-
-        series = Series3[0]; 
-
-                for (int i = 0; i < 5; i++)
-                {
-                    gfx.DrawString(
-                         XAxisLabelsforReaders[i] + "   " + (int)series.Data[i] + " scans" , 
-                        veryVerySmallFont, 
-                        XBrushes.Black,
-                        new XRect(0, 590 + (i * 10), page.Width, page.Height),
-                        XStringFormats.TopCenter
-                    );
-                }
-
-        gfx.DrawString("• Most Active People: ", smallFont, XBrushes.Black, 
-        new XRect(-150, 640, page.Width, page.Height), 
-        XStringFormats.TopCenter);
-
-         series = Series2[0]; 
-
-                for (int i = 0; i < 5; i++)
-                {
-                    gfx.DrawString(
-                         XAxisLabelsforPeople[i] + "   " + (int)series.Data[i] + " scans" , 
-                        veryVerySmallFont, 
-                        XBrushes.Black,
-                        new XRect(0, 660 + (i * 10), page.Width, page.Height),
-                        XStringFormats.TopCenter
-                    );
-                }
-
-        gfx.DrawString("• Most Active Panels: ", smallFont, XBrushes.Black, 
-        new XRect(-150, 710, page.Width, page.Height), 
-        XStringFormats.TopCenter);
-
-        series = Series4[0]; 
-
-                for (int i = 0; i < 5; i++)
-                {
-                    gfx.DrawString(
-                         "Panel " + XAxisLabelsforPanels[i] + "   " + (int)series.Data[i] + " scans" , 
-                        verySmallFont, 
-                        XBrushes.Black,
-                        new XRect(0, 715 + (i * 13), page.Width, page.Height),
-                        XStringFormats.TopCenter
-                    );
-                }
+    series = Series4[0];
+    for (int i = 0; i < 5; i++)
+    {
+        gfx.DrawString($"    - Panel {XAxisLabelsforPanels[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 15;
+    }
 
     document.Save(pdfPath);
     document.Close();
 }
+
 
     
 
