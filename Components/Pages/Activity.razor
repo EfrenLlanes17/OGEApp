@@ -242,39 +242,39 @@
 <div style="text-align: center; width: 100%;">
     @if (showContent)
     {
-        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 105%;">
+        <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
             
            
 
             <div class="mostActiveReaders" style="width: 30%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleReaderChartClick">
-                <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Most Active Readers</b></h2>
+                <h2 style="color: white; font-size: 22px; margin-left:80px"><b>Most Active Readers</b></h2>
                 <div style="transform-origin: top;">
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series3" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="110%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series3" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforReaders" Width="115%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
                 </div>
             </div>
 
             <div class="mostActivePeople" style="width: 30%; display: flex; flex-direction: column; align-items: center; margin-left:5%;  margin-right:5%" @onclick="HandlePersonChartClick">
-                <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Most Active People</b></h2>
+                <h2 style="color: white; font-size: 22px; margin-left:80px"><b>Most Active People</b></h2>
                 <div style="transform-origin: top;">
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPeople" Width="110%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series2" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPeople" Width="115%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
                 </div>
             </div>
 
-            <div class="mostActiveScanAct" style="width: 30%; display: flex; flex-direction: column; align-items: center;" @onclick="HandlePannelChartClick">
-                <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Most Active Panels</b></h2>
+            <div class="" style="width: 30%; display: flex; flex-direction: column; align-items: center; %" @onclick="HandlePannelChartClick">
+                <h2 style="color: white; font-size: 22px; margin-left:80px"><b>Most Active Panels</b></h2>
                 <div style="transform-origin: top;">
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="110%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="112%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
                 </div>
             </div>
 
-             <button style="font-size: 75px; background-color: black; color: white; margin-right: 4%; cursor: pointer; padding-top: 8%; text-align: center; width: 5%;" @onclick="nextGraphs">
+             <button style="font-size: 75px; background-color: black; color: white; padding-left: 1%; cursor: pointer; padding-top: 8%; text-align: center; width: 5%;" @onclick="nextGraphs">
                 &gt;
             </button>
         </div>
     }
 </div>
 
-<div style="text-align: center; width: 97%;">
+<div style="text-align: center; width: 100%;">
     @if (!showContent)
     {
         <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; width: 100%;">
@@ -291,7 +291,7 @@
             </div>
 
             <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleFlagsChartClick">
-                <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Safety Flags</b></h2>
+                <h2 style="color: white; font-size: 22px; margin-bottom: 5px; margin-left:40px"><b>Safety Flags</b></h2>
                 <div style="color: white; font-size: 20px; margin-bottom: 5px; margin-top: 8%;">
                     @foreach (var s in Upload.listOfErrors.Take(4))
                     {
@@ -323,6 +323,24 @@
     }
 </div>
 
+<div style="position: absolute;
+       top: 100px;
+       left: 10px; z-index: 10; width: 90%">
+    @if (showSuccess)
+    {
+        <div class="alert alert-success alert-dismissible fade show" style="width: 25%;" role="alert">
+            @successMessage
+            <button type="button" class="btn-close" aria-label="Close" @onclick="() => showSuccess = false"></button>
+        </div>
+    }
+    @if (showError)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" style="width: 25%;" role="alert">
+            @errorMessage
+            <button type="button" class="btn-close" aria-label="Close" @onclick="() => showError = false"></button>
+        </div>
+    }
+</div>
 
 
 
@@ -383,6 +401,14 @@
     font-size: 100%
 } 
 
+.mostActiveReadersPop .mud-charts-yaxis text {
+    font-size: 80%
+} 
+
+ .mostActiveScanAct .mud-charts-yaxis text {
+    font-size: 80%
+} 
+
  .mostActivePeople .mud-charts-xaxis text {
     font-size: 70%
 } 
@@ -392,22 +418,7 @@
 
 </style>
 
-<div class="d-flex justify-content-center">
-    @if (showSuccess)
-    {
-        <div class="alert alert-success alert-dismissible fade show" style="width: 25%;" role="alert">
-            @successMessage
-            <button type="button" class="btn-close" aria-label="Close" @onclick="() => showSuccess = false"></button>
-        </div>
-    }
-    @if (showError)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" style="width: 25%;" role="alert">
-            @errorMessage
-            <button type="button" class="btn-close" aria-label="Close" @onclick="() => showError = false"></button>
-        </div>
-    }
-</div>
+
 
 
 
