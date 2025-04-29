@@ -422,11 +422,11 @@ public void CreatePdf()
     double marginLeft = 30;
     double marginTop = 30;
     double lineSpacing = 20;
-    double currentY = 0; // scoot layout up by 75px
+    double currentY = 0;
 
     // Header Logos
     gfx.DrawImage(inflowLogo, marginLeft, currentY + 20, 100, 35);
-    gfx.DrawImage(ogeLogo, page.Width - marginLeft - 100, currentY+ 15, 100, 40);
+    gfx.DrawImage(ogeLogo, page.Width - marginLeft - 100, currentY + 15, 100, 40);
     currentY += 50;
 
     // Title
@@ -458,53 +458,11 @@ public void CreatePdf()
     gfx.DrawString($"• Unique People: {amountPeople}", regularFont, XBrushes.Black, marginLeft, currentY);
     currentY += lineSpacing;
 
-    gfx.DrawString($"• Avg Scans At Times:", regularFont, XBrushes.Black, marginLeft, currentY);
-    currentY += lineSpacing - 5;
-
-    var series = changechartToMatchTimeFrame(Series6)[0];
-    for (int i = 0; i < 5; i++)
-    {
-        gfx.DrawString($"    - {XAxisLabelsforTimes[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
-        currentY += 15;
-    }
-
-    currentY += 8;
-    gfx.DrawString("• Safety Flags:", regularFont, XBrushes.Black, marginLeft, currentY);
-    currentY += lineSpacing - 5;
-
-    for (int i = 0; i < Math.Min(Upload.listOfErrors.Count, 5); i++)
-    {
-        gfx.DrawString($"    - {Upload.listOfErrors[i]}", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
-        currentY += 13;
-    }
-
-    currentY += 8;
-    gfx.DrawString("• Avg Scan Activations:", regularFont, XBrushes.Black, marginLeft, currentY);
-    currentY += lineSpacing - 5;
-
-    series = changechartToMatchTimeFrame(Series)[0];
-    for (int i = 0; i < 5; i++)
-    {
-        gfx.DrawString($"    - {XAxisLabels[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
-        currentY += 15;
-    }
-
-    currentY += 8;
-    gfx.DrawString("• Most Active Reader:", regularFont, XBrushes.Black, marginLeft, currentY);
-    currentY += lineSpacing - 5;
-
-    series = Series3[0];
-    for (int i = 0; i < 5; i++)
-    {
-        gfx.DrawString($"    - {XAxisLabelsforReaders[i]}: {(int)series.Data[i]} scans", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
-        currentY += 13;
-    }
-
-    currentY += 8;
+    // Most Active People
     gfx.DrawString("• Most Active People:", regularFont, XBrushes.Black, marginLeft, currentY);
     currentY += lineSpacing - 5;
 
-    series = Series2[0];
+    var series = Series2[0];
     for (int i = 0; i < 5; i++)
     {
         gfx.DrawString($"    - {XAxisLabelsforPeople[i]}: {(int)series.Data[i]} scans", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
@@ -519,6 +477,52 @@ public void CreatePdf()
     for (int i = 0; i < 5; i++)
     {
         gfx.DrawString($"    - Panel {XAxisLabelsforPanels[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 15;
+    }
+
+    currentY += 8;
+    gfx.DrawString("• Most Active Reader:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
+
+    series = Series3[0];
+    for (int i = 0; i < 5; i++)
+    {
+        gfx.DrawString($"    - {XAxisLabelsforReaders[i]}: {(int)series.Data[i]} scans", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 13;
+    }
+
+    // Avg Scans At Times
+    currentY += 8;
+    gfx.DrawString("• Avg Scans At Times:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
+
+    series = changechartToMatchTimeFrame(Series6)[0];
+    for (int i = 0; i < 5; i++)
+    {
+        gfx.DrawString($"    - {XAxisLabelsforTimes[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 15;
+    }
+
+    // Safety Flags
+    currentY += 8;
+    gfx.DrawString("• Safety Flags:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
+
+    for (int i = 0; i < Math.Min(Upload.listOfErrors.Count, 5); i++)
+    {
+        gfx.DrawString($"    - {Upload.listOfErrors[i]}", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
+        currentY += 13;
+    }
+
+    // Avg Scan Activations
+    currentY += 8;
+    gfx.DrawString("• Avg Scan Activations:", regularFont, XBrushes.Black, marginLeft, currentY);
+    currentY += lineSpacing - 5;
+
+    series = changechartToMatchTimeFrame(Series)[0];
+    for (int i = 0; i < 5; i++)
+    {
+        gfx.DrawString($"    - {XAxisLabels[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
         currentY += 15;
     }
 

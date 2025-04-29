@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OGEApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f8f9f92c0eeae7a070b84133847c87fed82d920d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6a04303c085521f31b9b4e03ba3e8e7c422a9a03")]
 [assembly: System.Reflection.AssemblyProductAttribute("OGEApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OGEApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
