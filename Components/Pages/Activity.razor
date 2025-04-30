@@ -106,8 +106,9 @@
 
     <!-- Left Column: Entries/Exits and People Count -->
     <div style="display: flex; flex-direction: column; align-items: flex-start; padding-left: 50%;">
-        <h3 style="font-weight: bold; margin-top: 7mm;">Entries/Exits: @entriesAndExit</h3>
-        <h3 style="font-weight: bold; margin-top: 7mm;">People: @amountPeople</h3>
+        <h3 style="font-weight: bold; margin-top: 4mm;">Entries/Exits: @entriesAndExit</h3>
+        <h3 style="font-weight: bold; margin-top: 4mm;">People: @amountPeople</h3>
+        <h3 style="font-weight: bold; margin-top: 4mm; font-size:17px">Avg Unique People Per Day: @(amountPeople/GetDaysBetweenDates(selectedDateMin, selectedDateMax))</h3>
     </div>
 </div>
 
