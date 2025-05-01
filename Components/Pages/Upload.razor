@@ -492,22 +492,43 @@ public DateTime GetLastDate()
 
 public List<string> GetMostActiveHours()
 {
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
     return Entries
-        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var utcTime))
+            {
+                utcTime = DateTime.SpecifyKind(utcTime, DateTimeKind.Utc);
+                return TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone);
+            }
+            return (DateTime?)null;
+        })
         .Where(dt => dt.HasValue)
         .GroupBy(dt => dt.Value.Hour)
         .OrderByDescending(g => g.Count())
         .Take(5)
-        .Select(g => $"{((g.Key + 24 - 5) % 24):00}:00")  // Wraps hour to stay within 0–23
+        .Select(g => $"{g.Key:00}:00")
         .ToList();
 }
 
 
 
+
 public List<double> GetHourCounts()
 {
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
     return Entries
-        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var utcTime))
+            {
+                utcTime = DateTime.SpecifyKind(utcTime, DateTimeKind.Utc);
+                return TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone);
+            }
+            return (DateTime?)null;
+        })
         .Where(dt => dt.HasValue)
         .GroupBy(dt => dt.Value.Hour)
         .OrderByDescending(g => g.Count())
@@ -515,6 +536,7 @@ public List<double> GetHourCounts()
         .Select(g => (double)g.Count())
         .ToList();
 }
+
 
 
 

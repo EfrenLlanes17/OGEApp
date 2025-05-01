@@ -956,22 +956,43 @@ OrganizeEventsByDayOfWeek(GetFilteredEntries());
 
 public static List<string> GetMostActiveHours(List<Upload.ReaderEvent> events)
 {
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
     return events
-        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var utcTime))
+            {
+                utcTime = DateTime.SpecifyKind(utcTime, DateTimeKind.Utc);
+                return TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone);
+            }
+            return (DateTime?)null;
+        })
         .Where(dt => dt.HasValue)
         .GroupBy(dt => dt.Value.Hour)
         .OrderByDescending(g => g.Count())
         .Take(5)
-        .Select(g => $"{((g.Key + 24 - 5) % 24):00}:00")  // Wraps hour to stay within 0–23
+        .Select(g => $"{g.Key:00}:00")
         .ToList();
 }
 
 
 
+
 public static List<double> GetHourCounts(List<Upload.ReaderEvent> events)
 {
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
     return events
-        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var utcTime))
+            {
+                utcTime = DateTime.SpecifyKind(utcTime, DateTimeKind.Utc);
+                return TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone);
+            }
+            return (DateTime?)null;
+        })
         .Where(dt => dt.HasValue)
         .GroupBy(dt => dt.Value.Hour)
         .OrderByDescending(g => g.Count())
@@ -979,6 +1000,7 @@ public static List<double> GetHourCounts(List<Upload.ReaderEvent> events)
         .Select(g => (double)g.Count())
         .ToList();
 }
+
 
 
 
