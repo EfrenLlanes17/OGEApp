@@ -341,10 +341,13 @@ public static Boolean dupBool = false;
 
                 Navigation.NavigateTo("/Activity");
             }
-            catch (Exception exception)
-            {
-                ErrorMessage = exception.Message;
-            }
+           catch (Exception exception)
+{
+    ErrorMessage = exception.Message;
+    Console.WriteLine($"Exception: {exception.Message}");
+    Console.WriteLine($"Stack Trace: {exception.StackTrace}");
+}
+
         }
     }
 
@@ -605,8 +608,9 @@ private List<double> GetTopActivePeopleCounts(int topN = 5)
 
   private List<string> GetTopActiveReaders(int topN = 5)
 {
+    //assums location name is in teh readr desc
     return Entries
-        .GroupBy(e => e.ReaderDesc.Substring(22))
+        .GroupBy(e => e.ReaderDesc.Substring(e.Location.Length))
         .OrderByDescending(g => g.Count())
         .Take(topN)
         .Select(g => g.Key)
