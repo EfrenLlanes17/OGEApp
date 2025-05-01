@@ -1155,15 +1155,21 @@ var afterHours = entries
     .OrderBy(e => e.IDHash).ThenBy(e => e.Time)
     .GroupBy(e => e.IDHash)
     .SelectMany(group =>
-        group.Zip(group.Skip(1), (a, b) => new { Prev = a, Curr = b , PrevTime = DateTime.Parse(a.Time), CurrTime = DateTime.Parse(b.Time) })
-             .Where(pair =>
-                 pair.Prev.ReaderDesc == pair.Curr.ReaderDesc &&
-                 pair.Prev.IDHash == pair.Curr.IDHash &&
-                  pair.Prev.DevID == pair.Curr.DevID &&
-                  pair.Prev.Machine == pair.Curr.Machine &&
-                 pair.CurrTime  == pair.PrevTime 
-             )
-             .Select(pair => pair.Curr)
+        group.Zip(group.Skip(1), (a, b) => new
+        {
+            Prev = a,
+            Curr = b,
+            PrevTime = DateTime.Parse(a.Time),
+            CurrTime = DateTime.Parse(b.Time)
+        })
+        .Where(pair =>
+            pair.Prev.ReaderDesc == pair.Curr.ReaderDesc &&
+            pair.Prev.IDHash == pair.Curr.IDHash &&
+            pair.Prev.DevID == pair.Curr.DevID &&
+            pair.Prev.Machine == pair.Curr.Machine &&
+            pair.CurrTime == pair.PrevTime
+        )
+        .Select(pair => pair.Curr)
     )
     .ToList();
 
@@ -1234,13 +1240,17 @@ var afterHours = entries
         }
     }
 
-    if (duplicateScans.Any() && Upload.dupBool)
+   if (duplicateScans.Any() && Upload.dupBool)
+{
+    var groupedByReader = duplicateScans
+        .GroupBy(d => d.ReaderDesc)
+        .Select(g => new { ReaderDesc = g.Key, Count = g.Count() });
+
+    foreach (var group in groupedByReader)
     {
-        foreach (var dup in duplicateScans)
-        {
-    issues.Add($"Duplicate scan detected for {dup.IDHash.Substring(0,10)} at {dup.ReaderDesc} at {dup.Time}.");
-        }
+        issues.Add($"{group.ReaderDesc} has {group.Count} duplicate scans.");
     }
+}
 
    
     if (!issues.Any())
