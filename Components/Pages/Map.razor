@@ -1202,11 +1202,11 @@ if(maintenance){
 
     public static string scansToColorPanelMaintenance(int i){
         
-        return GetColorMaintenance(GetPanelScanCount(i),Pages.Upload.SCAN_THRESHOLDForPannel , Upload.nearPannel);
+        return GetColorMaintenancePanel(GetPanelScanCount(i),Pages.Upload.SCAN_THRESHOLDForPannel , Upload.nearPannel);
     }
 
      public static string scansToColorReaderMaintenance(string str){
-         return GetColorMaintenance(GetReaderScanCount(str),Pages.Upload.SCAN_THRESHOLDForReader, Upload.nearReader);
+         return GetColorMaintenanceReader(str,GetReaderScanCount(str),Pages.Upload.SCAN_THRESHOLDForReader, Upload.nearReader);
     }
 
    private static string GetColor(int scans, int threshold)
@@ -1248,12 +1248,51 @@ if(maintenance){
 }
 
 
-private static string GetColorMaintenance(int scans, int threshold , int near)
+private static string GetColorMaintenancePanel(int scans, int threshold , int near)
 {
-    if(scans >= threshold ){
+    if(scans >= threshold && Upload.PanelsOver){
         return "red";
     }
-    else if(scans + near > threshold){
+    else if(scans + near > threshold && Upload.PanelsNear){
+        return "yellow";
+    }
+    else{
+        return "green";
+    }
+}
+
+private static string GetColorMaintenanceReader(string reader,int scans, int threshold , int near)
+{
+ var duplicateScans = Upload.Entries
+    .OrderBy(e => e.IDHash)
+    .GroupBy(e => e.IDHash)
+    .SelectMany(group =>
+        group.Zip(group.Skip(1), (a, b) => new
+        {
+            Prev = a,
+            Curr = b,
+            PrevTime = DateTime.Parse(a.Time),
+            CurrTime = DateTime.Parse(b.Time)
+        })
+        .Where(pair =>
+            pair.Prev.ReaderDesc == pair.Curr.ReaderDesc &&
+            pair.Prev.ReaderDesc == reader &&
+            pair.Prev.IDHash == pair.Curr.IDHash &&
+            pair.Prev.DevID == pair.Curr.DevID &&
+            pair.Prev.Machine == pair.Curr.Machine &&
+            pair.CurrTime == pair.PrevTime
+        )
+        .Select(pair => pair.Curr)
+    )
+    .ToList();
+
+    if(scans >= threshold  && Upload.ReadersOver){
+        return "red";
+    }
+    else if(duplicateScans.Count > 0 && Upload.dupBool){
+             return "red";
+    }
+    else if(scans + near > threshold && Upload.ReadersNear){
         return "yellow";
     }
     else{
@@ -1455,6 +1494,27 @@ public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderE
         .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
         .ToList();
 
+  var duplicateScans = entries
+    .OrderBy(e => e.IDHash).ThenBy(e => e.Time)
+    .GroupBy(e => e.IDHash)
+    .SelectMany(group =>
+        group.Zip(group.Skip(1), (a, b) => new
+        {
+            Prev = a,
+            Curr = b,
+            PrevTime = DateTime.Parse(a.Time),
+            CurrTime = DateTime.Parse(b.Time)
+        })
+        .Where(pair =>
+            pair.Prev.ReaderDesc == pair.Curr.ReaderDesc &&
+            pair.Prev.IDHash == pair.Curr.IDHash &&
+            pair.Prev.DevID == pair.Curr.DevID &&
+            pair.Prev.Machine == pair.Curr.Machine &&
+            pair.CurrTime == pair.PrevTime
+        )
+        .Select(pair => pair.Curr)
+    )
+    .ToList();
        
 
 
@@ -1484,6 +1544,18 @@ public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderE
             issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Near threshold of {SCAN_THRESHOLDForReader}");
         }
     }
+
+    if (duplicateScans.Any() && Upload.dupBool)
+{
+    var groupedByReader = duplicateScans
+        .GroupBy(d => d.ReaderDesc)
+        .Select(g => new { ReaderDesc = g.Key, Count = g.Count() });
+
+    foreach (var group in groupedByReader)
+    {
+        issues.Add($"{group.ReaderDesc} has {group.Count} duplicate scans.");
+    }
+}
 
    
     if (!issues.Any())
