@@ -633,7 +633,7 @@ private void HandleReaderChartClick()
     private static List<string> GetTopActiveReadersNoLimit(List<Upload.ReaderEvent> entries)
 {
     return entries
-        .GroupBy(e => e.ReaderDesc.Substring(22))
+        .GroupBy(e => e.ReaderDesc)
         .OrderByDescending(g => g.Count())
         .Select(g => g.Key)
         .ToList();

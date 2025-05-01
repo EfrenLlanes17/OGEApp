@@ -32,11 +32,17 @@
                
                      <h1 style="margin-left: 0.5cm; font-size: 12px"> @str</h1>
                  } 
+                 }
+                 else if(item.Equals("Reader")){
+                    <strong>Connected Panel: </strong> @GetUniquePannel(Labels[i]).ToArray()[0]
+                 
+
+                 }
                    
               
                 
                 
-                }
+                
             </p>
         </div>
     }
@@ -98,6 +104,15 @@
     return Upload.Entries
         .Where(e => e.Machine == panel)  
         .Select(e => e.ReaderDesc)               
+        .Distinct()                              
+        .ToList();                               
+}
+
+public static List<int> GetUniquePannel(string reader)
+{
+    return Upload.Entries
+        .Where(e => e.ReaderDesc == reader)  
+        .Select(e => e.Machine)               
         .Distinct()                              
         .ToList();                               
 }
