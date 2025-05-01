@@ -792,7 +792,7 @@ public static string location
 
  private static List<Upload.ReaderEvent> GetFilteredEntriesByName()
 {
-    return Upload.Entries
+    return GetFilteredEntries()
         .Where(e =>e.Location.Equals(location))
         .ToList();
 }
