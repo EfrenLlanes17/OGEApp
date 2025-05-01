@@ -1261,44 +1261,40 @@ private static string GetColorMaintenancePanel(int scans, int threshold , int ne
     }
 }
 
-private static string GetColorMaintenanceReader(string reader,int scans, int threshold , int near)
+private static string GetColorMaintenanceReader(string reader, int scans, int threshold, int near)
 {
- var duplicateScans = Upload.Entries
-    .OrderBy(e => e.IDHash)
-    .GroupBy(e => e.IDHash)
-    .SelectMany(group =>
-        group.Zip(group.Skip(1), (a, b) => new
-        {
-            Prev = a,
-            Curr = b,
-            PrevTime = DateTime.Parse(a.Time),
-            CurrTime = DateTime.Parse(b.Time)
-        })
-        .Where(pair =>
-            pair.Prev.ReaderDesc == pair.Curr.ReaderDesc &&
-            pair.Prev.ReaderDesc == reader &&
-            pair.Prev.IDHash == pair.Curr.IDHash &&
-            pair.Prev.DevID == pair.Curr.DevID &&
-            pair.Prev.Machine == pair.Curr.Machine &&
-            pair.CurrTime == pair.PrevTime
-        )
-        .Select(pair => pair.Curr)
-    )
-    .ToList();
-
-    if(scans >= threshold  && Upload.ReadersOver){
+    if (Upload.ReadersOver && scans >= threshold)
         return "red";
+
+    if (Upload.dupBool)
+    {
+        var relevantEntries = Upload.Entries
+            .Where(e => e.ReaderDesc == reader)
+            .OrderBy(e => e.IDHash)
+            .ThenBy(e => e.Time)
+            .ToList();
+
+        for (int i = 1; i < relevantEntries.Count; i++)
+        {
+            var prev = relevantEntries[i - 1];
+            var curr = relevantEntries[i];
+
+            if (prev.IDHash == curr.IDHash &&
+                prev.DevID == curr.DevID &&
+                prev.Machine == curr.Machine &&
+                prev.Time == curr.Time) // Compare time strings directly
+            {
+                return "red"; // Early exit on first duplicate found
+            }
+        }
     }
-    else if(duplicateScans.Count > 0 && Upload.dupBool){
-             return "red";
-    }
-    else if(scans + near > threshold && Upload.ReadersNear){
+
+    if (Upload.ReadersNear && (scans + near > threshold))
         return "yellow";
-    }
-    else{
-        return "green";
-    }
+
+    return "green";
 }
+
    
 
     public static void OnPanelClick(int i)
