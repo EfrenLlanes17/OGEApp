@@ -1172,15 +1172,32 @@ if(maintenance){
 
     public static List<int> panelReaders = new List<int>();
 
-      
+    private static int GetTopActivePanel()
+{
+    return Upload.Entries
+        .GroupBy(e => e.Machine.ToString())
+        .OrderByDescending(g => g.Count())
+        .Select(g => int.Parse(g.Key)) // convert string back to int
+        .FirstOrDefault();
+}
+
+    private static string GetTopActiveReader()
+{
+    return Upload.Entries
+        .GroupBy(e => e.ReaderDesc) // or e.Reader.ToString() if needed
+        .OrderByDescending(g => g.Count())
+        .Select(g => g.Key)
+        .FirstOrDefault();
+}
+
 
     public static string scansToColorPanel(int i){
         
-        return GetColor(GetPanelScanCount(i),Pages.Upload.SCAN_THRESHOLDForPannel);
+        return GetColor(GetPanelScanCount(i),GetPanelScanCount(GetTopActivePanel()));
     }
 
      public static string scansToColorReader(string str){
-         return GetColor(GetReaderScanCount(str),Pages.Upload.SCAN_THRESHOLDForReader);
+         return GetColor(GetReaderScanCount(str), GetReaderScanCount(GetTopActiveReader()));
     }
 
     public static string scansToColorPanelMaintenance(int i){
