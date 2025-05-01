@@ -1268,7 +1268,7 @@ private static string GetColorMaintenanceReader(string reader, int scans, int th
 
     if (Upload.dupBool)
     {
-        var relevantEntries = Upload.Entries
+        var relevantEntries = Upload.EntriesWithDups
             .Where(e => e.ReaderDesc == reader)
             .OrderBy(e => e.IDHash)
             .ThenBy(e => e.Time)
@@ -1460,6 +1460,7 @@ public static List<string> CheckForPotentialIssuesWithPanel(List<Upload.ReaderEv
 public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderEvent> entries)
 {
     entries =  entries.Where(e => e.ReaderDesc == readerName).ToList();
+    List<Upload.ReaderEvent> entriesWithDup = Upload.EntriesWithDups.Where(e => e.ReaderDesc == readerName).ToList();
 
     int SCAN_THRESHOLDForReader = Upload.SCAN_THRESHOLDForReader; 
     int nearReader = Upload.nearReader;
@@ -1490,7 +1491,7 @@ public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderE
         .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
         .ToList();
 
-  var duplicateScans = entries
+  var duplicateScans = entriesWithDup
     .OrderBy(e => e.IDHash).ThenBy(e => e.Time)
     .GroupBy(e => e.IDHash)
     .SelectMany(group =>
