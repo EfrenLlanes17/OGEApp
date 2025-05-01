@@ -653,7 +653,7 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
  private void HandlePersonChartClick()
     {
         
-        Fulllist.Labels = GetMostActiveHoursNoLimit(Upload.Entries).ToArray();
+        Fulllist.Labels = GetTopActivePeopleNamesNoLimit(Upload.Entries).ToArray();
         Fulllist.Series = GetTopActivePeopleCountsNoLimit(Upload.Entries).ToArray();
         Fulllist.item = "Person";
         Fulllist.isFlags = false;
@@ -729,7 +729,7 @@ private static double GetAverageUniquePeoplePerDay(List<Upload.ReaderEvent> entr
 private static List<string> GetTopActivePeopleNamesNoLimit(List<Upload.ReaderEvent> entries)
 {
     return entries
-        .GroupBy(e => e.IDHash.Substring(0,10))
+        .GroupBy(e => e.IDHash)
         .OrderByDescending(g => g.Count())
         .Select(g => g.Key)
         .ToList();
