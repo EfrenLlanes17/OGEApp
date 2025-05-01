@@ -108,7 +108,7 @@
     <div style="display: flex; flex-direction: column; align-items: flex-start; padding-left: 50%;">
         <h3 style="font-weight: bold; margin-top: 4mm;">Entries/Exits: @entriesAndExit</h3>
         <h3 style="font-weight: bold; margin-top: 4mm;">People: @amountPeople</h3>
-        <h3 style="font-weight: bold; margin-top: 4mm; font-size:18px">Avg Unique People Per Day: @((int)GetAverageUniquePeoplePerDay(GetFilteredEntries()))</h3>
+        <h3 style="font-weight: bold; margin-top: 4mm; font-size:18px">Avg Unique People Per Day: @amountAvgPeoplePerDay</h3>
     </div>
 </div>
 
@@ -837,6 +837,8 @@ private static void OnLocationChanged(string newValue)
 //This is for unique people count
 amountPeople = GetUniquePeopleCount(GetFilteredEntriesByName());
 
+amountAvgPeoplePerDay = (int)GetAverageUniquePeoplePerDay(GetFilteredEntriesByName());
+
 //This is for entries/exists
 entriesAndExit = GetFilteredEntriesByName().Count;
 
@@ -929,6 +931,8 @@ public static void OnDateChange(){
 
 //This is for unique people count
 amountPeople = GetUniquePeopleCount(GetFilteredEntries());
+
+amountAvgPeoplePerDay = (int)GetAverageUniquePeoplePerDay(GetFilteredEntries());
 
 //This is for entries/exists
 entriesAndExit = GetFilteredEntries().Count;
@@ -1259,6 +1263,10 @@ public static DateTime selectedDateMax
 
 
       public static int amountPeople { get; set; } = 0;
+
+      public static int amountAvgPeoplePerDay { get; set; } = 0;
+
+      
 
        public static List<ChartSeries> Series = Upload.Series;
 
