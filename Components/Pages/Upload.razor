@@ -175,9 +175,11 @@ private int Index = -1;
 
     public static List<string> listOfErrors = new List<string>();
 
-public static int openTime = 9;
+public static TimeOnly? openTime { get; set; } = new TimeOnly(9, 0);   // 9:00 AM
+public static TimeOnly? closeTime { get; set; } = new TimeOnly(17, 0); // 5:00 PM
 
-public static int closeTime = 17;
+public static Boolean operating247 { get; set; } = true;
+
 
 public static int SCAN_THRESHOLDForPannel = 4000;
 
@@ -324,25 +326,45 @@ public static Boolean dupBool = false;
     int SCAN_THRESHOLDForReader = 2000; //2000
     int nearReader = 100; *@
 
-    int closingTime = closeTime;
+    
+var openingTime = Upload.openTime ?? new TimeOnly(5, 0);
+var closingTime = Upload.closeTime ?? new TimeOnly(17, 0);
 
-    int openingTime = openTime;
+// List for issues
+List<string> issues = new List<string>();
 
-//Does not account for Day lights saving time and only works for UTE to CTE. Regular is +6 but its DST
-    int openingTimeUtc = openingTime +  5;
-    int closingTimeUtc = closingTime + 5 ;
-    if(closingTimeUtc > 12){
-        closingTimeUtc -= 12;
-    }
+@if(!Upload.operating247){
 
-    List<string> issues = new List<string>();
+var afterHours = entries
+    .Where(e =>
+    {
+        // Parse the time string into a DateTime (assumed to be in UTC)
+        if (!DateTime.TryParse(e.Time, out DateTime utcTime))
+            return false;
 
-    var afterHours = entries
-    .Where(e => 
-    DateTime.Parse(e.Time).Hour < openingTimeUtc || DateTime.Parse(e.Time).Hour > closingTimeUtc)
+        // Convert to Central Time (handles Daylight Saving automatically)
+        TimeZoneInfo cst = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+        DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime.ToUniversalTime(), cst);
+
+        // Compare just the time portion
+        var timeOnly = TimeOnly.FromDateTime(localTime);
+        return timeOnly < openingTime || timeOnly > closingTime;
+    })
     .Select(e => new { e.IDHash, e.Time, e.ReaderDesc })
     .ToList();
 
+     if (afterHours.Any() && afterHoursBool)
+    {
+        foreach (var scan in afterHours)
+            {
+                DateTime utcTime = DateTime.Parse(scan.Time).ToUniversalTime();
+                TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+                DateTime centralTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone);
+                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {centralTime} — outside regular hours.");
+            }
+    }
+
+}
 
     var duplicateScans = entries
     .OrderBy(e => e.IDHash).ThenBy(e => e.Time)
@@ -407,13 +429,7 @@ public static Boolean dupBool = false;
         }
     }
 
-     if (afterHours.Any() && afterHoursBool)
-    {
-        foreach (var scan in afterHours)
-            {
-                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {scan.Time} — outside regular hours.");
-            }
-    }
+    
 
     if (machineIssuesNear.Any() && PanelsNear)
     {

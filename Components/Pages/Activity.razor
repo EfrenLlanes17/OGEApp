@@ -87,7 +87,7 @@
                 
 
 
-        
+       
          @* @GetDaysBetweenDates(selectedDateMin, selectedDateMax) Days  *@
          @* @Upload.SCAN_THRESHOLDForPannel
        @Upload.SCAN_THRESHOLDForReader
@@ -189,18 +189,31 @@
         </div>
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
-            <input id="inputText" type="text"
-                @bind="Upload.openTime"
-                style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
-            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Opening time (EX: 5AM --> 5)</label>
+    <input id="closeTimeCheckbox" type="checkbox"
+           @bind="Upload.operating247"
+           style="width:30%; height: 20px;" />
+    <label for="closeTimeCheckbox" style="color: white; font-size: 18px; min-width: 100px;">
+        Operating 24/7
+    </label>
         </div>
 
+@if(!Upload.operating247){
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
-            <input id="inputText" type="text"
-                @bind="Upload.closeTime"
-                style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
-            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Closing time (EX: 10PM --> 22)</label>
-        </div>
+    <input id="openTimeInput" type="time"
+        @bind="Upload.openTime"
+        style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
+    <label for="openTimeInput" style="color: white; font-size: 18px; min-width: 150px;">Opening time</label>
+</div>
+
+<div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+    <input id="closeTimeInput" type="time"
+        @bind="Upload.closeTime"
+        style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
+    <label for="closeTimeInput" style="color: white; font-size: 18px; min-width: 150px;">Closing time</label>
+</div>
+}
+
+
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
     <input id="closeTimeCheckbox" type="checkbox"
@@ -1073,24 +1086,47 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
 
     int SCAN_THRESHOLDForReader = Upload.SCAN_THRESHOLDForReader; 
     int nearReader = Upload.nearReader;
-    int closingTime = Upload.closeTime;
+    
+var openingTime = Upload.openTime ?? new TimeOnly(5, 0);
+var closingTime = Upload.closeTime ?? new TimeOnly(17, 0);
 
-    int openingTime = Upload.openTime;
+// List for issues
+List<string> issues = new List<string>();
 
-//Does not account for Day lights saving time and only works for UTE to CTE. Regular is +6 but its DST
-    int openingTimeUtc = openingTime +  5;
-    int closingTimeUtc = closingTime + 5 ;
-    if(closingTimeUtc > 12){
-        closingTimeUtc -= 12;
-    }
+@if(!Upload.operating247){
 
-    List<string> issues = new List<string>();
+var afterHours = entries
+    .Where(e =>
+    {
+        // Parse the time string into a DateTime (assumed to be in UTC)
+        if (!DateTime.TryParse(e.Time, out DateTime utcTime))
+            return false;
 
-    var afterHours = entries
-    .Where(e => 
-    DateTime.Parse(e.Time).Hour < openingTimeUtc || DateTime.Parse(e.Time).Hour > closingTimeUtc)
+        // Convert to Central Time (handles Daylight Saving automatically)
+        TimeZoneInfo cst = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+        DateTime localTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime.ToUniversalTime(), cst);
+
+        // Compare just the time portion
+        var timeOnly = TimeOnly.FromDateTime(localTime);
+        return timeOnly < openingTime || timeOnly > closingTime;
+    })
     .Select(e => new { e.IDHash, e.Time, e.ReaderDesc })
     .ToList();
+
+     if (afterHours.Any() && Upload.afterHoursBool)
+    {
+        foreach (var scan in afterHours)
+            {
+                DateTime utcTime = DateTime.Parse(scan.Time).ToUniversalTime();
+
+                TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+                DateTime centralTime = TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone);
+                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {centralTime} — outside regular hours.");
+            }
+    }
+
+}
+
 
 
     var duplicateScans = entries
@@ -1156,13 +1192,7 @@ public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entr
         }
     }
 
-     if (afterHours.Any() && Upload.afterHoursBool)
-    {
-        foreach (var scan in afterHours)
-            {
-                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {scan.Time} — outside regular hours.");
-            }
-    }
+
 
     if (machineIssuesNear.Any() && Upload.PanelsNear)
     {
