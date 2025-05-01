@@ -23,7 +23,20 @@
                 <span style="margin-left: 10px;">@item @Labels[i]</span>
             </h3>
             <p style="margin: 4px 0 0 28px; font-size: 15px;">
+                <div>
                 <strong>Scans:</strong> @Series[i]
+                </div>
+                @if(item.Equals("Panel")){
+                     <strong>Connected Readers:</strong>
+                 foreach(string str in GetUniqueReaderDescs(int.Parse(Labels[i]))){ 
+               
+                     <h1 style="margin-left: 0.5cm; font-size: 12px"> @str</h1>
+                 } 
+                   
+              
+                
+                
+                }
             </p>
         </div>
     }
@@ -79,6 +92,15 @@
     {
         renderLimit += 1000;
     }
+
+    public static List<string> GetUniqueReaderDescs(int panel)
+{
+    return Upload.Entries
+        .Where(e => e.Machine == panel)  
+        .Select(e => e.ReaderDesc)               
+        .Distinct()                              
+        .ToList();                               
+}
 
     public static Boolean isFlags { get; set; }
 
