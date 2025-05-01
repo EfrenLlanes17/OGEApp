@@ -610,7 +610,7 @@ try
 private void HandleFlagsChartClick()
     {
         
-        Fulllist.Labels = CheckForPotentialIssues(Upload.Entries).ToArray();
+        Fulllist.Labels = CheckForPotentialIssues(Upload.EntriesWithDups).ToArray();
         Fulllist.item = "Warning";
         Fulllist.isFlags = true;
         Navigation.NavigateTo("/fulllist");
@@ -770,7 +770,7 @@ void ShowModal() => IsVisible = true;
    void HideModal()
 {
     IsVisible = false;
-    Upload.listOfErrors = CheckForPotentialIssues(Upload.Entries);
+    Upload.listOfErrors = CheckForPotentialIssues(Upload.EntriesWithDups);
     
 }
 
@@ -810,6 +810,13 @@ public static string location
         .ToList();
 }
 
+private static List<Upload.ReaderEvent> GetFilteredEntriesByNameForIssues()
+{
+    return Upload.EntriesWithDups
+        .Where(e =>e.Location.Equals(location))
+        .ToList();
+}
+
 private static void OnLocationChanged(string newValue)
 {
     
@@ -818,7 +825,7 @@ private static void OnLocationChanged(string newValue)
    
     //Console.WriteLine(GetFilteredEntries().Count);
     //This is for the warning flags
-     Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntriesByName()); 
+     Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntriesByNameForIssues()); 
     
     //This is for most active people
     XAxisLabelsforPeople = GetTopActivePeopleNames(GetFilteredEntriesByName()).ToArray();

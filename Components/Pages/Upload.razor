@@ -130,6 +130,8 @@
     public static Dictionary<string, List<ReaderEvent>> eventsByDayOfWeek = new();
     public static List<ReaderEvent> Entries = new();
 
+    public static List<ReaderEvent> EntriesWithDups = new();
+
 
 
 private int Index = -1; 
@@ -227,6 +229,7 @@ public static Boolean dupBool = false;
                 string line;
                 bool firstLine = true;
                 Entries.Clear();
+                EntriesWithDups.Clear();
 
                 while ((line = await reader.ReadLineAsync()) != null)
                 {
@@ -241,6 +244,33 @@ public static Boolean dupBool = false;
                     }
                 }
                 
+                EntriesWithDups = Entries;
+
+                // Identify duplicate scans
+                var duplicateScans = Entries
+                    .OrderBy(e => e.IDHash).ThenBy(e => e.Time)
+                    .GroupBy(e => e.IDHash)
+                    .SelectMany(group =>
+                        group.Zip(group.Skip(1), (a, b) => new
+                        {
+                            Prev = a,
+                            Curr = b,
+                            PrevTime = DateTime.Parse(a.Time),
+                            CurrTime = DateTime.Parse(b.Time)
+                        })
+                        .Where(pair =>
+                            pair.Prev.ReaderDesc == pair.Curr.ReaderDesc &&
+                            pair.Prev.IDHash == pair.Curr.IDHash &&
+                            pair.Prev.DevID == pair.Curr.DevID &&
+                            pair.Prev.Machine == pair.Curr.Machine &&
+                            pair.CurrTime == pair.PrevTime
+                        )
+                        .Select(pair => pair.Curr)
+                    )
+                    .ToHashSet(); // So we can efficiently remove them
+
+                // Remove duplicates from entries
+                Entries = Entries.Where(e => !duplicateScans.Contains(e)).ToList();
 
                 
             
@@ -275,7 +305,7 @@ public static Boolean dupBool = false;
                 @* Console.WriteLine(CheckForPotentialIssues(Entries).Count); *@
 
                 
-                listOfErrors = CheckForPotentialIssues(Entries);
+                listOfErrors = CheckForPotentialIssues(EntriesWithDups);
 
                  @* List<string> machineIssues = Entries
                     .GroupBy(e => e.DevID)  
