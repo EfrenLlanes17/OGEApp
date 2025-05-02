@@ -948,24 +948,24 @@ public static void OnDateChange(){
     @* Upload.listOfErrors = CheckForPotentialIssues(GetFilteredEntries()); *@
     
     //This is for most active people
-    XAxisLabelsforPeople = GetTopActivePeopleNames(GetFilteredEntries()).ToArray();
+    XAxisLabelsforPeople = GetTopActivePeopleNames(GetFilteredEntriesByLocandDate()).ToArray();
     Series2.Clear();
-    Series2.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePeopleCounts(GetFilteredEntries()).ToArray()});
+    Series2.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePeopleCounts(GetFilteredEntriesByLocandDate()).ToArray()});
 
 //This is for Pannels
-    XAxisLabelsforPanels = GetTopActivePanels(GetFilteredEntries()).ToArray();
+    XAxisLabelsforPanels = GetTopActivePanels(GetFilteredEntriesByLocandDate()).ToArray();
     Series4.Clear();
-    Series4.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts(GetFilteredEntries()).ToArray()});
+    Series4.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts(GetFilteredEntriesByLocandDate()).ToArray()});
 
 //This is for Readers
-    XAxisLabelsforReaders = GetTopActiveReaders(GetFilteredEntries()).ToArray();
+    XAxisLabelsforReaders = GetTopActiveReaders(GetFilteredEntriesByLocandDate()).ToArray();
     Series3.Clear();
-    Series3.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts(GetFilteredEntries()).ToArray()});
+    Series3.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActiveReadersCounts(GetFilteredEntriesByLocandDate()).ToArray()});
 
     //This is for Times
-    XAxisLabelsforTimes = GetMostActiveHours(GetFilteredEntries()).ToArray();
+    XAxisLabelsforTimes = GetMostActiveHours(GetFilteredEntriesByLocandDate()).ToArray();
     Series6.Clear();
-    Series6.Add(new ChartSeries() { Name = "# of Entries", Data = GetHourCounts(GetFilteredEntries()).ToArray()});
+    Series6.Add(new ChartSeries() { Name = "# of Entries", Data = GetHourCounts(GetFilteredEntriesByLocandDate()).ToArray()});
 
 //This is for locations
 @* Layout.MainLayout.locations.Clear();
@@ -975,15 +975,15 @@ public static void OnDateChange(){
 
 
 //This is for unique people count
-amountPeople = GetUniquePeopleCount(GetFilteredEntries());
+amountPeople = GetUniquePeopleCount(GetFilteredEntriesByLocandDate());
 
-amountAvgPeoplePerDay = (int)GetAverageUniquePeoplePerDay(GetFilteredEntries());
+amountAvgPeoplePerDay = (int)GetAverageUniquePeoplePerDay(GetFilteredEntriesByLocandDate());
 
 //This is for entries/exists
-entriesAndExit = GetFilteredEntries().Count;
+entriesAndExit = GetFilteredEntriesByLocandDate().Count;
 
 //This is for scan Activations
-OrganizeEventsByDayOfWeek(GetFilteredEntries());
+OrganizeEventsByDayOfWeek(GetFilteredEntriesByLocandDate());
 }
 
 public static List<string> GetMostActiveHours(List<Upload.ReaderEvent> events)
