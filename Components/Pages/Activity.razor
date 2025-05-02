@@ -676,14 +676,26 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
 
     public static List<string> GetMostActiveHoursNoLimit(List<Upload.ReaderEvent> events)
 {
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
     return events
-        .Select(e => DateTime.TryParse(e.Time, out var dt) ? dt : (DateTime?)null)
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var dt))
+            {
+                var utc = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+                var central = TimeZoneInfo.ConvertTimeFromUtc(utc, centralZone);
+                return (DateTime?)central;
+            }
+            return null;
+        })
         .Where(dt => dt.HasValue)
         .GroupBy(dt => dt.Value.Hour)
         .OrderByDescending(g => g.Count())
-        .Select(g => $"{((g.Key + 24 - 5) % 24):00}:00")  // Wraps hour to stay within 0–23
+        .Select(g => $"{g.Key:00}:00") // g.Key is the Central Time hour
         .ToList();
 }
+
 
 
 
