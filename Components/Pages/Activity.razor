@@ -517,7 +517,7 @@ try
     currentY += lineSpacing - 5;
 
     var series = Series2[0];
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5 && i<XAxisLabelsforPeople.Length; i++)
     {
         gfx.DrawString($"    - {XAxisLabelsforPeople[i]}: {(int)series.Data[i]} scans", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
         currentY += 13;
@@ -528,7 +528,7 @@ try
     currentY += lineSpacing - 5;
 
     series = Series4[0];
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5 && i<XAxisLabelsforPanels.Length; i++)
     {
         gfx.DrawString($"    - Panel {XAxisLabelsforPanels[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
         currentY += 15;
@@ -539,7 +539,7 @@ try
     currentY += lineSpacing - 5;
 
     series = Series3[0];
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5 && i<XAxisLabelsforReaders.Length; i++)
     {
         gfx.DrawString($"    - {XAxisLabelsforReaders[i]}: {(int)series.Data[i]} scans", tinyFont, XBrushes.Black, marginLeft + 15, currentY);
         currentY += 13;
@@ -551,7 +551,7 @@ try
     currentY += lineSpacing - 5;
 
     series = changechartToMatchTimeFrame(Series6)[0];
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5 && i<XAxisLabelsforTimes.Length; i++)
     {
         gfx.DrawString($"    - {XAxisLabelsforTimes[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
         currentY += 15;
@@ -574,7 +574,7 @@ try
     currentY += lineSpacing - 5;
 
     series = changechartToMatchTimeFrame(Series)[0];
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 5 && i<XAxisLabels.Length; i++)
     {
         gfx.DrawString($"    - {XAxisLabels[i]}: {(int)series.Data[i]} scans", smallFont, XBrushes.Black, marginLeft + 15, currentY);
         currentY += 15;
@@ -591,8 +591,9 @@ try
 
     catch (Exception ex)
     {
-        errorMessage = $"An error occurred while creating the PDF: {ex.Message}";
+        errorMessage = $"An error occurred while creating the PDF: {ex.Message} ";
             successMessage = null;
+            Console.WriteLine(ex.StackTrace);
             showSuccess = false;
             showError = true;
     }
