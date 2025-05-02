@@ -274,7 +274,7 @@
                 </div>
             </div>
 
-            <div class="" style="width: 30%; display: flex; flex-direction: column; align-items: center; %" @onclick="HandlePannelChartClick">
+            <div class="mostActivePanel" style="width: 30%; display: flex; flex-direction: column; align-items: center; %" @onclick="HandlePannelChartClick">
                 <h2 style="color: white; font-size: 22px; margin-left:80px"><b>Most Active Panels</b></h2>
                 <div style="transform-origin: top;">
                     <MudChart ChartType="ChartType.Bar" ChartSeries="@Series4" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabelsforPanels" Width="112%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
@@ -424,7 +424,11 @@
 } 
 
  .mostActivePeople .mud-charts-xaxis text {
-    font-size: 70%
+    font-size: 75%
+} 
+
+.mostActivePanel .mud-charts-xaxis text {
+    font-size: 100%
 } 
 
 
