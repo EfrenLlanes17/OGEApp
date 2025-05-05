@@ -90,12 +90,20 @@
 }
 else{
     if(!isFlags){
-     <div  style="width: 55%; display: flex; flex-direction: column; align-items: center;">
-                <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Avg Scans Per Day</b></h2>
-                <div style="transform-origin: top;">
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="listOfChartSeries" XAxisLabels="@LabelsForGraph"  @bind-SelectedIndex="selIndex" Width="95%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
-                </div>
+     <div style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px;">
+    <h2 style="color: white; font-size: 28px; margin-bottom: 15px;"><b>Avg Scans Per Day</b></h2>
+    <div style="transform-origin: top; width: 90%;">
+        <MudChart ChartType="ChartType.Bar"
+                  ChartSeries="listOfChartSeries"
+                  XAxisLabels="@LabelsForGraph"
+                  @bind-SelectedIndex="selIndex"
+                  Width="100%"
+                  Height="500px"
+                  Style="color: #FFFFFF;"
+                  ChartOptions="@Options" />
     </div>
+</div>
+
     }
     else{
     <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
