@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-4\\OGEApp.csproj": {}
+    "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\OGEApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-4\\OGEApp.csproj": {
+    "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\OGEApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-4\\OGEApp.csproj",
+        "projectUniqueName": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\OGEApp.csproj",
         "projectName": "OGEApp",
-        "projectPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-4\\OGEApp.csproj",
-        "packagesPath": "C:\\Users\\efren\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-4\\obj\\",
+        "projectPath": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\OGEApp.csproj",
+        "packagesPath": "C:\\Users\\el1101034\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\efren\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\el1101034\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -77,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
