@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\OGEApp.csproj": {}
+    "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-5\\OGEApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\OGEApp.csproj": {
+    "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-5\\OGEApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\OGEApp.csproj",
+        "projectUniqueName": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-5\\OGEApp.csproj",
         "projectName": "OGEApp",
-        "projectPath": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\OGEApp.csproj",
+        "projectPath": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-5\\OGEApp.csproj",
         "packagesPath": "C:\\Users\\el1101034\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-4\\obj\\",
+        "outputPath": "C:\\Users\\el1101034\\Desktop\\code\\OGEApp-5\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

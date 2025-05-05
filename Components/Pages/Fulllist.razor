@@ -124,4 +124,16 @@ public static List<int> GetUniquePannel(string reader)
         Navigation.NavigateTo("/activity");
     }
      
+     [Inject] private IJSRuntime JSRuntime { get; set; }
+
+private bool hasScrolled = false;
+
+protected override async Task OnAfterRenderAsync(bool firstRender)
+{
+    if (firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("eval", "window.scrollTo(0, 0);");
+    }
+}
+
 }
