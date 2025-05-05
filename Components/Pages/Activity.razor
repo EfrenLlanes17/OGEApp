@@ -225,6 +225,13 @@
         </div>
 
         <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+            <input id="inputText" type="text"
+                @bind="Upload.dupMin"
+                style="padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; width:30%; text-align: center;" />
+            <label for="inputText" style="color: white; font-size: 18px; min-width: 100px; ">Min Dups To Show Warning</label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
     <input id="closeTimeCheckbox" type="checkbox"
            @bind="Upload.dupBool"
            style="width:30%; height: 20px;" />
@@ -1198,7 +1205,11 @@ var afterHours = entries
         )
         .Select(pair => pair.Curr)
     )
+    .GroupBy(d => d.ReaderDesc)
+    .Where(g => g.Count() > Upload.dupMin)
+    .SelectMany(g => g)
     .ToList();
+
 
 
    

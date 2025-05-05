@@ -203,6 +203,7 @@ public static Boolean afterHoursBool = true;
 
 public static Boolean dupBool = false;
 
+public static int dupMin = 100;
 
 
     public async Task FileUploaded(InputFileChangeEventArgs e)
@@ -419,7 +420,11 @@ var afterHours = entries
         )
         .Select(pair => pair.Curr)
     )
+    .GroupBy(d => d.ReaderDesc)
+    .Where(g => g.Count() > dupMin)
+    .SelectMany(g => g)
     .ToList();
+
 
 
    
