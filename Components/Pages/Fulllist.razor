@@ -90,19 +90,20 @@
 }
 else{
     if(!isFlags){
-     <div style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px;">
-    <h2 style="color: white; font-size: 28px; margin-bottom: 15px;"><b>Avg Scans Per Day</b></h2>
-    <div style="transform-origin: top; width: 90%;">
+     <div style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 30px;">
+    <h2 style="color: white; font-size: 36px; margin-bottom: 14px;"><b>@LabelOfGraph</b></h2>
+    <div style="transform-origin: top; width: 100%;">
         <MudChart ChartType="ChartType.Bar"
                   ChartSeries="listOfChartSeries"
                   XAxisLabels="@LabelsForGraph"
                   @bind-SelectedIndex="selIndex"
                   Width="100%"
-                  Height="500px"
+                  Height="525px"
                   Style="color: #FFFFFF;"
                   ChartOptions="@Options" />
     </div>
 </div>
+
 
     }
     else{
@@ -166,6 +167,10 @@ else{
         color: black ;
     }
 
+.mud-charts-xaxis text {
+    font-size: 68%
+}
+
 </style>
 
 
@@ -181,6 +186,8 @@ else{
     private string _value1 = "Graph";
 
     private int selIndex = -1; 
+
+    public static string LabelOfGraph { get; set; }
 
     public static string[] Labels { get; set; }
 

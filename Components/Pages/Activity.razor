@@ -641,6 +641,7 @@ private void HandleReaderChartClick()
         Fulllist.item = "Reader";
         Fulllist.listOfChartSeries = Series3;
         Fulllist.LabelsForGraph = XAxisLabelsforReaders;
+        Fulllist.LabelOfGraph = "Most Active Readers";
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
@@ -675,6 +676,7 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
         Fulllist.item = "Person";
         Fulllist.listOfChartSeries = Series2;
         Fulllist.LabelsForGraph = XAxisLabelsforPeople;
+        Fulllist.LabelOfGraph = "Most Active People";
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
@@ -689,6 +691,7 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
         Fulllist.item = "Time";
         Fulllist.listOfChartSeries = changechartToMatchTimeFrame(Series6);
         Fulllist.LabelsForGraph = XAxisLabelsforTimes;
+        Fulllist.LabelOfGraph = "Avg Scans At Times";
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
@@ -777,6 +780,7 @@ private static List<string> GetTopActivePeopleNamesNoLimit(List<Upload.ReaderEve
         Fulllist.item = "Panel";
         Fulllist.listOfChartSeries = Series4;
         Fulllist.LabelsForGraph = XAxisLabelsforPanels;
+        Fulllist.LabelOfGraph = "Most Active Panels";
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
