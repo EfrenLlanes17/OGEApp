@@ -1268,25 +1268,33 @@ private static string GetColorMaintenanceReader(string reader, int scans, int th
 
     if (Upload.dupBool)
     {
-        var relevantEntries = Upload.EntriesWithDups
-            .Where(e => e.ReaderDesc == reader)
-            .OrderBy(e => e.IDHash)
-            .ThenBy(e => e.Time)
-            .ToList();
+        int duplicateCount = 0;
 
-        for (int i = 1; i < relevantEntries.Count; i++)
-        {
-            var prev = relevantEntries[i - 1];
-            var curr = relevantEntries[i];
+var relevantEntries = Upload.EntriesWithDups
+    .Where(e => e.ReaderDesc == reader)
+    .OrderBy(e => e.IDHash)
+    .ThenBy(e => e.Time)
+    .ToList();
 
-            if (prev.IDHash == curr.IDHash &&
-                prev.DevID == curr.DevID &&
-                prev.Machine == curr.Machine &&
-                prev.Time == curr.Time) // Compare time strings directly
-            {
-                return "red"; // Early exit on first duplicate found
-            }
-        }
+for (int i = 1; i < relevantEntries.Count; i++)
+{
+    var prev = relevantEntries[i - 1];
+    var curr = relevantEntries[i];
+
+    if (prev.IDHash == curr.IDHash &&
+        prev.DevID == curr.DevID &&
+        prev.Machine == curr.Machine &&
+        prev.Time == curr.Time) // Compare time strings directly
+    {
+        duplicateCount++;
+    }
+}
+
+if (duplicateCount > Upload.dupMin)
+{
+    return "red";
+}
+
     }
 
     if (Upload.ReadersNear && (scans + near > threshold))
@@ -1491,7 +1499,9 @@ public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderE
         .Select(g => new { ReaderDesc = g.Key, Count = g.Count() })
         .ToList();
 
-  var duplicateScans = entriesWithDup
+
+
+     var duplicateScans = entriesWithDup
     .OrderBy(e => e.IDHash).ThenBy(e => e.Time)
     .GroupBy(e => e.IDHash)
     .SelectMany(group =>
@@ -1511,6 +1521,9 @@ public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderE
         )
         .Select(pair => pair.Curr)
     )
+    .GroupBy(d => d.ReaderDesc)
+    .Where(g => g.Count() > Upload.dupMin)
+    .SelectMany(g => g)
     .ToList();
        
 
