@@ -331,7 +331,7 @@
             <div class="mostActiveScanAct" style="width: 55%; display: flex; flex-direction: column; align-items: center;">
                 <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Avg Scans Per Day</b></h2>
                 <div style="transform-origin: top;">
-                    <MudChart ChartType="ChartType.Bar" ChartSeries="changechartToMatchTimeFrame(Series)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="95%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                    <MudChart ChartType="ChartType.Line" ChartSeries="changechartToMatchTimeFrame(Series)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="95%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
                 </div>
             </div>
         </div>
@@ -639,6 +639,8 @@ private void HandleReaderChartClick()
         Fulllist.Labels = GetTopActiveReadersNoLimit(GetFilteredEntriesByLocandDate()).ToArray();
         Fulllist.Series = GetTopActiveReadersCountsNoLimit(GetFilteredEntriesByLocandDate()).ToArray();
         Fulllist.item = "Reader";
+        Fulllist.listOfChartSeries = Series3;
+        Fulllist.LabelsForGraph = XAxisLabelsforReaders;
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
@@ -671,6 +673,8 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
         Fulllist.Labels = GetTopActivePeopleNamesNoLimit(GetFilteredEntriesByLocandDate()).ToArray();
         Fulllist.Series = GetTopActivePeopleCountsNoLimit(GetFilteredEntriesByLocandDate()).ToArray();
         Fulllist.item = "Person";
+        Fulllist.listOfChartSeries = Series2;
+        Fulllist.LabelsForGraph = XAxisLabelsforPeople;
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
@@ -683,6 +687,8 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
         Fulllist.Labels = GetMostActiveHoursNoLimit(GetFilteredEntriesByLocandDate()).ToArray();
         Fulllist.Series = GetHourCountsNoLimit(GetFilteredEntriesByLocandDate()).ToArray();
         Fulllist.item = "Time";
+        Fulllist.listOfChartSeries = changechartToMatchTimeFrame(Series6);
+        Fulllist.LabelsForGraph = XAxisLabelsforTimes;
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
@@ -769,6 +775,8 @@ private static List<string> GetTopActivePeopleNamesNoLimit(List<Upload.ReaderEve
         Fulllist.Labels = GetTopActivePannelNamesNoLimit(GetFilteredEntriesByLocandDate()).ToArray();
         Fulllist.Series = GetTopActivePanelCountsNoLimit(GetFilteredEntriesByLocandDate()).ToArray();
         Fulllist.item = "Panel";
+        Fulllist.listOfChartSeries = Series4;
+        Fulllist.LabelsForGraph = XAxisLabelsforPanels;
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 

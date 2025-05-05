@@ -5,6 +5,9 @@
 
 <PageTitle>FullList</PageTitle>
 
+<!-- In Pages/_Layout.cshtml -->
+
+
 <MudButton Variant="Variant.Filled"
                Color="Color.Primary"
                StartIcon="@Icons.Material.Filled.ArrowBack"
@@ -13,6 +16,18 @@
     </MudButton>
 
 
+
+<div style="width: 50%; margin-left: 25%; display: flex; justify-content: center; align-items: center;">
+    <MudStack>
+        <MudToggleGroup T="string" SelectedClass="@_style" @bind-Value="_value1" Color="Color.Primary" CheckMark FixedContent>
+            <MudToggleItem Value="@("Graph")" Text="Graph" />
+            <MudToggleItem Value="@("List")" Text="List" />
+        </MudToggleGroup>
+    </MudStack>
+</div>
+
+
+@if(_value1.Equals("List")){
 @for (int i = 0; i < Labels.Length && (!isFlags || i < renderLimit); i++)
 {
     if (!isFlags)
@@ -72,7 +87,41 @@
         Class="custom-fab" />
 </MudScrollToTop>
 
-
+}
+else{
+    if(!isFlags){
+     <div  style="width: 55%; display: flex; flex-direction: column; align-items: center;">
+                <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Avg Scans Per Day</b></h2>
+                <div style="transform-origin: top;">
+                    <MudChart ChartType="ChartType.Bar" ChartSeries="listOfChartSeries" XAxisLabels="@LabelsForGraph"  @bind-SelectedIndex="selIndex" Width="95%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
+                </div>
+    </div>
+    }
+    else{
+    <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+                <h2 style="color: white; font-size: 22px; margin-bottom: 5px; margin-left:40px"><b>Safety Flags</b></h2>
+                <div style="color: white; font-size: 20px; margin-bottom: 5px; margin-top: 8%;">
+                    @foreach (var s in Upload.listOfErrors.Take(4))
+                    {
+                        if (!s.Equals("No issues detected with machines or readers."))
+                        {
+                            <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 12cm;">
+                                <img src="images/error.jpeg" alt="Error Img" width="35" height="35" style="margin-left: 10px;">
+                                <h3 style="font-size: 17px; margin-bottom: 5%; margin-top: 1%;">@s</h3>
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 10cm;">
+                                <img src="images/check.png" alt="Check Img" width="35" height="35" style="margin-left: 10px;">
+                                <h3 style="font-size: 17px; margin-bottom: 5%; margin-top: 1%;">@s</h3>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+    }
+}
 
 
 
@@ -82,6 +131,14 @@
                 
 
 <style>
+.mud-chart text {
+    fill: white !important;
+}
+
+.mud-chart-legend-item{
+    visibility: hidden;
+}
+
     body {
         background-color: black;
         color: white;
@@ -96,21 +153,37 @@
     border: 2px solid white;  /* Adds a white border around the button */
 }
 
-
+.custom-striped {
+        background-color: white;
+        color: black ;
+    }
 
 </style>
 
 
 
+
+
 @code{
 
-    
+     public ChartOptions Options = new ChartOptions();
+
+    private string _style = "custom-striped";
+
+    private string _value1 = "Graph";
+
+    private int selIndex = -1; 
+
     public static string[] Labels { get; set; }
 
     
     public static double[] Series { get; set; }
 
     public static string item  { get; set; }
+
+    public static List<ChartSeries> listOfChartSeries { get; set; }
+
+    public static string[] LabelsForGraph { get; set; }
 
     private int renderLimit = 1000;
 
