@@ -328,7 +328,7 @@
                 </div>
             </div>
 
-            <div class="mostActiveScanAct" style="width: 55%; display: flex; flex-direction: column; align-items: center;">
+            <div class="mostActiveScanAct" style="width: 55%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleDaysOfTheWeekChartClick" >
                 <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Avg Scans Per Day</b></h2>
                 <div style="transform-origin: top;">
                     <MudChart ChartType="ChartType.Line" ChartSeries="changechartToMatchTimeFrame(Series)" @bind-SelectedIndex="selIndex" XAxisLabels="@XAxisLabels" Width="95%" Height="350px" Style="color: #FFFFFF;" ChartOptions="@Options"/>
@@ -692,6 +692,25 @@ private static List<double> GetTopActiveReadersCountsNoLimit(List<Upload.ReaderE
         Fulllist.listOfChartSeries = changechartToMatchTimeFrame(Series6);
         Fulllist.LabelsForGraph = XAxisLabelsforTimes;
         Fulllist.LabelOfGraph = "Avg Scans At Times";
+        Fulllist.isFlags = false;
+        Navigation.NavigateTo("/fulllist");
+
+        
+    }
+
+    private void HandleDaysOfTheWeekChartClick()
+    {
+        
+        Fulllist.Labels = XAxisLabels;
+        var roundedData = changechartToMatchTimeFrame(Series)[0].Data
+            .Select(d => Math.Round(d))
+            .ToArray();
+
+        Fulllist.Series = roundedData;
+        Fulllist.item = "";
+        Fulllist.listOfChartSeries = changechartToMatchTimeFrame(Series);
+        Fulllist.LabelsForGraph = XAxisLabels;
+        Fulllist.LabelOfGraph = "Avg Scans Per Day";
         Fulllist.isFlags = false;
         Navigation.NavigateTo("/fulllist");
 
