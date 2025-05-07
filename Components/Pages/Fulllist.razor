@@ -5,8 +5,8 @@
 
 <PageTitle>FullList</PageTitle>
 
-<!-- In Pages/_Layout.cshtml -->
 
+@* Back To Activity Button*@
 
 <MudButton Variant="Variant.Filled"
                Color="Color.Primary"
@@ -16,7 +16,7 @@
     </MudButton>
 
 
-
+@* Graph vs list selection*@
 <div style="width: 50%; margin-left: 25%; display: flex; justify-content: center; align-items: center;">
     <MudStack>
         <MudToggleGroup T="string" SelectedClass="@_style" @bind-Value="_value1" Color="Color.Primary" CheckMark FixedContent>
@@ -26,12 +26,14 @@
     </MudStack>
 </div>
 
+@* If List is selected*@
 
 @if(_value1.Equals("List")){
 @for (int i = 0; i < Labels.Length && (!isFlags || i < renderLimit); i++)
 {
     if (!isFlags)
     {
+        @* If List is selected and its not saftey Flags*@
        
         <div style="margin: 10px 0; padding: 12px; border-radius: 10px; background-color: rgb(29, 29, 29); color: white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
             <h3 style="font-size: 18px; margin: 0;">
@@ -65,6 +67,7 @@
     }
     else
     {
+        @* If List is selected and its saftey Flags*@
         <div style="margin: 10px 0; padding: 12px; border-radius: 10px; background-color: rgb(29, 29, 29); color: white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
             <h3 style="font-size: 17px;">@Labels[i]</h3>
         </div>
@@ -72,6 +75,7 @@
 }
 @if (isFlags && renderLimit < Labels.Length)
 {
+    @* Show more Button*@
     <div style="text-align: center; margin-top: 10px;">
         <button @onclick="ShowMore"
                 style="padding: 10px 20px; background-color: #444; color: white; border: none; border-radius: 5px; cursor: pointer;">
@@ -80,7 +84,7 @@
     </div>
 }
 
-
+@* Scroll to top Button*@
 <MudScrollToTop>
     <MudFab 
         Color="Color.Tertiary" 
@@ -92,7 +96,9 @@
 }
 else{
     if(!isFlags){
+        @* If Graph is selected and its not saftey Flags*@
      if(item.Equals("")){
+         @* If Graph is selected and its not saftey Flags and its days of the week*@
          <div style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 30px;">
     <h2 style="color: white; font-size: 36px; margin-bottom: 14px;"><b>@LabelOfGraph</b></h2>
     <div style="transform-origin: top; width: 100%;">
@@ -109,6 +115,7 @@ else{
      
     }
     else{
+         @* If Graph is selected and its not saftey Flags and a bar graph*@
 <div style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 30px;">
     <h2 style="color: white; font-size: 36px; margin-bottom: 14px;"><b>@LabelOfGraph</b></h2>
     <div style="transform-origin: top; width: 100%;">
@@ -126,6 +133,7 @@ else{
 
     }
     else{
+         @* If Graph is selected and its saftey Flags*@
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
                 <h2 style="color: white; font-size: 32px; margin-bottom: 5px;  margin-top: 3%;"><b>Safety Flags</b></h2>
                 <div style="color: white; font-size: 20px; margin-bottom: 5px; margin-top: 3%;">
@@ -177,8 +185,8 @@ else{
   color-scheme: dark;
 }
 .custom-fab {
-    background-color: black;  /* Sets the background to black */
-    border: 2px solid white;  /* Adds a white border around the button */
+    background-color: black; 
+    border: 2px solid white;  
 }
 
 .custom-striped {
