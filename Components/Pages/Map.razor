@@ -1180,14 +1180,14 @@ if(maintenance){
     return Upload.Entries
         .GroupBy(e => e.Machine.ToString())
         .OrderByDescending(g => g.Count())
-        .Select(g => int.Parse(g.Key)) // convert string back to int
+        .Select(g => int.Parse(g.Key)) 
         .FirstOrDefault();
 }
 
     private static string GetTopActiveReader()
 {
     return Upload.Entries
-        .GroupBy(e => e.ReaderDesc) // or e.Reader.ToString() if needed
+        .GroupBy(e => e.ReaderDesc) 
         .OrderByDescending(g => g.Count())
         .Select(g => g.Key)
         .FirstOrDefault();
@@ -1287,7 +1287,7 @@ for (int i = 1; i < relevantEntries.Count; i++)
     if (prev.IDHash == curr.IDHash &&
         prev.DevID == curr.DevID &&
         prev.Machine == curr.Machine &&
-        prev.Time == curr.Time) // Compare time strings directly
+        prev.Time == curr.Time) 
     {
         duplicateCount++;
     }
@@ -1389,26 +1389,11 @@ public static List<string> CheckForPotentialIssuesWithPanel(List<Upload.ReaderEv
 
     int nearPannel = Upload.nearPannel;
 
-    @* int SCAN_THRESHOLDForReader = Upload.SCAN_THRESHOLDForReader; 
-    int nearReader = Upload.nearReader;
-    int closingTime = Upload.closeTime;
-
-    int openingTime = Upload.openTime; *@
-
-//Does not account for Day lights saving time and only works for UTE to CTE. Regular is +6 but its DST
-    @* int openingTimeUtc = openingTime +  5;
-    int closingTimeUtc = closingTime + 5 ;
-    if(closingTimeUtc > 12){
-        closingTimeUtc -= 12;
-    } *@
+   
 
     List<string> issues = new List<string>();
 
-    @* var afterHours = entries
-    .Where(e => 
-    DateTime.Parse(e.Time).Hour < openingTimeUtc || DateTime.Parse(e.Time).Hour > closingTimeUtc)
-    .Select(e => new { e.IDHash, e.Time, e.ReaderDesc })
-    .ToList(); *@
+   
 
 
    
@@ -1438,14 +1423,7 @@ public static List<string> CheckForPotentialIssuesWithPanel(List<Upload.ReaderEv
     }
 
    
-@* 
-     if (afterHours.Any() && Upload.afterHoursBool)
-    {
-        foreach (var scan in afterHours)
-            {
-                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {scan.Time} — outside regular hours.");
-            }
-    } *@
+
 
     if (machineIssuesNear.Any() && Upload.PanelsNear)
     {
@@ -1480,12 +1458,7 @@ public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderE
 
     List<string> issues = new List<string>();
 
-    @* var afterHours = entries
-    .Where(e => 
-    DateTime.Parse(e.Time).Hour < openingTimeUtc || DateTime.Parse(e.Time).Hour > closingTimeUtc)
-    .Select(e => new { e.IDHash, e.Time, e.ReaderDesc })
-    .ToList(); *@
-
+  
 
 
   
@@ -1539,14 +1512,7 @@ public static List<string> CheckForPotentialIssuesWithReader(List<Upload.ReaderE
             issues.Add($"Reader {issue.ReaderDesc} : {issue.Count} scans. Over threshold of {SCAN_THRESHOLDForReader}");
         }
     }
-@* 
-     if (afterHours.Any() && Upload.afterHoursBool)
-    {
-        foreach (var scan in afterHours)
-            {
-                issues.Add($"{scan.IDHash.Substring(0,10)} scanned at {scan.ReaderDesc} at {scan.Time} — outside regular hours.");
-            }
-    } *@
+
 
     
 
