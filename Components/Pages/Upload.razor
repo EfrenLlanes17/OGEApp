@@ -38,17 +38,6 @@
 <img src="images/whiteInflowLogo.png" alt="Inflow Logo" width="325" height="75" style="align-content: center; margin-top: 1%;">
 
 
-@* <MudFileUpload T="IBrowserFile" FilesChanged="FileUploaded">
-    <ActivatorContent>
-        <MudButton Variant="Variant.Filled"
-                   Class="custom-upload-button"
-                   Style="background-color: black; color: white; font-weight: bold; font-size: 20px; width: 100%; border-width: 1mm; border-color: white; cursor: pointer; text-align: center; margin-top: 10%;"
-                   StartIcon="@Icons.Material.Filled.CloudUpload">
-            Upload File
-        </MudButton>
-    </ActivatorContent>
-</MudFileUpload> *@
-
 @* Upload Button *@
 
  <label for="fileUpload" class="btn btn-primary rounded-pill"
@@ -58,58 +47,6 @@
 </label>
 </div> 
 
-@* @if(file != null || Series.Count != 0){
-<MudSimpleTable Style="overflow-x: auto;">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>File Size(bytes)</th>
-                </tr>
-            </thead>
-    using OGEApp.Components.Layout;
-    using OGEApp.Components.Layout;
-            <tbody>
-            <tr>
-                    <td>@file.Name</td>
-                    <td>@file.Size</td>
-              </tr>  
-    </tbody>
-    </MudSimpleTable> 
-
-
-
-    <MudSimpleTable Style="overflow-x: auto; background-color: rgb(75, 72, 72);">
-    <thead>
-        <tr>
-            <th>Day of the Week</th>
-            <th>Event Count</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var entry in eventsByDayOfWeek)
-        {
-            <tr>
-                <td>@entry.Key</td>
-                <td>@entry.Value.Count</td>
-            </tr>
-        }
-    </tbody>
-</MudSimpleTable>
-
-
-
-    <div>
-    <MudChart ChartType="ChartType.Line" ChartSeries="@Series" @bind-SelectedIndex="Index" XAxisLabels="@XAxisLabels" Width="100%" Height="350px" ChartOptions="@Options"/>
-    <MudGrid>
-         <MudItem xs="6">
-            <MudText Typo="Typo.body1" Class="py-3">Selected: @(Index < 0 ? "None" : Series[Index].Name)</MudText>
-        </MudItem>
-        <MudItem xs="6">
-            <MudSlider @bind-Value="Options.LineStrokeWidth" Min="1" Max="10" Color="Color.Info">Line Width: @Options.LineStrokeWidth.ToString()</MudSlider>
-        </MudItem> 
-    </MudGrid>
-</div>
-} *@
 
 
 
@@ -274,9 +211,9 @@ public static int dupMin = 60;
                         )
                         .Select(pair => pair.Curr)
                     )
-                    .ToHashSet(); // So we can efficiently remove them
+                    .ToHashSet(); 
 
-                // Remove duplicates from entries
+                
                 Entries = Entries.Where(e => !duplicateScans.Contains(e)).ToList();
 
                 
@@ -306,27 +243,11 @@ public static int dupMin = 60;
                 SeriesPanel.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts().ToArray()});
                 XAxisLabelsforPanels= GetTopActivePanels().ToArray();
 
-                @* Console.WriteLine(Entries.Last().Time);
-                Console.WriteLine( DateTime.Parse(Entries.Last().Time).ToString());
-                Console.WriteLine(GetFirstDate().ToString());
-                Console.WriteLine(GetLastDate().ToString()); *@
-
-                @* foreach(string s in CheckForPotentialIssues(Entries).ToArray()){
-                   Console.WriteLine(s);
-                } *@
-                @* Console.WriteLine(CheckForPotentialIssues(Entries).Count); *@
+              
 
                 
                 listOfErrors = CheckForPotentialIssues(EntriesWithDups);
 
-                 @* List<string> machineIssues = Entries
-                    .GroupBy(e => e.DevID)  
-                    .Select(g => g.Key.ToString() + " "+ g.Count().ToString())  
-                    .ToList();
-
-               
-                
-                    Console.WriteLine(machineIssues.Count); *@
                 
 
 
@@ -367,12 +288,7 @@ public static int dupMin = 60;
 
     public List<string> CheckForPotentialIssues(List<ReaderEvent> entries)
 {
-    @* int SCAN_THRESHOLDForPannel = 4000; //4000
-    int nearPannel = 100;
-
-    int SCAN_THRESHOLDForReader = 2000; //2000
-    int nearReader = 100; *@
-
+   
     
 var openingTime = Upload.openTime ?? new TimeOnly(5, 0);
 var closingTime = Upload.closeTime ?? new TimeOnly(17, 0);
@@ -640,7 +556,7 @@ public List<double> GetScanCountsPerDay()
         .OrderBy(g => g.Key)
         .ToDictionary(g => g.Key, g => (double)g.Count());
 
-    // Match the order of days from GetAllDays
+    
     var allDays = GetAllDays();
     return allDays.Select(day => grouped.ContainsKey(day) ? grouped[day] : 0).ToList();
 }
@@ -663,13 +579,13 @@ private List<double> GetTopActivePeopleCounts(int topN = 5)
         .GroupBy(e => e.IDHash)
         .OrderByDescending(g => g.Count())
         .Take(topN)
-        .Select(g => (double)g.Count()) // Convert count to double
+        .Select(g => (double)g.Count()) 
         .ToList();
 }
 
   private List<string> GetTopActiveReaders(int topN = 5)
 {
-    //assums location name is in teh readr desc
+    //assums location name is in the readr desc
     return Entries
         .GroupBy(e => e.ReaderDesc.Substring(e.Location.Length))
         .OrderByDescending(g => g.Count())
@@ -684,7 +600,7 @@ private List<double> GetTopActiveReadersCounts(int topN = 5)
         .GroupBy(e => e.ReaderDesc)
         .OrderByDescending(g => g.Count())
         .Take(topN)
-        .Select(g => (double)g.Count()) // Convert count to double
+        .Select(g => (double)g.Count()) 
         .ToList();
 }
 
@@ -704,7 +620,7 @@ private List<double> GetTopActivePanelCounts(int topN = 5)
         .GroupBy(e => e.Machine.ToString())
         .OrderByDescending(g => g.Count())
         .Take(topN)
-        .Select(g => (double)g.Count()) // Convert count to double
+        .Select(g => (double)g.Count()) 
         .ToList();
 }
 
