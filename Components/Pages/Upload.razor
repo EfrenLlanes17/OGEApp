@@ -158,6 +158,10 @@ private int Index = -1;
     {
     };
 
+    public static List<ChartSeries> SeriesAllDays = new List<ChartSeries>()
+    {
+    };
+
     public static List<ChartSeries> SeriesPanel = new List<ChartSeries>()
     {
     };
@@ -168,6 +172,8 @@ private int Index = -1;
     public static string[] XAxisLabelsforReaders = {};
 
     public static string[] XAxisLabelsforTimes = {};
+
+    public static string[] XAxisLabelsforAllDays = {};
 
     public static string[] XAxisLabelsforPanels = {};
 
@@ -291,6 +297,11 @@ public static int dupMin = 60;
                 SeriesTimes.Add(new ChartSeries() { Name = "# of Entries", Data = GetHourCounts().ToArray()});
                 XAxisLabelsforTimes= GetMostActiveHours().ToArray();
 
+                
+                SeriesAllDays.Clear();
+                SeriesAllDays.Add(new ChartSeries() { Name = "# of Entries", Data = GetScanCountsPerDay().ToArray()});
+                XAxisLabelsforAllDays= GetAllDays().ToArray();
+
                 SeriesPanel.Clear();
                 SeriesPanel.Add(new ChartSeries() { Name = "# of Entries", Data = GetTopActivePanelCounts().ToArray()});
                 XAxisLabelsforPanels= GetTopActivePanels().ToArray();
@@ -319,7 +330,9 @@ public static int dupMin = 60;
                 
 
 
-                
+                foreach(var s in GetScanCountsPerDay().ToArray()){
+                    Console.WriteLine(s);
+                }
                 
                 
                 firstDay = GetFirstDate();
@@ -586,8 +599,51 @@ public List<double> GetHourCounts()
 }
 
 
+public List<string> GetAllDays()
+{
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
+    return Entries
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var utcTime))
+            {
+                utcTime = DateTime.SpecifyKind(utcTime, DateTimeKind.Utc);
+                return TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone).Date;
+            }
+            return (DateTime?)null;
+        })
+        .Where(dt => dt.HasValue)
+        .Select(dt => dt.Value.ToString("MM-dd"))
+        .Distinct()
+        .OrderBy(date => date)
+        .ToList();
+}
 
 
+public List<double> GetScanCountsPerDay()
+{
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
+    var grouped = Entries
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var utcTime))
+            {
+                utcTime = DateTime.SpecifyKind(utcTime, DateTimeKind.Utc);
+                return TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone).Date;
+            }
+            return (DateTime?)null;
+        })
+        .Where(dt => dt.HasValue)
+        .GroupBy(dt => dt.Value.ToString("MM-dd"))
+        .OrderBy(g => g.Key)
+        .ToDictionary(g => g.Key, g => (double)g.Count());
+
+    // Match the order of days from GetAllDays
+    var allDays = GetAllDays();
+    return allDays.Select(day => grouped.ContainsKey(day) ? grouped[day] : 0).ToList();
+}
 
 
 

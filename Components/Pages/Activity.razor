@@ -3,6 +3,7 @@
 
 @inject NavigationManager Navigation
 
+
 @using PdfSharpCore.Pdf;
 @using PdfSharpCore.Drawing;
 @using System.IO;
@@ -338,6 +339,24 @@
     
 </div>
 
+@* Cant figure out length issue *@
+@* <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <h2 style="color: white; font-size: 22px; margin-left:80px"><b>Scans in Data Per Day</b></h2>
+    
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <MudChart ChartType="ChartType.Line"
+                  ChartSeries="@Series7"
+                  @bind-SelectedIndex="selIndex"
+                  XAxisLabels="@XAxisLabelsforAllDays"
+                  Width="100%"    
+                  Height="350px"  
+                  Style="color: #FFFFFF;"
+                   />
+    </div>
+</div> *@
+
+
+
 <div style="position: absolute;
        top: 100px;
        left: 10px; z-index: 10; width: 90%">
@@ -402,6 +421,9 @@
 .mud-chart-legend-item{
     visibility: hidden;
 }
+
+
+
 
 
 .mostActiveReaders .mud-charts-xaxis text {
@@ -1406,6 +1428,8 @@ public static DateTime selectedDateMax
       public static List<ChartSeries> Series6 = Upload.SeriesTimes;
 
         public static List<ChartSeries> Series3 = Upload.SeriesReaders;
+
+        public static List<ChartSeries> Series7 = Upload.SeriesAllDays;
         public static List<ChartSeries> Series4 = Upload.SeriesPanel;
 
         public  List<ChartSeries> Series5;
@@ -1420,12 +1444,13 @@ public static DateTime selectedDateMax
 
         public static string[] XAxisLabelsforTimes = Pages.Upload.XAxisLabelsforTimes;
 
+        public static string[] XAxisLabelsforAllDays = Pages.Upload.XAxisLabelsforAllDays;
+
         private int selIndex = -1; 
 
         public ChartOptions Options = new ChartOptions();
         
-        
-
+      
      
 
 
