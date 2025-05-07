@@ -6,7 +6,7 @@
 
 
 
-
+@* Hot Points turned on *@
 @if(hotPoints){
 
     if(hotPoints){
@@ -17,16 +17,16 @@
     }
 
 <div style="display: flex; flex-direction: column; align-items: center; margin-top: 1.5%;">
-    <!-- Labels above the bar -->
+    
     
     <div style="width: 60%; display: flex; justify-content: space-between; margin-bottom: 5px; margin-right: 5%; font-size: 14px;">
         <span style="font-weight: bold;">Most Active</span>
         <span style="font-weight: bold; margin-right: 75%;">Least Active</span>
     </div>
 
-    <!-- Bar and checkboxes in one row -->
+    
     <div style="display: flex; align-items: center; width: 65%; gap: 20px; margin-right: 0%">
-        <!-- Gradient Bar -->
+        @* Gradient Bar *@
 
         
         <div style="
@@ -43,7 +43,7 @@
 
         
 <div style="margin-left: 38%; ">
-        <!-- Checkboxes -->
+        @* Checkboxes*@
         <label class="custom-checkbox panels-color" style="margin-right: 10px;">
             <input type="checkbox" @bind="panels" />Panels  
         </label>
@@ -378,7 +378,7 @@ else{
 
 
 }
-
+@* Maintence Turned on*@
 @if(maintenance){
 
 if(maintenance){
@@ -673,6 +673,8 @@ if(maintenance){
 </i>
 }
 
+
+@* Panels turned on*@
 @if(panels){
 // Welding Area
 <i class="fas fa-pager"
@@ -797,6 +799,7 @@ if(maintenance){
 
 }
 
+@*Readers turned on*@
 @if(readers){
 
     //Storage Room
@@ -964,7 +967,7 @@ if(maintenance){
 
 }
 
-
+@* Panel clicked pop up*@
 @if (IsPanelVisible)
 {
     
@@ -1023,7 +1026,7 @@ if(maintenance){
     </div> 
 
 }
-
+@* Reader clicked pop up*@
 @if (IsReaderVisible)
 {
     
@@ -1086,7 +1089,7 @@ if(maintenance){
 
  
 
-
+@* Map*@
 <div style="text-align: center; margin-top: 5px;">
     <img src="images/map1.jpeg" alt="OGE map" width="67%" height="50%" />
 </div>
