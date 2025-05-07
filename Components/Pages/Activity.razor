@@ -12,9 +12,9 @@
 <PageTitle>activity</PageTitle>
 
 
-
+@* Back To upload button *@
 <div style="display: grid; grid-template-columns: 1fr auto;">
-    <!-- Upload button all the way to the left -->
+    
     <MudButton Variant="Variant.Filled"
                Color="Color.Primary"
                StartIcon="@Icons.Material.Filled.ArrowBack"
@@ -23,7 +23,7 @@
     </MudButton>
 
    <div style="display: flex; justify-content: space-between; align-items: center;">
-    <!-- Download PDF button -->
+    @* PDF button *@
     <button @onclick="CreatePdf" style="
         padding: 10px 20px;
         font-size: 16px;
@@ -36,7 +36,7 @@
         Download PDF
     </button>
 
-    <!-- Show Popup button aligned to the right -->
+    @* Settings button *@
     <div>
         <button class="btn btn-primary" style="background: transparent; border: transparent;" @onclick="ShowModal">
             <img src="images/settings.png" alt="Settings Icon" style="width: 40px; height: 38px;" />
@@ -56,15 +56,16 @@
 
 
 <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 100px;">
-    <!-- Left Column: Activity Title -->
+    @* Activity Page Header *@
     <div>
         <h1 style="font-weight: bold; margin-top: 7mm;">Activity</h1>
     </div>
 
-    <!-- Right Column: Timeframe and Date Inputs -->
+    
     <div style="text-align: center;">
+        @* TimeFrame *@
         <h1 style="font-weight: bold; margin-top: 7mm;">Time Frame</h1>
-
+        @*Date Filter*@
         <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;">
             <input type="date" @bind="selectedDateMin"
                 min="@Upload.firstDay.ToString("yyyy-MM-dd")" 
@@ -78,6 +79,7 @@
                 max="@Upload.LastDay.ToString("yyyy-MM-dd")"
                 style="width: 150px; padding: 5px; border: 1px solid #FFFFFF; border-radius: 5px; background-color: black; color: #FFFFFF; text-align: center;">
         </div>
+        @* Location Filter *@
                 <select @bind="location"  name="locations" id="locations" style="fit-content; background-color: black; border: white; color: white; text-align: center; font-weight: bold; margin-top: 10px;" >
                     <option value="">Location</option>
                     @foreach(var loc in getLocations()){
@@ -105,7 +107,7 @@
       
     </div>
 
-    <!-- Left Column: Entries/Exits and People Count -->
+    @* Entires and people information *@
     <div style="display: flex; flex-direction: column; align-items: flex-start; padding-left: 50%;">
         <h3 style="font-weight: bold; margin-top: 4mm;">Entries/Exits: @entriesAndExit</h3>
         <h3 style="font-weight: bold; margin-top: 4mm;">People: @amountPeople</h3>
@@ -113,6 +115,7 @@
     </div>
 </div>
 
+@* Settings Pop up *@
 @if (IsVisible)
 {
     <div class="modal-backdrop" @onclick="HideModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999;">
@@ -260,13 +263,13 @@
 }
 
     
-
+@* Graphs *@
 <div style="text-align: center; width: 96%;">
     
         <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; width: 100%;">
             
            
-
+            @* Reader Graph *@
             <div class="mostActiveReaders" style="width: 30%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleReaderChartClick">
                 <h2 style="color: white; font-size: 22px; margin-left:80px"><b>Most Active Readers</b></h2>
                 <div style="transform-origin: top;">
@@ -274,6 +277,7 @@
                 </div>
             </div>
 
+            @* People Graph *@
             <div class="mostActivePeople" style="width: 30%; display: flex; flex-direction: column; align-items: center; margin-left:5%;  margin-right:5%" @onclick="HandlePersonChartClick">
                 <h2 style="color: white; font-size: 22px; margin-left:80px"><b>Most Active People</b></h2>
                 <div style="transform-origin: top;">
@@ -281,6 +285,7 @@
                 </div>
             </div>
 
+            @* Panel Graph *@
             <div class="mostActivePanel" style="width: 30%; display: flex; flex-direction: column; align-items: center; %" @onclick="HandlePannelChartClick">
                 <h2 style="color: white; font-size: 22px; margin-left:80px"><b>Most Active Panels</b></h2>
                 <div style="transform-origin: top;">
@@ -298,7 +303,7 @@
         <div style="display: flex; justify-content: center; align-items: flex-start; gap: 30px; width: 100%;">
             
         
-
+            @* Times Graph *@
             <div class="mostActiveReadersPop" style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleTimesChartClick">
                 <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Avg Scans At Times</b></h2>
                 <div style="transform-origin: top;">
@@ -306,6 +311,7 @@
                 </div>
             </div>
 
+            @* Saftey Flags *@
             <div style="width: 50%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleFlagsChartClick">
                 <h2 style="color: white; font-size: 22px; margin-bottom: 5px; margin-left:40px"><b>Safety Flags</b></h2>
                 <div style="color: white; font-size: 20px; margin-bottom: 5px; margin-top: 8%;">
@@ -329,6 +335,7 @@
                 </div>
             </div>
 
+            @* Days of the Week Graph *@
             <div class="mostActiveScanAct" style="width: 55%; display: flex; flex-direction: column; align-items: center;" @onclick="HandleDaysOfTheWeekChartClick" >
                 <h2 style="color: white; font-size: 22px; margin-bottom: 5px;"><b>Avg Scans Per Day</b></h2>
                 <div style="transform-origin: top;">
@@ -394,7 +401,7 @@
 </div> *@
 
 
-
+@* PDF success Message *@
 <div style="position: absolute;
        top: 100px;
        left: 10px; z-index: 10; width: 90%">

@@ -1,55 +1,55 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\OGEApp.bundle.scp.css",
       "PackagePath": "staticwebassets\\OGEApp.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\app.css",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\images\\check.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\images\\check.png",
       "PackagePath": "staticwebassets\\images\\check.png"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\images\\error.jpeg",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\images\\error.jpeg",
       "PackagePath": "staticwebassets\\images\\error.jpeg"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\images\\inflowLogo.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\images\\inflowLogo.png",
       "PackagePath": "staticwebassets\\images\\inflowLogo.png"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\images\\map1.jpeg",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\images\\map1.jpeg",
       "PackagePath": "staticwebassets\\images\\map1.jpeg"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\images\\redOGELogo.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\images\\redOGELogo.png",
       "PackagePath": "staticwebassets\\images\\redOGELogo.png"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\images\\settings.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\images\\settings.png",
       "PackagePath": "staticwebassets\\images\\settings.png"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\images\\whiteInflowLogo.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\images\\whiteInflowLogo.png",
       "PackagePath": "staticwebassets\\images\\whiteInflowLogo.png"
     },
     {
-      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-6\\wwwroot\\images\\whiteOGELogo.png",
+      "Id": "C:\\Users\\efren\\OneDrive\\Desktop\\Code Projects\\blaze1\\OGEApp-8\\wwwroot\\images\\whiteOGELogo.png",
       "PackagePath": "staticwebassets\\images\\whiteOGELogo.png"
     },
     {
