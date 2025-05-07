@@ -338,6 +338,44 @@
         </div>
     
 </div>
+@* Heat Calendar *@
+@* <div style="display: flex; justify-content: center;">
+    <div style="width: 30%;">
+<MudPaper Class="pa-4">
+    <MudText Typo="Typo.h5" Align="Align.Center">@CurrentMonth.ToString("MMMM yyyy")</MudText>
+    <MudStack Row Justify="Justify.Center" Class="mb-2">
+        <MudButton Variant="Variant.Text" OnClick="PreviousMonth">Previous</MudButton>
+        <MudButton Variant="Variant.Text" OnClick="NextMonth">Next</MudButton>
+    </MudStack>
+
+    <MudGrid>
+        
+        @foreach (var date in GetCalendarDates())
+        {
+            <MudItem xs="1">
+                @if (date.Month == CurrentMonth.Month)
+                {
+                    <MudButton Variant="Variant.Outlined"
+                               Color="@(SelectedDate == date ? Color.Primary : Color.Default)"
+                               OnClick="@(() => SelectDate(date))"
+                               Style="width: 100%; min-width: 40px;">
+                        @date.Day
+                    </MudButton>
+                }
+                else
+                {
+                    <div></div>
+                }
+            </MudItem>
+        }
+    </MudGrid>
+
+    <MudText Typo="Typo.body1" Align="Align.Center" Class="mt-4">
+        Selected Date: @SelectedDate.ToShortDateString()
+    </MudText>
+</MudPaper>
+</div>
+</div> *@
 
 @* Cant figure out length issue *@
 @* <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
@@ -470,6 +508,37 @@
     private string errorMessage;
     private bool showSuccess = false;
     private bool showError = false;
+
+    @* private DateTime CurrentMonth = DateTime.Today;
+    private DateTime SelectedDate = DateTime.Today;
+    private readonly string[] WeekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    private void PreviousMonth()
+    {
+        CurrentMonth = CurrentMonth.AddMonths(-1);
+    }
+
+    private void NextMonth()
+    {
+        CurrentMonth = CurrentMonth.AddMonths(1);
+    }
+
+    private void SelectDate(DateTime date)
+    {
+        SelectedDate = date;
+    }
+
+    private IEnumerable<DateTime> GetCalendarDates()
+    {
+        var firstDayOfMonth = new DateTime(CurrentMonth.Year, CurrentMonth.Month, 1);
+        var daysBefore = (int)firstDayOfMonth.DayOfWeek;
+        var start = firstDayOfMonth.AddDays(-daysBefore);
+
+        for (int i = 0; i < 42; i++) // 6 weeks
+        {
+            yield return start.AddDays(i);
+        }
+    } *@
     
 public void CreatePdf()
 {
@@ -1186,6 +1255,53 @@ private static List<string> GetTopActivePeopleNames(List<Upload.ReaderEvent> ent
         .Select(g => g.Key)
         .ToList();
 }
+
+@* For Heat Calendar *@
+@* public List<string> GetAllDays()
+{
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
+    return GetFilteredEntriesByLocandDate()
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var utcTime))
+            {
+                utcTime = DateTime.SpecifyKind(utcTime, DateTimeKind.Utc);
+                return TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone).Date;
+            }
+            return (DateTime?)null;
+        })
+        .Where(dt => dt.HasValue)
+        .Select(dt => dt.Value.ToString("MM-dd"))
+        .Distinct()
+        .OrderBy(date => date)
+        .ToList();
+}
+
+
+public List<double> GetScanCountsPerDay()
+{
+    TimeZoneInfo centralZone = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+
+    var grouped = GetFilteredEntriesByLocandDate()
+        .Select(e =>
+        {
+            if (DateTime.TryParse(e.Time, out var utcTime))
+            {
+                utcTime = DateTime.SpecifyKind(utcTime, DateTimeKind.Utc);
+                return TimeZoneInfo.ConvertTimeFromUtc(utcTime, centralZone).Date;
+            }
+            return (DateTime?)null;
+        })
+        .Where(dt => dt.HasValue)
+        .GroupBy(dt => dt.Value.ToString("MM-dd"))
+        .OrderBy(g => g.Key)
+        .ToDictionary(g => g.Key, g => (double)g.Count());
+
+    // Match the order of days from GetAllDays
+    var allDays = GetAllDays();
+    return allDays.Select(day => grouped.ContainsKey(day) ? grouped[day] : 0).ToList();
+} *@
 
 public static List<string> CheckForPotentialIssues(List<Upload.ReaderEvent> entries)
 {
