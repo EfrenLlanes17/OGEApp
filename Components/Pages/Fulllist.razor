@@ -99,16 +99,16 @@ else{
         @* If Graph is selected and its not saftey Flags*@
      if(item.Equals("")){
          @* If Graph is selected and its not saftey Flags and its days of the week*@
-         <div style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 30px;">
-    <h2 style="color: white; font-size: 36px; margin-bottom: 14px;"><b>@LabelOfGraph</b></h2>
-    <div style="transform-origin: top; width: 100%;">
-        <MudChart ChartType="ChartType.Line"
+         <div  style="width: 100%; display: flex; flex-direction: column; align-items: center; padding: 30px; ">
+    <h2 style="color: white; font-size: 36px; margin-bottom: 14px; "><b>@LabelOfGraph</b></h2>
+    <div style="transform-origin: top; width: 100%; ">
+        <MudChart id="captureArea" ChartType="ChartType.Line"
                   ChartSeries="listOfChartSeries"
                   XAxisLabels="@LabelsForGraph"
                   @bind-SelectedIndex="selIndex"
                   Width="100%"
                   Height="525px"
-                  Style="color: #FFFFFF;"
+                  Style="color: #FFFFFF; background-color: black;"
                   ChartOptions="@Options" />
     </div>
 </div>
@@ -199,12 +199,35 @@ else{
 }
 
 </style>
+@inject IJSRuntime JS
 
 
 
+<button class="btn btn-primary" @onclick="SaveAsImage">Save as PNG</button>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<script>
+window.saveDivAsPng = (divId, fileName) => {
+    const element = document.getElementById(divId);
+    if (!element) return;
+
+    html2canvas(element).then(canvas => {
+        const link = document.createElement("a");
+        link.download = fileName || "download.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+    });
+};
+
+</script>
 
 
 @code{
+     private async Task SaveAsImage()
+    {
+        await JS.InvokeVoidAsync("saveDivAsPng", "captureArea", "my-image.png");
+    }
 
      public ChartOptions Options = new ChartOptions();
 
