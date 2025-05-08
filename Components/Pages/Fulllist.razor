@@ -34,6 +34,8 @@
     if (!isFlags)
     {
         @* If List is selected and its not saftey Flags*@
+
+     
        
         <div style="margin: 10px 0; padding: 12px; border-radius: 10px; background-color: rgb(29, 29, 29); color: white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
             <h3 style="font-size: 18px; margin: 0;">
@@ -199,35 +201,16 @@ else{
 }
 
 </style>
-@inject IJSRuntime JS
 
 
 
-<button class="btn btn-primary" @onclick="SaveAsImage">Save as PNG</button>
 
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
-<script>
-window.saveDivAsPng = (divId, fileName) => {
-    const element = document.getElementById(divId);
-    if (!element) return;
-
-    html2canvas(element).then(canvas => {
-        const link = document.createElement("a");
-        link.download = fileName || "download.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-    });
-};
-
-</script>
 
 
 @code{
-     private async Task SaveAsImage()
-    {
-        await JS.InvokeVoidAsync("saveDivAsPng", "captureArea", "my-image.png");
-    }
+
+
 
      public ChartOptions Options = new ChartOptions();
 
